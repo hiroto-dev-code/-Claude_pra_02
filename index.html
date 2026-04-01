@@ -2,91 +2,122 @@
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   .board { background: #09090b; min-height: 600px; color: #f4f4f5; padding: 0 0 40px; font-family: var(--font-mono, monospace); }
-  .header {
-    position: sticky; top: 0; z-index: 30;
-    border-bottom: 1px solid rgba(120,53,15,0.4);
-    background: rgba(9,9,11,0.92); backdrop-filter: blur(8px);
-    padding: 10px 20px; display: flex; align-items: center; justify-content: space-between;
-  }
-  .logo { display: flex; align-items: center; gap: 10px; }
+  .header { position: sticky; top: 0; z-index: 30; border-bottom: 1px solid rgba(120,53,15,0.4); background: rgba(9,9,11,0.92); backdrop-filter: blur(8px); padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; }
   .logo-icon { width: 32px; height: 32px; border: 1px solid #92400e; background: rgba(120,53,15,0.3); border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+  .logo-wrap { display: flex; align-items: center; gap: 10px; }
   .logo-title { font-size: 13px; font-weight: 700; letter-spacing: 0.15em; color: #fbbf24; text-transform: uppercase; }
-  .logo-sub { font-size: 11px; color: #71717a; }
+  .logo-sub { font-size: 11px; color: #71717a; margin-top: 1px; }
   .header-btn { display: flex; align-items: center; gap: 6px; padding: 7px 14px; font-size: 12px; font-weight: 700; border: 1px solid #d97706; color: #fde68a; background: rgba(120,53,15,0.3); border-radius: 3px; cursor: pointer; font-family: var(--font-mono, monospace); letter-spacing: 0.03em; transition: background 0.15s; }
   .header-btn:hover { background: rgba(120,53,15,0.5); }
   .main { max-width: 960px; margin: 0 auto; padding: 28px 16px 0; }
   .section-divider { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-  .divider-line { flex: 1; height: 1px; background: rgba(120,53,15,0.3); }
-  .divider-label { font-size: 11px; color: #d97706; letter-spacing: 0.15em; text-transform: uppercase; padding: 0 8px; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin-bottom: 28px; }
-  .card { border-radius: 3px; border: 1px solid rgba(120,53,15,0.45); background: linear-gradient(135deg, #18181b, #18181b, rgba(120,53,15,0.08)); overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s; }
-  .card:hover { border-color: rgba(217,119,6,0.6); box-shadow: 0 4px 20px rgba(120,53,15,0.18); }
-  .card.full { border-color: #3f3f46; background: rgba(24,24,27,0.5); opacity: 0.72; }
+  .divider-line { flex: 1; height: 1px; }
+  .divider-label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; padding: 0 8px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(268px, 1fr)); gap: 14px; margin-bottom: 28px; }
+  .card { border-radius: 3px; overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s; }
+  .card.open-card  { border: 1px solid rgba(120,53,15,0.45); background: linear-gradient(135deg,#18181b,#18181b,rgba(120,53,15,0.08)); }
+  .card.open-card:hover { border-color: rgba(217,119,6,0.6); box-shadow: 0 4px 20px rgba(120,53,15,0.18); }
+  .card.closed-card { border: 1px solid #3f3f46; background: rgba(24,24,27,0.5); opacity: 0.65; }
+  .card.my-card { border: 1px solid rgba(120,53,15,0.7); background: linear-gradient(135deg,#18181b,rgba(120,53,15,0.12)); }
   .card-header { display: flex; align-items: center; justify-content: space-between; padding: 7px 14px; border-bottom: 1px solid rgba(120,53,15,0.25); background: rgba(120,53,15,0.12); }
   .card-header-left { display: flex; align-items: center; gap: 6px; font-size: 11px; color: rgba(251,191,36,0.75); letter-spacing: 0.15em; text-transform: uppercase; }
   .card-header-right { display: flex; align-items: center; gap: 8px; }
   .rank { font-size: 11px; color: #d97706; }
-  .card-date { font-size: 10px; color: #52525b; letter-spacing: 0.05em; }
+  .card-date { font-size: 10px; color: #52525b; }
+  .expired-tag { font-size: 10px; color: #ef4444; letter-spacing: 0.05em; }
   .card-body { padding: 14px; }
   .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
   .shop-name { font-size: 14px; font-weight: 700; color: #f4f4f5; line-height: 1.3; margin-bottom: 5px; font-family: sans-serif; }
   .category-badge { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 2px; border: 1px solid; font-family: var(--font-mono, monospace); }
-  .badge-red    { color: #f87171; border-color: #b91c1c; background: rgba(127,29,29,0.3); }
-  .badge-orange { color: #fb923c; border-color: #c2410c; background: rgba(124,45,18,0.3); }
-  .badge-green  { color: #4ade80; border-color: #15803d; background: rgba(20,83,45,0.3); }
-  .badge-blue   { color: #60a5fa; border-color: #1d4ed8; background: rgba(29,78,216,0.2); }
-  .badge-yellow { color: #facc15; border-color: #a16207; background: rgba(113,63,18,0.3); }
-  .badge-gray   { color: #a1a1aa; border-color: #52525b; background: rgba(39,39,42,0.5); }
-  .full-badge { font-size: 10px; font-weight: 700; color: #f87171; border: 1px solid #991b1b; padding: 4px 7px; border-radius: 2px; background: rgba(127,29,29,0.35); transform: rotate(1deg); flex-shrink: 0; font-family: var(--font-mono, monospace); }
-  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 10px; }
-  .stat { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #a1a1aa; }
-  .stat-val { color: #e4e4e7; }
-  .stat-val.red { color: #f87171; }
-  .stat-muted { color: #52525b; }
-  .progress-track { height: 4px; background: #27272a; border-radius: 99px; overflow: hidden; margin-bottom: 12px; }
-  .progress-fill { height: 100%; border-radius: 99px; transition: width 0.5s; }
-  .progress-fill.amber { background: #f59e0b; }
-  .progress-fill.red   { background: #dc2626; }
-  .card-actions { display: flex; gap: 8px; }
-  .btn-join { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 7px 10px; font-size: 12px; font-weight: 700; border-radius: 2px; cursor: pointer; font-family: var(--font-mono, monospace); transition: background 0.15s, transform 0.1s; letter-spacing: 0.03em; }
-  .btn-join.active   { border: 1px solid #d97706; color: #fde68a; background: rgba(120,53,15,0.4); }
-  .btn-join.active:hover { background: rgba(120,53,15,0.6); }
-  .btn-join.active:active { transform: scale(0.96); }
-  .btn-join.joined   { border: 1px solid #15803d; color: #86efac; background: rgba(20,83,45,0.3); cursor: not-allowed; }
-  .btn-join.disabled { border: 1px solid #3f3f46; color: #52525b; background: rgba(39,39,42,0.4); cursor: not-allowed; }
-  .btn-like { display: flex; align-items: center; gap: 5px; padding: 7px 10px; font-size: 12px; border: 1px solid #3f3f46; color: #71717a; background: rgba(39,39,42,0.4); border-radius: 2px; cursor: pointer; font-family: var(--font-mono, monospace); transition: border-color 0.15s, color 0.15s, background 0.15s, transform 0.1s; white-space: nowrap; }
-  .btn-like:hover:not(.liked) { border-color: #71717a; color: #d4d4d8; }
-  .btn-like:active:not(.liked) { transform: scale(0.96); }
-  .btn-like.liked { border-color: #1d4ed8; color: #93c5fd; background: rgba(29,78,216,0.15); cursor: not-allowed; }
-  .toast-wrap { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 8px; z-index: 99; pointer-events: none; }
-  .toast { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 3px; font-size: 12px; font-family: var(--font-mono, monospace); pointer-events: all; max-width: 300px; animation: slideIn 0.2s ease; border: 1px solid; }
-  .toast.success { background: rgba(120,53,15,0.9); border-color: #d97706; color: #fde68a; }
-  .toast.error   { background: rgba(127,29,29,0.9); border-color: #dc2626; color: #fca5a5; }
-  .toast.info    { background: rgba(24,24,27,0.95); border-color: #52525b; color: #d4d4d8; }
-  @keyframes slideIn { from { opacity:0; transform:translateX(16px); } to { opacity:1; transform:translateX(0); } }
-  .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.72); backdrop-filter: blur(4px); z-index: 50; display: flex; align-items: center; justify-content: center; padding: 16px; }
-  .modal { width: 100%; max-width: 420px; border: 1px solid rgba(180,83,9,0.6); background: #09090b; border-radius: 3px; }
-  .modal-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 18px; border-bottom: 1px solid rgba(120,53,15,0.3); background: rgba(120,53,15,0.15); }
-  .modal-title { display: flex; align-items: center; gap: 7px; font-size: 11px; color: #fbbf24; letter-spacing: 0.15em; text-transform: uppercase; }
-  .modal-close { background: none; border: none; color: #71717a; cursor: pointer; font-size: 16px; line-height: 1; padding: 2px 4px; }
-  .modal-close:hover { color: #d4d4d8; }
-  .modal-body { padding: 18px; display: flex; flex-direction: column; gap: 14px; }
-  .field label { display: flex; align-items: center; gap: 5px; font-size: 10px; color: #71717a; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px; }
-  .field input, .field select { width: 100%; padding: 8px 10px; background: #18181b; border: 1px solid #3f3f46; border-radius: 2px; color: #e4e4e7; font-size: 12px; font-family: var(--font-mono, monospace); outline: none; transition: border-color 0.15s; }
-  .field input:focus, .field select:focus { border-color: #d97706; }
-  .field input::placeholder { color: #52525b; }
-  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .submit-btn { width: 100%; padding: 10px; border: 1px solid #d97706; color: #fde68a; background: rgba(120,53,15,0.45); border-radius: 2px; cursor: pointer; font-size: 12px; font-weight: 700; font-family: var(--font-mono, monospace); letter-spacing: 0.06em; transition: background 0.15s; }
-  .submit-btn:hover { background: rgba(120,53,15,0.65); }
+  .badge-red    { color:#f87171;border-color:#b91c1c;background:rgba(127,29,29,0.3); }
+  .badge-orange { color:#fb923c;border-color:#c2410c;background:rgba(124,45,18,0.3); }
+  .badge-green  { color:#4ade80;border-color:#15803d;background:rgba(20,83,45,0.3); }
+  .badge-blue   { color:#60a5fa;border-color:#1d4ed8;background:rgba(29,78,216,0.2); }
+  .badge-yellow { color:#facc15;border-color:#a16207;background:rgba(113,63,18,0.3); }
+  .badge-gray   { color:#a1a1aa;border-color:#52525b;background:rgba(39,39,42,0.5); }
+  .closed-badge { font-size:10px;font-weight:700;color:#f87171;border:1px solid #991b1b;padding:4px 7px;border-radius:2px;background:rgba(127,29,29,0.35);transform:rotate(1deg);flex-shrink:0;font-family:var(--font-mono,monospace); }
+  .owner-badge  { font-size:10px;font-weight:700;color:#fbbf24;border:1px solid #92400e;padding:4px 7px;border-radius:2px;background:rgba(120,53,15,0.4);flex-shrink:0;font-family:var(--font-mono,monospace); }
+  .stats { display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px; }
+  .stat { display:flex;align-items:center;gap:6px;font-size:12px;color:#a1a1aa; }
+  .stat-val { color:#e4e4e7; }
+  .stat-val.red { color:#f87171; }
+  .stat-muted { color:#52525b; }
+  .progress-track { height:4px;background:#27272a;border-radius:99px;overflow:hidden;margin-bottom:12px; }
+  .progress-fill { height:100%;border-radius:99px;transition:width 0.5s; }
+  .progress-fill.amber { background:#f59e0b; }
+  .progress-fill.red   { background:#dc2626; }
+  .progress-fill.gray  { background:#52525b; }
+  .card-actions { display:flex;gap:8px; }
+  .btn { display:flex;align-items:center;justify-content:center;gap:6px;padding:7px 10px;font-size:12px;font-weight:700;border-radius:2px;cursor:pointer;font-family:var(--font-mono,monospace);transition:background 0.15s,transform 0.1s;letter-spacing:0.03em;border:1px solid; }
+  .btn:active { transform:scale(0.96); }
+  .btn-join    { flex:1;border-color:#d97706;color:#fde68a;background:rgba(120,53,15,0.4); }
+  .btn-join:hover { background:rgba(120,53,15,0.6); }
+  .btn-cancel  { flex:1;border-color:#52525b;color:#a1a1aa;background:rgba(39,39,42,0.4); }
+  .btn-cancel:hover { border-color:#71717a;color:#d4d4d8;background:rgba(63,63,70,0.4); }
+  .btn-delete  { flex:1;border-color:#991b1b;color:#fca5a5;background:rgba(127,29,29,0.3); }
+  .btn-delete:hover { background:rgba(127,29,29,0.5); }
+  .btn-disabled{ flex:1;border-color:#3f3f46;color:#52525b;background:rgba(39,39,42,0.4);cursor:not-allowed; }
+  .btn-detail  { display:flex;align-items:center;gap:5px;padding:7px 10px;font-size:12px;border:1px solid #3f3f46;color:#71717a;background:rgba(39,39,42,0.4);border-radius:2px;cursor:pointer;font-family:var(--font-mono,monospace);transition:border-color 0.15s,color 0.15s;white-space:nowrap; }
+  .btn-detail:hover { border-color:#71717a;color:#d4d4d8; }
+  .btn-like    { display:flex;align-items:center;gap:5px;padding:7px 10px;font-size:12px;border:1px solid #3f3f46;color:#71717a;background:rgba(39,39,42,0.4);border-radius:2px;cursor:pointer;font-family:var(--font-mono,monospace);transition:border-color 0.15s,color 0.15s,background 0.15s;white-space:nowrap; }
+  .btn-like:hover:not(.liked) { border-color:#71717a;color:#d4d4d8; }
+  .btn-like.liked { border-color:#1d4ed8;color:#93c5fd;background:rgba(29,78,216,0.15);cursor:not-allowed; }
+
+  /* Detail panel */
+  .detail-backdrop { position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(4px);z-index:60;display:flex;align-items:center;justify-content:center;padding:16px; }
+  .detail-panel { width:100%;max-width:460px;border:1px solid rgba(180,83,9,0.5);background:#0c0c0e;border-radius:4px; }
+  .detail-header { display:flex;align-items:center;justify-content:space-between;padding:11px 18px;border-bottom:1px solid rgba(120,53,15,0.3);background:rgba(120,53,15,0.15); }
+  .detail-title { font-size:11px;color:#fbbf24;letter-spacing:0.15em;text-transform:uppercase; }
+  .modal-close  { background:none;border:none;color:#71717a;cursor:pointer;font-size:18px;line-height:1;padding:2px 4px; }
+  .modal-close:hover { color:#d4d4d8; }
+  .detail-body  { padding:18px; }
+  .detail-shop  { font-size:18px;font-weight:700;color:#f4f4f5;font-family:sans-serif;margin-bottom:6px; }
+  .detail-cat   { display:inline-block;font-size:11px;padding:2px 10px;border-radius:2px;border:1px solid;margin-bottom:16px; }
+  .detail-grid  { display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px; }
+  .detail-item  { background:#18181b;border:1px solid #27272a;border-radius:3px;padding:10px 12px; }
+  .detail-item-label { font-size:10px;color:#52525b;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:3px; }
+  .detail-item-val   { font-size:14px;color:#e4e4e7;font-weight:700; }
+  .detail-section-title { font-size:10px;color:#71717a;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:8px; }
+  .hunters-list { display:flex;flex-direction:column;gap:6px;margin-bottom:16px; }
+  .hunter-row   { display:flex;align-items:center;gap:8px;padding:7px 10px;background:#18181b;border:1px solid #27272a;border-radius:3px; }
+  .hunter-avatar{ width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0; }
+  .hunter-name  { font-size:12px;color:#d4d4d8; }
+  .hunter-you   { font-size:10px;color:#d97706;margin-left:auto; }
+  .empty-hunters{ font-size:12px;color:#52525b;text-align:center;padding:12px 0; }
+  .progress-section { margin-bottom:4px; }
+  .progress-label { display:flex;justify-content:space-between;font-size:11px;color:#71717a;margin-bottom:5px; }
+
+  /* Modal */
+  .modal-backdrop { position:fixed;inset:0;background:rgba(0,0,0,0.72);backdrop-filter:blur(4px);z-index:50;display:flex;align-items:center;justify-content:center;padding:16px; }
+  .modal { width:100%;max-width:420px;border:1px solid rgba(180,83,9,0.6);background:#09090b;border-radius:3px; }
+  .modal-header { display:flex;align-items:center;justify-content:space-between;padding:10px 18px;border-bottom:1px solid rgba(120,53,15,0.3);background:rgba(120,53,15,0.15); }
+  .modal-title-text { font-size:11px;color:#fbbf24;letter-spacing:0.15em;text-transform:uppercase; }
+  .modal-body { padding:18px;display:flex;flex-direction:column;gap:14px; }
+  .field label { display:flex;align-items:center;gap:5px;font-size:10px;color:#71717a;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:6px; }
+  .field input,.field select { width:100%;padding:8px 10px;background:#18181b;border:1px solid #3f3f46;border-radius:2px;color:#e4e4e7;font-size:12px;font-family:var(--font-mono,monospace);outline:none;transition:border-color 0.15s; }
+  .field input:focus,.field select:focus { border-color:#d97706; }
+  .field input::placeholder { color:#52525b; }
+  .field-row { display:grid;grid-template-columns:1fr 1fr;gap:10px; }
+  .submit-btn { width:100%;padding:10px;border:1px solid #d97706;color:#fde68a;background:rgba(120,53,15,0.45);border-radius:2px;cursor:pointer;font-size:12px;font-weight:700;font-family:var(--font-mono,monospace);letter-spacing:0.06em;transition:background 0.15s; }
+  .submit-btn:hover { background:rgba(120,53,15,0.65); }
+  .post-name-note { font-size:10px;color:#52525b;margin-top:-8px;padding-left:2px; }
+
+  /* Toast */
+  .toast-wrap { position:fixed;bottom:20px;right:20px;display:flex;flex-direction:column;gap:8px;z-index:99;pointer-events:none; }
+  .toast { display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:3px;font-size:12px;font-family:var(--font-mono,monospace);pointer-events:all;max-width:300px;animation:slideIn 0.2s ease;border:1px solid; }
+  .toast.success { background:rgba(120,53,15,0.92);border-color:#d97706;color:#fde68a; }
+  .toast.error   { background:rgba(127,29,29,0.92);border-color:#dc2626;color:#fca5a5; }
+  .toast.info    { background:rgba(24,24,27,0.96);border-color:#52525b;color:#d4d4d8; }
+  @keyframes slideIn { from{opacity:0;transform:translateX(16px);}to{opacity:1;transform:translateX(0);} }
 </style>
 
 <div class="board">
   <div class="header">
-    <div class="logo">
+    <div class="logo-wrap">
       <div class="logo-icon">🔥</div>
-      <div class="logo-title" style="display:flex;flex-direction:column;gap:1px;">
-        <span style="font-size:13px;font-weight:700;letter-spacing:0.15em;color:#fbbf24;text-transform:uppercase;">Lunch Boarding</span>
-        <span style="font-size:11px;color:#71717a;font-weight:400;">一飯行こうぜ！</span>
+      <div>
+        <div class="logo-title">Lunch Boarding</div>
+        <div class="logo-sub">一飯行こうぜ！</div>
       </div>
     </div>
     <button class="header-btn" onclick="openModal()">＋ クエスト発令</button>
@@ -95,106 +126,109 @@
 </div>
 
 <div class="toast-wrap" id="toastWrap"></div>
-
-<div class="modal-backdrop" id="modal" style="display:none;">
-  <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title">📜 新規クエスト依頼書</div>
-      <button class="modal-close" onclick="closeModal()">✕</button>
-    </div>
-    <div class="modal-body">
-      <div class="field">
-        <label>🗺 お店の名前</label>
-        <input id="f-shop" type="text" placeholder="例：焼肉ホルモン 炎の番人" />
-      </div>
-      <div class="field">
-        <label>🍴 食べたいもの</label>
-        <select id="f-cat">
-          <option>焼肉</option><option>ラーメン</option><option>タイ料理</option>
-          <option>寿司</option><option>カレー</option><option>中華</option>
-          <option>イタリアン</option><option>その他</option>
-        </select>
-      </div>
-      <div class="field-row">
-        <div class="field">
-          <label>👥 最大人数</label>
-          <input id="f-max" type="number" min="2" max="10" value="4" />
-        </div>
-        <div class="field">
-          <label>🕐 集合時間</label>
-          <input id="f-time" type="time" value="12:00" />
-        </div>
-      </div>
-      <div class="field">
-        <label>📅 日付</label>
-        <input id="f-date" type="date" />
-      </div>
-      <button class="submit-btn" onclick="postQuest()">── クエストを発令する ──</button>
-    </div>
-  </div>
-</div>
+<div id="detailMount"></div>
+<div id="modalMount"></div>
 
 <script>
-const BADGE = { '焼肉':'badge-red','ラーメン':'badge-orange','タイ料理':'badge-green','寿司':'badge-blue','カレー':'badge-yellow','中華':'badge-orange','イタリアン':'badge-green','その他':'badge-gray' };
-const RANK = ['★','★★','★★★'];
+const BADGE = {'焼肉':'badge-red','ラーメン':'badge-orange','タイ料理':'badge-green','寿司':'badge-blue','カレー':'badge-yellow','中華':'badge-orange','イタリアン':'badge-green','その他':'badge-gray'};
+const RANK  = ['★','★★','★★★'];
+const AVATAR_COLORS = [
+  ['rgba(120,53,15,0.6)','#fbbf24'],['rgba(29,78,216,0.4)','#93c5fd'],
+  ['rgba(20,83,45,0.4)','#86efac'],['rgba(127,29,29,0.4)','#fca5a5'],
+  ['rgba(88,28,135,0.4)','#d8b4fe'],
+];
 const MH = {
-  join:  ['受注完了！腹を空かして来い！','一飯の義！共に戦おうぞ！','ハンターが一名加わった！'],
-  like:  ['グッジョブ！飯への情熱が伝わってきた！','激励を受け取った！','ナイスサポート！'],
-  post:  ['依頼書をボードに貼り付けた！','新たなクエストが発令された！','クエストを発令した！仲間が集まるのを待て！'],
-  full:  ['このクエストは定員に達している...次のクエストを探せ！','満員じゃ！クエストを選び直せ！'],
-  dup:   ['本日すでに別のクエストを受注済みだ！一日一飯の掟じゃ！','今日はもう受注済みだぞ！欲張るな！'],
-  liked: ['すでにグッジョブ済みじゃ！'],
+  join:   ['受注完了！腹を空かして来い！','一飯の義！共に戦おうぞ！','ハンターが一名加わった！'],
+  cancel: ['受注をキャンセルした...次のクエストを探せ！','撤退じゃ！また挑め！'],
+  like:   ['グッジョブ！飯への情熱が伝わってきた！','激励を受け取った！','ナイスサポート！'],
+  post:   ['依頼書をボードに貼り付けた！','新たなクエストが発令された！'],
+  delete: ['クエストを取り消した。また発令せよ！'],
+  full:   ['このクエストは定員に達している...','満員じゃ！クエストを選び直せ！'],
+  dup:    ['本日すでに別クエストを受注済みだ！一日一飯の掟じゃ！'],
+  liked:  ['すでにグッジョブ済みじゃ！'],
+  expired:['このクエストはすでに時刻を過ぎておる...'],
 };
 const rnd = arr => arr[Math.floor(Math.random()*arr.length)];
 
-function todayStr() {
-  const d = new Date();
-  return d.getFullYear()+'-'+(String(d.getMonth()+1).padStart(2,'0'))+'-'+(String(d.getDate()).padStart(2,'0'));
+function todayStr(){ const d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function fmtDate(s){ const [y,m,d]=s.split('-'); return `${y}/${m}/${d}`; }
+function getRank(c,m){ const r=c/m; return r<0.4?0:r<0.8?1:2; }
+
+// 現在時刻より前の meetingTime かつ 今日のクエストなら期限切れ
+function isExpired(q){
+  const today = todayStr();
+  if(q.date !== today) return q.date < today;
+  const now = new Date();
+  const [h,mi] = q.meetingTime.split(':').map(Number);
+  return now.getHours() > h || (now.getHours()===h && now.getMinutes()>=mi);
 }
-function fmtDate(str) {
-  const [y,m,d] = str.split('-');
-  return `${y}/${m}/${d}`;
-}
-function getRank(cur,max){ const r=cur/max; return r<0.4?0:r<0.8?1:2; }
 
 const TODAY = todayStr();
+const ME = 'あなた';
 
 let quests = [
-  { id:'q1', shopName:'焼肉ホルモン 炎の番人',   foodCategory:'焼肉',   maxParticipants:4, currentParticipants:2, meetingTime:'12:00', date:TODAY, status:'open', likeCount:5  },
-  { id:'q2', shopName:'ラーメン道場 鬼辛',        foodCategory:'ラーメン', maxParticipants:3, currentParticipants:3, meetingTime:'12:15', date:TODAY, status:'full', likeCount:12 },
-  { id:'q3', shopName:'タイ料理 バンコク食堂',    foodCategory:'タイ料理', maxParticipants:5, currentParticipants:1, meetingTime:'13:00', date:TODAY, status:'open', likeCount:3  },
-  { id:'q4', shopName:'寿司割烹 海神',            foodCategory:'寿司',   maxParticipants:6, currentParticipants:4, meetingTime:'11:45', date:TODAY, status:'open', likeCount:8  },
-  { id:'q5', shopName:'カレーハウス スパイス魔境', foodCategory:'カレー', maxParticipants:4, currentParticipants:2, meetingTime:'12:30', date:TODAY, status:'open', likeCount:7  },
+  { id:'q1', shopName:'焼肉ホルモン 炎の番人',  foodCategory:'焼肉',   maxParticipants:4, currentParticipants:2, meetingTime:'12:00', date:TODAY, status:'open', likeCount:5,  postedBy:'田中',   hunters:['田中','鈴木'] },
+  { id:'q2', shopName:'ラーメン道場 鬼辛',       foodCategory:'ラーメン',maxParticipants:3, currentParticipants:3, meetingTime:'12:15', date:TODAY, status:'open', likeCount:12, postedBy:'佐藤',   hunters:['佐藤','山田','高橋'] },
+  { id:'q3', shopName:'タイ料理 バンコク食堂',   foodCategory:'タイ料理',maxParticipants:5, currentParticipants:1, meetingTime:'13:00', date:TODAY, status:'open', likeCount:3,  postedBy:ME,       hunters:[ME] },
+  { id:'q4', shopName:'寿司割烹 海神',           foodCategory:'寿司',   maxParticipants:6, currentParticipants:4, meetingTime:'11:45', date:TODAY, status:'open', likeCount:8,  postedBy:'伊藤',   hunters:['伊藤','渡辺','中村','小林'] },
+  { id:'q5', shopName:'カレーハウス スパイス魔境',foodCategory:'カレー', maxParticipants:4, currentParticipants:2, meetingTime:'12:30', date:TODAY, status:'open', likeCount:7,  postedBy:'加藤',   hunters:['加藤','松本'] },
 ];
 
-// 状態管理: 今日受注済みのクエストID, いいね済みのクエストIDセット
-let joinedQuestId = null;   // 今日受注中のID（1つのみ）
-const likedQuestIds = new Set();
+let joinedQuestId = null;
+const likedSet = new Set();
 
-function renderCard(q) {
-  const full = q.status==='full' || q.currentParticipants>=q.maxParticipants;
-  const pct  = Math.min(q.currentParticipants/q.maxParticipants*100, 100);
-  const badge = BADGE[q.foodCategory]||'badge-gray';
-  const rank  = RANK[getRank(q.currentParticipants, q.maxParticipants)];
-  const isJoinedThis  = joinedQuestId === q.id;
+// q3はMEが発注者
+// 自動期限チェック用タイマー
+setInterval(render, 30000);
+
+function computeStatus(q){
+  if(isExpired(q)) return 'expired';
+  if(q.currentParticipants >= q.maxParticipants) return 'full';
+  return 'open';
+}
+
+function renderCard(q){
+  const st  = computeStatus(q);
+  const isMine    = q.postedBy === ME;
+  const isJoined  = q.hunters.includes(ME) && !isMine;
   const alreadyJoined = joinedQuestId !== null && joinedQuestId !== q.id;
-  const isLiked = likedQuestIds.has(q.id);
+  const pct = Math.min(q.currentParticipants/q.maxParticipants*100,100);
+  const badge = BADGE[q.foodCategory]||'badge-gray';
+  const rank  = RANK[getRank(q.currentParticipants,q.maxParticipants)];
+  const isLiked = likedSet.has(q.id);
 
-  let joinClass, joinLabel, joinDisabled;
-  if (isJoinedThis) {
-    joinClass = 'joined'; joinLabel = '✓ 受注済み'; joinDisabled = true;
-  } else if (full) {
-    joinClass = 'disabled'; joinLabel = '満員'; joinDisabled = true;
-  } else if (alreadyJoined) {
-    joinClass = 'disabled'; joinLabel = '受注不可'; joinDisabled = true;
+  let cardClass = 'card ';
+  if(st==='expired') cardClass+='closed-card';
+  else if(isMine) cardClass+='my-card';
+  else cardClass+='open-card';
+
+  let progressColor = st==='expired'?'gray':st==='full'?'red':'amber';
+
+  let topBadge = '';
+  if(isMine) topBadge = '<div class="owner-badge">発令者</div>';
+  else if(st!=='open') topBadge = '<div class="closed-badge">受注不可</div>';
+
+  // アクションボタン
+  let actionBtn = '';
+  if(isMine){
+    actionBtn = `<button class="btn btn-delete" onclick="deleteQuest('${q.id}')">✕ クエスト取消</button>`;
+  } else if(st==='expired'){
+    actionBtn = `<button class="btn btn-disabled" disabled>受注不可</button>`;
+  } else if(st==='full' && !isJoined){
+    actionBtn = `<button class="btn btn-disabled" disabled>受注不可</button>`;
+  } else if(isJoined){
+    actionBtn = `<button class="btn btn-cancel" onclick="cancelQuest('${q.id}')">↩ 受注キャンセル</button>`;
+  } else if(alreadyJoined){
+    actionBtn = `<button class="btn btn-disabled" disabled>受注不可</button>`;
   } else {
-    joinClass = 'active'; joinLabel = '⚔ 受注する'; joinDisabled = false;
+    actionBtn = `<button class="btn btn-join" onclick="joinQuest('${q.id}')">⚔ 受注する</button>`;
   }
 
-  return `<div class="card${full?' full':''}" id="card-${q.id}">
+  return `<div class="${cardClass}" id="card-${q.id}">
     <div class="card-header">
-      <div class="card-header-left"><span>🔥</span>Lunch Quest</div>
+      <div class="card-header-left">🔥 Lunch Quest</div>
       <div class="card-header-right">
+        ${st==='expired'?'<span class="expired-tag">⏰ 時間切れ</span>':''}
         <span class="card-date">📅 ${fmtDate(q.date)}</span>
         <span class="rank">${rank}</span>
       </div>
@@ -205,17 +239,16 @@ function renderCard(q) {
           <div class="shop-name">${q.shopName}</div>
           <span class="category-badge ${badge}">${q.foodCategory}</span>
         </div>
-        ${full?'<div class="full-badge">受注不可</div>':''}
+        ${topBadge}
       </div>
       <div class="stats">
         <div class="stat">🕐 <span class="stat-val">${q.meetingTime}</span></div>
-        <div class="stat">👥 <span class="stat-val${full?' red':''}">${q.currentParticipants}</span><span class="stat-muted"> / ${q.maxParticipants}</span></div>
+        <div class="stat">👥 <span class="stat-val${st==='full'?' red':''}">${q.currentParticipants}</span><span class="stat-muted"> / ${q.maxParticipants}</span></div>
       </div>
-      <div class="progress-track"><div class="progress-fill ${full?'red':'amber'}" style="width:${pct}%"></div></div>
+      <div class="progress-track"><div class="progress-fill ${progressColor}" style="width:${pct}%"></div></div>
       <div class="card-actions">
-        <button class="btn-join ${joinClass}" onclick="joinQuest('${q.id}')" ${joinDisabled?'disabled':''}>
-          ${joinLabel}
-        </button>
+        ${actionBtn}
+        <button class="btn-detail" onclick="openDetail('${q.id}')">🔍</button>
         <button class="btn-like${isLiked?' liked':''}" onclick="likeQuest('${q.id}')" ${isLiked?'disabled':''}>
           👍 <span id="like-${q.id}">${q.likeCount}</span>
         </button>
@@ -224,79 +257,213 @@ function renderCard(q) {
   </div>`;
 }
 
-function render() {
-  const open = quests.filter(q => q.status!=='full');
-  const full = quests.filter(q => q.status==='full');
-  let html = '';
-  if (open.length) {
-    html += `<div class="section-divider"><div class="divider-line"></div><div class="divider-label">受注可能なクエスト (${open.length})</div><div class="divider-line"></div></div>`;
-    html += `<div class="grid">${open.map(renderCard).join('')}</div>`;
+function render(){
+  // 期限チェックで joinedQuestId も無効化
+  if(joinedQuestId){
+    const jq = quests.find(q=>q.id===joinedQuestId);
+    if(jq && isExpired(jq)) joinedQuestId = null;
   }
-  if (full.length) {
-    html += `<div class="section-divider"><div class="divider-line" style="background:#27272a"></div><div class="divider-label" style="color:#52525b">受注不可（満員） (${full.length})</div><div class="divider-line" style="background:#27272a"></div></div>`;
-    html += `<div class="grid">${full.map(renderCard).join('')}</div>`;
+
+  const active  = quests.filter(q => computeStatus(q)==='open' || computeStatus(q)==='full');
+  const expired = quests.filter(q => computeStatus(q)==='expired');
+  let html = '';
+
+  if(active.length){
+    html += `<div class="section-divider"><div class="divider-line" style="background:rgba(120,53,15,0.3)"></div><div class="divider-label" style="color:#d97706">受注可能なクエスト (${active.length})</div><div class="divider-line" style="background:rgba(120,53,15,0.3)"></div></div>`;
+    html += `<div class="grid">${active.map(renderCard).join('')}</div>`;
+  }
+  if(expired.length){
+    html += `<div class="section-divider"><div class="divider-line" style="background:#27272a"></div><div class="divider-label" style="color:#52525b">受注不可 (${expired.length})</div><div class="divider-line" style="background:#27272a"></div></div>`;
+    html += `<div class="grid">${expired.map(renderCard).join('')}</div>`;
   }
   document.getElementById('main').innerHTML = html;
 }
 
-function toast(msg, type='success') {
-  const wrap = document.getElementById('toastWrap');
-  const el = document.createElement('div');
-  el.className = 'toast ' + type;
-  const icons = {success:'⚔', error:'🛡', info:'👍'};
-  el.innerHTML = `<span>${icons[type]||'⚔'}</span><span>${msg}</span>`;
+function toast(msg,type='success'){
+  const wrap=document.getElementById('toastWrap');
+  const el=document.createElement('div');
+  el.className='toast '+type;
+  const icons={success:'⚔',error:'🛡',info:'👍'};
+  el.innerHTML=`<span>${icons[type]}</span><span>${msg}</span>`;
   wrap.appendChild(el);
-  setTimeout(() => { el.style.transition='opacity 0.3s'; el.style.opacity='0'; setTimeout(()=>el.remove(), 300); }, 3200);
+  setTimeout(()=>{el.style.transition='opacity 0.3s';el.style.opacity='0';setTimeout(()=>el.remove(),300);},3200);
 }
 
-function joinQuest(id) {
-  if (joinedQuestId !== null && joinedQuestId !== id) {
-    toast(rnd(MH.dup), 'error'); return;
-  }
-  const idx = quests.findIndex(q => q.id===id);
-  if (idx===-1) return;
-  const q = quests[idx];
-  if (q.currentParticipants >= q.maxParticipants) { toast(rnd(MH.full), 'error'); return; }
-  quests[idx] = {...q, currentParticipants: q.currentParticipants+1};
-  if (quests[idx].currentParticipants >= quests[idx].maxParticipants) quests[idx].status = 'full';
-  joinedQuestId = id;
+function joinQuest(id){
+  if(joinedQuestId && joinedQuestId!==id){toast(rnd(MH.dup),'error');return;}
+  const idx=quests.findIndex(q=>q.id===id);
+  if(idx===-1) return;
+  const q=quests[idx];
+  if(isExpired(q)){toast(rnd(MH.expired),'error');return;}
+  if(q.currentParticipants>=q.maxParticipants){toast(rnd(MH.full),'error');return;}
+  quests[idx]={...q,currentParticipants:q.currentParticipants+1,hunters:[...q.hunters,ME]};
+  joinedQuestId=id;
   render();
-  toast(rnd(MH.join), 'success');
+  toast(rnd(MH.join),'success');
 }
 
-function likeQuest(id) {
-  if (likedQuestIds.has(id)) { toast(rnd(MH.liked), 'error'); return; }
-  const idx = quests.findIndex(q => q.id===id);
-  if (idx===-1) return;
-  quests[idx] = {...quests[idx], likeCount: quests[idx].likeCount+1};
-  likedQuestIds.add(id);
-  const el = document.getElementById('like-'+id);
-  if (el) el.textContent = quests[idx].likeCount;
-  const btn = el && el.closest('.btn-like');
-  if (btn) { btn.classList.add('liked'); btn.disabled = true; }
-  toast(rnd(MH.like), 'info');
+function cancelQuest(id){
+  const idx=quests.findIndex(q=>q.id===id);
+  if(idx===-1) return;
+  const q=quests[idx];
+  quests[idx]={...q,currentParticipants:Math.max(0,q.currentParticipants-1),hunters:q.hunters.filter(h=>h!==ME)};
+  if(joinedQuestId===id) joinedQuestId=null;
+  render();
+  toast(rnd(MH.cancel),'info');
 }
 
-function openModal() {
-  document.getElementById('f-date').value = TODAY;
-  document.getElementById('modal').style.display = 'flex';
+function deleteQuest(id){
+  quests=quests.filter(q=>q.id!==id);
+  if(joinedQuestId===id) joinedQuestId=null;
+  render();
+  toast(rnd(MH.delete),'error');
 }
-function closeModal() { document.getElementById('modal').style.display = 'none'; }
 
-function postQuest() {
-  const shop = document.getElementById('f-shop').value.trim();
+function likeQuest(id){
+  if(likedSet.has(id)){toast(rnd(MH.liked),'error');return;}
+  const idx=quests.findIndex(q=>q.id===id);
+  if(idx===-1) return;
+  quests[idx]={...quests[idx],likeCount:quests[idx].likeCount+1};
+  likedSet.add(id);
+  const el=document.getElementById('like-'+id);
+  if(el) el.textContent=quests[idx].likeCount;
+  const btn=el&&el.closest('.btn-like');
+  if(btn){btn.classList.add('liked');btn.disabled=true;}
+  toast(rnd(MH.like),'info');
+}
+
+/* ---- Detail Panel ---- */
+function openDetail(id){
+  const q=quests.find(q=>q.id===id);
+  if(!q) return;
+  const st=computeStatus(q);
+  const badge=BADGE[q.foodCategory]||'badge-gray';
+  const pct=Math.min(q.currentParticipants/q.maxParticipants*100,100);
+  const huntersHtml = q.hunters.length===0
+    ? '<div class="empty-hunters">まだ誰も受注していない...</div>'
+    : q.hunters.map((h,i)=>{
+        const [bg,fg]=AVATAR_COLORS[i%AVATAR_COLORS.length];
+        const initial=h.charAt(0);
+        const isYou=h===ME;
+        return `<div class="hunter-row">
+          <div class="hunter-avatar" style="background:${bg};color:${fg};">${initial}</div>
+          <span class="hunter-name">${h}</span>
+          ${isYou?'<span class="hunter-you">← あなた</span>':''}
+          ${h===q.postedBy?'<span style="font-size:10px;color:#d97706;margin-left:auto;">発令者</span>':''}
+        </div>`;
+      }).join('');
+
+  const html=`<div class="detail-backdrop" id="detailBD" onclick="closeDetailBD(event)">
+    <div class="detail-panel">
+      <div class="detail-header">
+        <span class="detail-title">📜 クエスト詳細</span>
+        <button class="modal-close" onclick="closeDetail()">✕</button>
+      </div>
+      <div class="detail-body">
+        <div class="detail-shop">${q.shopName}</div>
+        <span class="category-badge ${badge}" style="margin-bottom:16px;display:inline-block;">${q.foodCategory}</span>
+        <div class="detail-grid">
+          <div class="detail-item">
+            <div class="detail-item-label">📅 日付</div>
+            <div class="detail-item-val">${fmtDate(q.date)}</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-item-label">🕐 集合時間</div>
+            <div class="detail-item-val">${q.meetingTime}</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-item-label">👤 発令者</div>
+            <div class="detail-item-val">${q.postedBy}</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-item-label">🏷 ステータス</div>
+            <div class="detail-item-val" style="color:${st==='open'?'#4ade80':st==='full'?'#f87171':'#71717a'}">${st==='open'?'受注可':'受注不可'}</div>
+          </div>
+        </div>
+        <div class="progress-section">
+          <div class="progress-label"><span>参加人数</span><span>${q.currentParticipants} / ${q.maxParticipants}</span></div>
+          <div class="progress-track" style="margin-bottom:16px;"><div class="progress-fill ${st==='full'?'red':'amber'}" style="width:${pct}%"></div></div>
+        </div>
+        <div class="detail-section-title">⚔ 受注ハンター</div>
+        <div class="hunters-list">${huntersHtml}</div>
+        <div style="display:flex;gap:8px;">
+          <button class="submit-btn" style="background:rgba(39,39,42,0.5);border-color:#52525b;color:#a1a1aa;" onclick="closeDetail()">閉じる</button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+  document.getElementById('detailMount').innerHTML=html;
+}
+function closeDetail(){ document.getElementById('detailMount').innerHTML=''; }
+function closeDetailBD(e){ if(e.target.id==='detailBD') closeDetail(); }
+
+/* ---- Post Modal ---- */
+function openModal(){
+  const html=`<div class="modal-backdrop" id="postBD" onclick="closeModalBD(event)">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title-text">📜 新規クエスト依頼書</span>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="field">
+          <label>🗺 お店の名前</label>
+          <input id="f-shop" type="text" placeholder="例：焼肉ホルモン 炎の番人" />
+        </div>
+        <div class="field">
+          <label>🍴 食べたいもの</label>
+          <select id="f-cat">
+            <option>焼肉</option><option>ラーメン</option><option>タイ料理</option>
+            <option>寿司</option><option>カレー</option><option>中華</option>
+            <option>イタリアン</option><option>その他</option>
+          </select>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>👥 最大人数</label>
+            <input id="f-max" type="number" min="2" max="10" value="4" />
+          </div>
+          <div class="field">
+            <label>🕐 集合時間</label>
+            <input id="f-time" type="time" value="12:00" />
+          </div>
+        </div>
+        <div class="field">
+          <label>📅 日付</label>
+          <input id="f-date" type="date" value="${TODAY}" min="${TODAY}" />
+        </div>
+        <div class="field">
+          <label>👤 あなたの名前</label>
+          <input id="f-name" type="text" placeholder="名前を入力（省略で「あなた」）" />
+        </div>
+        <p class="post-name-note">※ デモ用。実装時はログインユーザーを使用します</p>
+        <button class="submit-btn" onclick="postQuest()">── クエストを発令する ──</button>
+      </div>
+    </div>
+  </div>`;
+  document.getElementById('modalMount').innerHTML=html;
+  setTimeout(()=>document.getElementById('f-shop')&&document.getElementById('f-shop').focus(),50);
+}
+function closeModal(){ document.getElementById('modalMount').innerHTML=''; }
+function closeModalBD(e){ if(e.target.id==='postBD') closeModal(); }
+
+function postQuest(){
+  const shop=document.getElementById('f-shop').value.trim();
+  if(!shop){document.getElementById('f-shop').focus();return;}
   const cat  = document.getElementById('f-cat').value;
   const max  = parseInt(document.getElementById('f-max').value)||4;
   const time = document.getElementById('f-time').value||'12:00';
   const date = document.getElementById('f-date').value||TODAY;
-  if (!shop) { document.getElementById('f-shop').focus(); return; }
-  quests.unshift({ id:'q'+Date.now(), shopName:shop, foodCategory:cat, maxParticipants:max, currentParticipants:0, meetingTime:time, date:date, status:'open', likeCount:0 });
-  document.getElementById('f-shop').value = '';
+  const nameVal = document.getElementById('f-name').value.trim();
+  const poster = nameVal || ME;
+  const newQ={id:'q'+Date.now(),shopName:shop,foodCategory:cat,maxParticipants:max,
+    currentParticipants:1,meetingTime:time,date:date,status:'open',likeCount:0,
+    postedBy:poster,hunters:[poster]};
+  quests.unshift(newQ);
   closeModal();
   render();
-  toast(rnd(MH.post), 'success');
+  toast(rnd(MH.post),'success');
 }
 
-document.getElementById('modal').addEventListener('click', function(e){ if(e.target===this) closeModal(); });
 render();
 </script>
