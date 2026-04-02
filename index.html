@@ -2,32 +2,63 @@
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   .board { background: #09090b; min-height: 600px; color: #f4f4f5; padding: 0 0 40px; font-family: var(--font-mono, monospace); }
-  .header { position: sticky; top: 0; z-index: 30; border-bottom: 1px solid rgba(120,53,15,0.4); background: rgba(9,9,11,0.92); backdrop-filter: blur(8px); padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; }
-  .logo-icon { width: 32px; height: 32px; border: 1px solid #92400e; background: rgba(120,53,15,0.3); border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+  .header { position: sticky; top: 0; z-index: 30; border-bottom: 1px solid rgba(120,53,15,0.4); background: rgba(9,9,11,0.93); backdrop-filter: blur(8px); padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; }
   .logo-wrap { display: flex; align-items: center; gap: 10px; }
+  .logo-icon { width: 32px; height: 32px; border: 1px solid #92400e; background: rgba(120,53,15,0.3); border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
   .logo-title { font-size: 13px; font-weight: 700; letter-spacing: 0.15em; color: #fbbf24; text-transform: uppercase; }
   .logo-sub { font-size: 11px; color: #71717a; margin-top: 1px; }
   .header-btn { display: flex; align-items: center; gap: 6px; padding: 7px 14px; font-size: 12px; font-weight: 700; border: 1px solid #d97706; color: #fde68a; background: rgba(120,53,15,0.3); border-radius: 3px; cursor: pointer; font-family: var(--font-mono, monospace); letter-spacing: 0.03em; transition: background 0.15s; }
   .header-btn:hover { background: rgba(120,53,15,0.5); }
-  .main { max-width: 960px; margin: 0 auto; padding: 28px 16px 0; }
-  .section-divider { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-  .divider-line { flex: 1; height: 1px; }
-  .divider-label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; padding: 0 8px; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(268px, 1fr)); gap: 14px; margin-bottom: 28px; }
+  .main { max-width: 1080px; margin: 0 auto; padding: 28px 16px 0; display: flex; gap: 0; }
+
+  /* Date sidebar */
+  .date-sidebar { width: 120px; flex-shrink: 0; padding-right: 0; }
+  .date-label-wrap { position: relative; margin-bottom: 0; }
+  .date-label { position: sticky; top: 60px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 10px 8px 10px 0; }
+  .date-badge { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 10px 12px; border: 1px solid rgba(120,53,15,0.5); border-radius: 4px; background: rgba(120,53,15,0.1); min-width: 72px; text-align: center; }
+  .date-badge.today { border-color: #d97706; background: rgba(120,53,15,0.25); }
+  .date-badge.past  { border-color: #27272a; background: transparent; opacity: 0.5; }
+  .date-badge.future{ border-color: rgba(120,53,15,0.35); background: rgba(120,53,15,0.06); }
+  .date-day-name { font-size: 10px; color: #71717a; letter-spacing: 0.1em; text-transform: uppercase; }
+  .date-day-num { font-size: 22px; font-weight: 700; color: #fbbf24; line-height: 1; }
+  .date-badge.past .date-day-num { color: #52525b; }
+  .date-month { font-size: 10px; color: #a1a1aa; }
+  .date-badge.today .date-month { color: #d97706; }
+  .today-pill { font-size: 9px; color: #fbbf24; background: rgba(217,119,6,0.25); border: 1px solid rgba(217,119,6,0.4); border-radius: 99px; padding: 1px 7px; margin-top: 3px; letter-spacing: 0.08em; }
+  .date-connector { width: 1px; background: rgba(120,53,15,0.2); flex: 1; min-height: 20px; margin: 4px auto; }
+
+  /* Quest column */
+  .quest-column { flex: 1; min-width: 0; }
+  .date-section { margin-bottom: 32px; display: flex; gap: 16px; }
+  .date-section-inner { flex: 1; min-width: 0; }
+
+  .sub-section-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; padding: 0 2px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .sub-section-label::after { content: ''; flex: 1; height: 1px; }
+  .sub-label-open  { color: #d97706; }
+  .sub-label-open::after  { background: rgba(120,53,15,0.3); }
+  .sub-label-closed{ color: #3f3f46; }
+  .sub-label-closed::after{ background: #27272a; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(255px, 1fr)); gap: 12px; margin-bottom: 16px; }
+
   .card { border-radius: 3px; overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s; }
-  .card.open-card  { border: 1px solid rgba(120,53,15,0.45); background: linear-gradient(135deg,#18181b,#18181b,rgba(120,53,15,0.08)); }
-  .card.open-card:hover { border-color: rgba(217,119,6,0.6); box-shadow: 0 4px 20px rgba(120,53,15,0.18); }
-  .card.closed-card { border: 1px solid #3f3f46; background: rgba(24,24,27,0.5); opacity: 0.65; }
-  .card.my-card { border: 1px solid rgba(120,53,15,0.7); background: linear-gradient(135deg,#18181b,rgba(120,53,15,0.12)); }
-  .card-header { display: flex; align-items: center; justify-content: space-between; padding: 7px 14px; border-bottom: 1px solid rgba(120,53,15,0.25); background: rgba(120,53,15,0.12); }
-  .card-header-left { display: flex; align-items: center; gap: 6px; font-size: 11px; color: rgba(251,191,36,0.75); letter-spacing: 0.15em; text-transform: uppercase; }
-  .card-header-right { display: flex; align-items: center; gap: 8px; }
+  .card.open-card   { border: 1px solid rgba(120,53,15,0.45); background: linear-gradient(135deg,#18181b,#18181b,rgba(120,53,15,0.07)); }
+  .card.open-card:hover { border-color: rgba(217,119,6,0.65); box-shadow: 0 4px 20px rgba(120,53,15,0.18); }
+  .card.my-card     { border: 1px solid rgba(180,83,9,0.65); background: linear-gradient(135deg,#18181b,rgba(120,53,15,0.12)); }
+  .card.closed-card { border: 1px solid #27272a; background: rgba(24,24,27,0.45); opacity: 0.6; }
+  .card.confirmed-card { border: 1px solid rgba(20,83,45,0.6); background: linear-gradient(135deg,#18181b,rgba(20,83,45,0.07)); opacity: 0.7; }
+
+  .card-header { display: flex; align-items: center; justify-content: space-between; padding: 6px 13px; border-bottom: 1px solid rgba(120,53,15,0.22); background: rgba(120,53,15,0.1); }
+  .card-header.confirmed-hdr { background: rgba(20,83,45,0.15); border-bottom-color: rgba(20,83,45,0.25); }
+  .card-header-left { display: flex; align-items: center; gap: 5px; font-size: 10px; color: rgba(251,191,36,0.7); letter-spacing: 0.14em; text-transform: uppercase; }
+  .card-header-right { display: flex; align-items: center; gap: 7px; }
   .rank { font-size: 11px; color: #d97706; }
-  .card-date { font-size: 10px; color: #52525b; }
-  .expired-tag { font-size: 10px; color: #ef4444; letter-spacing: 0.05em; }
-  .card-body { padding: 14px; }
-  .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
-  .shop-name { font-size: 14px; font-weight: 700; color: #f4f4f5; line-height: 1.3; margin-bottom: 5px; font-family: sans-serif; }
+  .expired-tag { font-size: 10px; color: #ef4444; }
+  .confirmed-tag { font-size: 10px; color: #4ade80; }
+
+  .card-body { padding: 12px 13px; }
+  .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 9px; }
+  .shop-name { font-size: 14px; font-weight: 700; color: #f4f4f5; line-height: 1.3; margin-bottom: 4px; font-family: sans-serif; }
   .category-badge { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 2px; border: 1px solid; font-family: var(--font-mono, monospace); }
   .badge-red    { color:#f87171;border-color:#b91c1c;background:rgba(127,29,29,0.3); }
   .badge-orange { color:#fb923c;border-color:#c2410c;background:rgba(124,45,18,0.3); }
@@ -35,80 +66,89 @@
   .badge-blue   { color:#60a5fa;border-color:#1d4ed8;background:rgba(29,78,216,0.2); }
   .badge-yellow { color:#facc15;border-color:#a16207;background:rgba(113,63,18,0.3); }
   .badge-gray   { color:#a1a1aa;border-color:#52525b;background:rgba(39,39,42,0.5); }
-  .closed-badge { font-size:10px;font-weight:700;color:#f87171;border:1px solid #991b1b;padding:4px 7px;border-radius:2px;background:rgba(127,29,29,0.35);transform:rotate(1deg);flex-shrink:0;font-family:var(--font-mono,monospace); }
-  .owner-badge  { font-size:10px;font-weight:700;color:#fbbf24;border:1px solid #92400e;padding:4px 7px;border-radius:2px;background:rgba(120,53,15,0.4);flex-shrink:0;font-family:var(--font-mono,monospace); }
-  .stats { display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px; }
-  .stat { display:flex;align-items:center;gap:6px;font-size:12px;color:#a1a1aa; }
+
+  .status-badge { font-size:10px;font-weight:700;padding:3px 7px;border-radius:2px;border:1px solid;flex-shrink:0;font-family:var(--font-mono,monospace); }
+  .sb-closed    { color:#f87171;border-color:#991b1b;background:rgba(127,29,29,0.3);transform:rotate(1deg); }
+  .sb-confirmed { color:#4ade80;border-color:#15803d;background:rgba(20,83,45,0.25); }
+  .sb-owner     { color:#fbbf24;border-color:#92400e;background:rgba(120,53,15,0.35); }
+
+  .stats { display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:9px; }
+  .stat { display:flex;align-items:center;gap:5px;font-size:11px;color:#a1a1aa; }
   .stat-val { color:#e4e4e7; }
   .stat-val.red { color:#f87171; }
   .stat-muted { color:#52525b; }
-  .progress-track { height:4px;background:#27272a;border-radius:99px;overflow:hidden;margin-bottom:12px; }
-  .progress-fill { height:100%;border-radius:99px;transition:width 0.5s; }
+
+  .progress-track { height:3px;background:#27272a;border-radius:99px;overflow:hidden;margin-bottom:10px; }
+  .progress-fill  { height:100%;border-radius:99px;transition:width 0.5s; }
   .progress-fill.amber { background:#f59e0b; }
   .progress-fill.red   { background:#dc2626; }
+  .progress-fill.green { background:#22c55e; }
   .progress-fill.gray  { background:#52525b; }
-  .card-actions { display:flex;gap:8px; }
-  .btn { display:flex;align-items:center;justify-content:center;gap:6px;padding:7px 10px;font-size:12px;font-weight:700;border-radius:2px;cursor:pointer;font-family:var(--font-mono,monospace);transition:background 0.15s,transform 0.1s;letter-spacing:0.03em;border:1px solid; }
-  .btn:active { transform:scale(0.96); }
-  .btn-join    { flex:1;border-color:#d97706;color:#fde68a;background:rgba(120,53,15,0.4); }
-  .btn-join:hover { background:rgba(120,53,15,0.6); }
-  .btn-cancel  { flex:1;border-color:#52525b;color:#a1a1aa;background:rgba(39,39,42,0.4); }
-  .btn-cancel:hover { border-color:#71717a;color:#d4d4d8;background:rgba(63,63,70,0.4); }
-  .btn-delete  { flex:1;border-color:#991b1b;color:#fca5a5;background:rgba(127,29,29,0.3); }
-  .btn-delete:hover { background:rgba(127,29,29,0.5); }
-  .btn-disabled{ flex:1;border-color:#3f3f46;color:#52525b;background:rgba(39,39,42,0.4);cursor:not-allowed; }
-  .btn-detail  { display:flex;align-items:center;gap:5px;padding:7px 10px;font-size:12px;border:1px solid #3f3f46;color:#71717a;background:rgba(39,39,42,0.4);border-radius:2px;cursor:pointer;font-family:var(--font-mono,monospace);transition:border-color 0.15s,color 0.15s;white-space:nowrap; }
-  .btn-detail:hover { border-color:#71717a;color:#d4d4d8; }
-  .btn-like    { display:flex;align-items:center;gap:5px;padding:7px 10px;font-size:12px;border:1px solid #3f3f46;color:#71717a;background:rgba(39,39,42,0.4);border-radius:2px;cursor:pointer;font-family:var(--font-mono,monospace);transition:border-color 0.15s,color 0.15s,background 0.15s;white-space:nowrap; }
-  .btn-like:hover:not(.liked) { border-color:#71717a;color:#d4d4d8; }
-  .btn-like.liked { border-color:#1d4ed8;color:#93c5fd;background:rgba(29,78,216,0.15);cursor:not-allowed; }
 
-  /* Detail panel */
-  .detail-backdrop { position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(4px);z-index:60;display:flex;align-items:center;justify-content:center;padding:16px; }
-  .detail-panel { width:100%;max-width:460px;border:1px solid rgba(180,83,9,0.5);background:#0c0c0e;border-radius:4px; }
-  .detail-header { display:flex;align-items:center;justify-content:space-between;padding:11px 18px;border-bottom:1px solid rgba(120,53,15,0.3);background:rgba(120,53,15,0.15); }
-  .detail-title { font-size:11px;color:#fbbf24;letter-spacing:0.15em;text-transform:uppercase; }
-  .modal-close  { background:none;border:none;color:#71717a;cursor:pointer;font-size:18px;line-height:1;padding:2px 4px; }
-  .modal-close:hover { color:#d4d4d8; }
-  .detail-body  { padding:18px; }
-  .detail-shop  { font-size:18px;font-weight:700;color:#f4f4f5;font-family:sans-serif;margin-bottom:6px; }
-  .detail-cat   { display:inline-block;font-size:11px;padding:2px 10px;border-radius:2px;border:1px solid;margin-bottom:16px; }
-  .detail-grid  { display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px; }
-  .detail-item  { background:#18181b;border:1px solid #27272a;border-radius:3px;padding:10px 12px; }
-  .detail-item-label { font-size:10px;color:#52525b;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:3px; }
-  .detail-item-val   { font-size:14px;color:#e4e4e7;font-weight:700; }
-  .detail-section-title { font-size:10px;color:#71717a;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:8px; }
-  .hunters-list { display:flex;flex-direction:column;gap:6px;margin-bottom:16px; }
-  .hunter-row   { display:flex;align-items:center;gap:8px;padding:7px 10px;background:#18181b;border:1px solid #27272a;border-radius:3px; }
-  .hunter-avatar{ width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0; }
-  .hunter-name  { font-size:12px;color:#d4d4d8; }
-  .hunter-you   { font-size:10px;color:#d97706;margin-left:auto; }
-  .empty-hunters{ font-size:12px;color:#52525b;text-align:center;padding:12px 0; }
-  .progress-section { margin-bottom:4px; }
-  .progress-label { display:flex;justify-content:space-between;font-size:11px;color:#71717a;margin-bottom:5px; }
+  .card-actions { display:flex;gap:6px; }
+  .btn { display:flex;align-items:center;justify-content:center;gap:5px;padding:6px 9px;font-size:11px;font-weight:700;border-radius:2px;cursor:pointer;font-family:var(--font-mono,monospace);transition:background 0.15s,transform 0.1s;letter-spacing:0.02em;border:1px solid;white-space:nowrap; }
+  .btn:active { transform:scale(0.96); }
+  .btn-join     { flex:1;border-color:#d97706;color:#fde68a;background:rgba(120,53,15,0.35); }
+  .btn-join:hover { background:rgba(120,53,15,0.6); }
+  .btn-cancel   { flex:1;border-color:#52525b;color:#a1a1aa;background:rgba(39,39,42,0.35); }
+  .btn-cancel:hover { border-color:#71717a;color:#d4d4d8; }
+  .btn-confirm  { border-color:#15803d;color:#86efac;background:rgba(20,83,45,0.25); }
+  .btn-confirm:hover { background:rgba(20,83,45,0.45); }
+  .btn-delete   { border-color:#7f1d1d;color:#fca5a5;background:rgba(127,29,29,0.25); }
+  .btn-delete:hover { background:rgba(127,29,29,0.45); }
+  .btn-disabled { flex:1;border-color:#27272a;color:#3f3f46;background:transparent;cursor:not-allowed; }
+  .btn-detail   { display:flex;align-items:center;gap:4px;padding:6px 9px;font-size:11px;border:1px solid #27272a;color:#52525b;background:transparent;border-radius:2px;cursor:pointer;transition:border-color 0.15s,color 0.15s; }
+  .btn-detail:hover { border-color:#52525b;color:#a1a1aa; }
+  .btn-like     { display:flex;align-items:center;gap:4px;padding:6px 9px;font-size:11px;border:1px solid #27272a;color:#52525b;background:transparent;border-radius:2px;cursor:pointer;transition:border-color 0.15s,color 0.15s; }
+  .btn-like:hover:not(.liked) { border-color:#52525b;color:#a1a1aa; }
+  .btn-like.liked { border-color:#1d4ed8;color:#93c5fd;background:rgba(29,78,216,0.12);cursor:not-allowed; }
+
+  /* Detail */
+  .overlay { position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(4px);z-index:60;display:flex;align-items:center;justify-content:center;padding:16px; }
+  .panel { width:100%;max-width:460px;border:1px solid rgba(180,83,9,0.45);background:#0c0c0e;border-radius:4px; }
+  .panel-hdr { display:flex;align-items:center;justify-content:space-between;padding:10px 17px;border-bottom:1px solid rgba(120,53,15,0.28);background:rgba(120,53,15,0.14); }
+  .panel-title { font-size:11px;color:#fbbf24;letter-spacing:0.15em;text-transform:uppercase; }
+  .panel-close { background:none;border:none;color:#71717a;cursor:pointer;font-size:17px;line-height:1;padding:2px 4px; }
+  .panel-close:hover { color:#d4d4d8; }
+  .panel-body { padding:17px; }
+  .detail-shop { font-size:17px;font-weight:700;color:#f4f4f5;font-family:sans-serif;margin-bottom:5px; }
+  .detail-grid { display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:14px 0; }
+  .ditem { background:#18181b;border:1px solid #27272a;border-radius:3px;padding:9px 11px; }
+  .ditem-label { font-size:9px;color:#52525b;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:2px; }
+  .ditem-val   { font-size:13px;color:#e4e4e7;font-weight:700; }
+  .hunters-title { font-size:9px;color:#71717a;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:7px; }
+  .hunters-list { display:flex;flex-direction:column;gap:5px;margin-bottom:14px; }
+  .hunter-row { display:flex;align-items:center;gap:7px;padding:6px 9px;background:#18181b;border:1px solid #27272a;border-radius:3px; }
+  .hunter-av { width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0; }
+  .hunter-name { font-size:12px;color:#d4d4d8; }
+  .hunter-tag  { font-size:9px;margin-left:auto;padding:1px 5px;border-radius:2px; }
+  .tag-you   { color:#d97706;background:rgba(120,53,15,0.3); }
+  .tag-owner { color:#fbbf24;background:rgba(120,53,15,0.2); }
+  .empty-hunters { font-size:12px;color:#3f3f46;text-align:center;padding:10px 0; }
+  .prog-row { display:flex;justify-content:space-between;font-size:10px;color:#71717a;margin-bottom:4px; }
 
   /* Modal */
-  .modal-backdrop { position:fixed;inset:0;background:rgba(0,0,0,0.72);backdrop-filter:blur(4px);z-index:50;display:flex;align-items:center;justify-content:center;padding:16px; }
   .modal { width:100%;max-width:420px;border:1px solid rgba(180,83,9,0.6);background:#09090b;border-radius:3px; }
-  .modal-header { display:flex;align-items:center;justify-content:space-between;padding:10px 18px;border-bottom:1px solid rgba(120,53,15,0.3);background:rgba(120,53,15,0.15); }
-  .modal-title-text { font-size:11px;color:#fbbf24;letter-spacing:0.15em;text-transform:uppercase; }
-  .modal-body { padding:18px;display:flex;flex-direction:column;gap:14px; }
-  .field label { display:flex;align-items:center;gap:5px;font-size:10px;color:#71717a;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:6px; }
-  .field input,.field select { width:100%;padding:8px 10px;background:#18181b;border:1px solid #3f3f46;border-radius:2px;color:#e4e4e7;font-size:12px;font-family:var(--font-mono,monospace);outline:none;transition:border-color 0.15s; }
+  .modal-hdr { display:flex;align-items:center;justify-content:space-between;padding:10px 17px;border-bottom:1px solid rgba(120,53,15,0.28);background:rgba(120,53,15,0.14); }
+  .modal-title { font-size:11px;color:#fbbf24;letter-spacing:0.15em;text-transform:uppercase; }
+  .modal-body { padding:17px;display:flex;flex-direction:column;gap:12px; }
+  .field label { display:flex;align-items:center;gap:5px;font-size:9px;color:#71717a;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:5px; }
+  .field input,.field select { width:100%;padding:7px 10px;background:#18181b;border:1px solid #3f3f46;border-radius:2px;color:#e4e4e7;font-size:12px;font-family:var(--font-mono,monospace);outline:none;transition:border-color 0.15s; }
   .field input:focus,.field select:focus { border-color:#d97706; }
-  .field input::placeholder { color:#52525b; }
+  .field input::placeholder { color:#3f3f46; }
   .field-row { display:grid;grid-template-columns:1fr 1fr;gap:10px; }
-  .submit-btn { width:100%;padding:10px;border:1px solid #d97706;color:#fde68a;background:rgba(120,53,15,0.45);border-radius:2px;cursor:pointer;font-size:12px;font-weight:700;font-family:var(--font-mono,monospace);letter-spacing:0.06em;transition:background 0.15s; }
-  .submit-btn:hover { background:rgba(120,53,15,0.65); }
-  .post-name-note { font-size:10px;color:#52525b;margin-top:-8px;padding-left:2px; }
+  .field-note { font-size:9px;color:#3f3f46;margin-top:-6px;padding-left:2px; }
+  .submit-btn { width:100%;padding:9px;border:1px solid #d97706;color:#fde68a;background:rgba(120,53,15,0.4);border-radius:2px;cursor:pointer;font-size:12px;font-weight:700;font-family:var(--font-mono,monospace);letter-spacing:0.06em;transition:background 0.15s; }
+  .submit-btn:hover { background:rgba(120,53,15,0.62); }
 
   /* Toast */
-  .toast-wrap { position:fixed;bottom:20px;right:20px;display:flex;flex-direction:column;gap:8px;z-index:99;pointer-events:none; }
-  .toast { display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:3px;font-size:12px;font-family:var(--font-mono,monospace);pointer-events:all;max-width:300px;animation:slideIn 0.2s ease;border:1px solid; }
-  .toast.success { background:rgba(120,53,15,0.92);border-color:#d97706;color:#fde68a; }
-  .toast.error   { background:rgba(127,29,29,0.92);border-color:#dc2626;color:#fca5a5; }
-  .toast.info    { background:rgba(24,24,27,0.96);border-color:#52525b;color:#d4d4d8; }
-  @keyframes slideIn { from{opacity:0;transform:translateX(16px);}to{opacity:1;transform:translateX(0);} }
+  .toast-wrap { position:fixed;bottom:20px;right:20px;display:flex;flex-direction:column;gap:7px;z-index:99;pointer-events:none; }
+  .toast { display:flex;align-items:center;gap:9px;padding:9px 13px;border-radius:3px;font-size:11px;font-family:var(--font-mono,monospace);pointer-events:all;max-width:290px;animation:slideIn 0.18s ease;border:1px solid; }
+  .toast.success { background:rgba(120,53,15,0.93);border-color:#d97706;color:#fde68a; }
+  .toast.error   { background:rgba(127,29,29,0.93);border-color:#dc2626;color:#fca5a5; }
+  .toast.info    { background:rgba(24,24,27,0.96);border-color:#3f3f46;color:#d4d4d8; }
+  .toast.green   { background:rgba(20,83,45,0.93);border-color:#15803d;color:#86efac; }
+  @keyframes slideIn { from{opacity:0;transform:translateX(14px);}to{opacity:1;transform:translateX(0);} }
 </style>
 
 <div class="board">
@@ -132,106 +172,133 @@
 <script>
 const BADGE = {'焼肉':'badge-red','ラーメン':'badge-orange','タイ料理':'badge-green','寿司':'badge-blue','カレー':'badge-yellow','中華':'badge-orange','イタリアン':'badge-green','その他':'badge-gray'};
 const RANK  = ['★','★★','★★★'];
-const AVATAR_COLORS = [
-  ['rgba(120,53,15,0.6)','#fbbf24'],['rgba(29,78,216,0.4)','#93c5fd'],
-  ['rgba(20,83,45,0.4)','#86efac'],['rgba(127,29,29,0.4)','#fca5a5'],
-  ['rgba(88,28,135,0.4)','#d8b4fe'],
+const AV_COLORS = [
+  ['rgba(120,53,15,0.55)','#fbbf24'],['rgba(29,78,216,0.4)','#93c5fd'],
+  ['rgba(20,83,45,0.45)','#86efac'],['rgba(127,29,29,0.4)','#fca5a5'],
+  ['rgba(88,28,135,0.4)','#d8b4fe'],['rgba(6,78,59,0.45)','#6ee7b7'],
 ];
 const MH = {
-  join:   ['受注完了！腹を空かして来い！','一飯の義！共に戦おうぞ！','ハンターが一名加わった！'],
-  cancel: ['受注をキャンセルした...次のクエストを探せ！','撤退じゃ！また挑め！'],
-  like:   ['グッジョブ！飯への情熱が伝わってきた！','激励を受け取った！','ナイスサポート！'],
-  post:   ['依頼書をボードに貼り付けた！','新たなクエストが発令された！'],
-  delete: ['クエストを取り消した。また発令せよ！'],
-  full:   ['このクエストは定員に達している...','満員じゃ！クエストを選び直せ！'],
-  dup:    ['本日すでに別クエストを受注済みだ！一日一飯の掟じゃ！'],
-  liked:  ['すでにグッジョブ済みじゃ！'],
-  expired:['このクエストはすでに時刻を過ぎておる...'],
+  join:    ['受注完了！腹を空かして来い！','一飯の義！共に戦おうぞ！','ハンターが一名加わった！'],
+  cancel:  ['受注をキャンセルした...また挑め！','撤退じゃ！次のクエストを探せ！'],
+  like:    ['グッジョブ！飯への情熱が伝わってきた！','激励を受け取った！','ナイスサポート！'],
+  post:    ['依頼書をボードに貼り付けた！','新たなクエストが発令された！'],
+  confirm: ['クエストを確定した！これより出発じゃ！','メンバー確定！一飯行こうぜ！'],
+  delete:  ['クエストを取り消した。また発令せよ！'],
+  full:    ['このクエストは定員に達している...'],
+  dup:     ['本日すでに別クエストを受注済みだ！一日一飯の掟じゃ！'],
+  liked:   ['すでにグッジョブ済みじゃ！'],
+  expired: ['このクエストはすでに時刻を過ぎておる...'],
+  pastdt:  ['過去の日時は選べぬ！'],
 };
-const rnd = arr => arr[Math.floor(Math.random()*arr.length)];
+const rnd = a => a[Math.floor(Math.random()*a.length)];
+
+const ME = 'あなた';
+const DAY_JP = ['日','月','火','水','木','金','土'];
+const MONTH_JP = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
 function todayStr(){ const d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
-function fmtDate(s){ const [y,m,d]=s.split('-'); return `${y}/${m}/${d}`; }
-function getRank(c,m){ const r=c/m; return r<0.4?0:r<0.8?1:2; }
-
-// 現在時刻より前の meetingTime かつ 今日のクエストなら期限切れ
+function nowMinutes(){ const n=new Date(); return n.getHours()*60+n.getMinutes(); }
 function isExpired(q){
-  const today = todayStr();
-  if(q.date !== today) return q.date < today;
-  const now = new Date();
-  const [h,mi] = q.meetingTime.split(':').map(Number);
-  return now.getHours() > h || (now.getHours()===h && now.getMinutes()>=mi);
+  const t=todayStr();
+  if(q.date<t) return true;
+  if(q.date>t) return false;
+  const [h,m]=q.meetingTime.split(':').map(Number);
+  return nowMinutes() >= h*60+m;
+}
+function computeStatus(q){
+  if(q.status==='confirmed') return 'confirmed';
+  if(isExpired(q)) return 'expired';
+  if(q.currentParticipants>=q.maxParticipants) return 'full';
+  return 'open';
+}
+function isClosed(q){ const s=computeStatus(q); return s==='confirmed'||s==='expired'||s==='full'; }
+function fmtDate(s){ const [y,m,d]=s.split('-'); return `${y}/${m}/${d}`; }
+function parseDateObj(s){ const [y,m,d]=s.split('-').map(Number); return new Date(y,m-1,d); }
+function dateLabel(s){
+  const d=parseDateObj(s);
+  return { day: d.getDate(), month: MONTH_JP[d.getMonth()], dow: DAY_JP[d.getDay()], year: d.getFullYear() };
 }
 
 const TODAY = todayStr();
-const ME = 'あなた';
+
+// サンプルデータ（明日・明後日も追加して日付順を確認）
+function tomorrow(){ const d=new Date(); d.setDate(d.getDate()+1); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function dayAfter(){ const d=new Date(); d.setDate(d.getDate()+2); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
 
 let quests = [
-  { id:'q1', shopName:'焼肉ホルモン 炎の番人',  foodCategory:'焼肉',   maxParticipants:4, currentParticipants:2, meetingTime:'12:00', date:TODAY, status:'open', likeCount:5,  postedBy:'田中',   hunters:['田中','鈴木'] },
-  { id:'q2', shopName:'ラーメン道場 鬼辛',       foodCategory:'ラーメン',maxParticipants:3, currentParticipants:3, meetingTime:'12:15', date:TODAY, status:'open', likeCount:12, postedBy:'佐藤',   hunters:['佐藤','山田','高橋'] },
-  { id:'q3', shopName:'タイ料理 バンコク食堂',   foodCategory:'タイ料理',maxParticipants:5, currentParticipants:1, meetingTime:'13:00', date:TODAY, status:'open', likeCount:3,  postedBy:ME,       hunters:[ME] },
-  { id:'q4', shopName:'寿司割烹 海神',           foodCategory:'寿司',   maxParticipants:6, currentParticipants:4, meetingTime:'11:45', date:TODAY, status:'open', likeCount:8,  postedBy:'伊藤',   hunters:['伊藤','渡辺','中村','小林'] },
-  { id:'q5', shopName:'カレーハウス スパイス魔境',foodCategory:'カレー', maxParticipants:4, currentParticipants:2, meetingTime:'12:30', date:TODAY, status:'open', likeCount:7,  postedBy:'加藤',   hunters:['加藤','松本'] },
+  { id:'q1', shopName:'焼肉ホルモン 炎の番人',  foodCategory:'焼肉',    maxParticipants:4, currentParticipants:2, meetingTime:'12:00', date:TODAY,    status:'open', likeCount:5,  postedBy:'田中', hunters:['田中','鈴木'] },
+  { id:'q2', shopName:'ラーメン道場 鬼辛',       foodCategory:'ラーメン', maxParticipants:3, currentParticipants:3, meetingTime:'12:15', date:TODAY,    status:'open', likeCount:12, postedBy:'佐藤', hunters:['佐藤','山田','高橋'] },
+  { id:'q3', shopName:'タイ料理 バンコク食堂',   foodCategory:'タイ料理', maxParticipants:5, currentParticipants:1, meetingTime:'13:00', date:TODAY,    status:'open', likeCount:3,  postedBy:ME,     hunters:[ME] },
+  { id:'q4', shopName:'寿司割烹 海神',           foodCategory:'寿司',    maxParticipants:4, currentParticipants:2, meetingTime:'11:45', date:TODAY,    status:'open', likeCount:8,  postedBy:'伊藤', hunters:['伊藤','渡辺'] },
+  { id:'q5', shopName:'スパイス魔境',            foodCategory:'カレー',  maxParticipants:4, currentParticipants:2, meetingTime:'12:30', date:tomorrow(),status:'open', likeCount:7,  postedBy:ME,     hunters:[ME,'加藤'] },
+  { id:'q6', shopName:'麻婆豆腐 四川食堂',       foodCategory:'中華',    maxParticipants:5, currentParticipants:1, meetingTime:'12:00', date:tomorrow(),status:'open', likeCount:2,  postedBy:'松本', hunters:['松本'] },
+  { id:'q7', shopName:'トラットリア ボスコ',     foodCategory:'イタリアン',maxParticipants:6,currentParticipants:2, meetingTime:'12:15', date:dayAfter(),status:'open', likeCount:4,  postedBy:'中村', hunters:['中村','小林'] },
 ];
 
 let joinedQuestId = null;
 const likedSet = new Set();
-
-// q3はMEが発注者
-// 自動期限チェック用タイマー
 setInterval(render, 30000);
 
-function computeStatus(q){
-  if(isExpired(q)) return 'expired';
-  if(q.currentParticipants >= q.maxParticipants) return 'full';
-  return 'open';
-}
+function getRank(c,m){ const r=c/m; return r<0.4?0:r<0.8?1:2; }
 
 function renderCard(q){
-  const st  = computeStatus(q);
-  const isMine    = q.postedBy === ME;
-  const isJoined  = q.hunters.includes(ME) && !isMine;
-  const alreadyJoined = joinedQuestId !== null && joinedQuestId !== q.id;
-  const pct = Math.min(q.currentParticipants/q.maxParticipants*100,100);
-  const badge = BADGE[q.foodCategory]||'badge-gray';
-  const rank  = RANK[getRank(q.currentParticipants,q.maxParticipants)];
+  const st      = computeStatus(q);
+  const isMine  = q.postedBy===ME;
+  const isJoined= q.hunters.includes(ME) && !isMine;
+  const alreadyJoinedElsewhere = joinedQuestId!==null && joinedQuestId!==q.id;
+  const pct     = Math.min(q.currentParticipants/q.maxParticipants*100,100);
+  const badge   = BADGE[q.foodCategory]||'badge-gray';
+  const rank    = RANK[getRank(q.currentParticipants,q.maxParticipants)];
   const isLiked = likedSet.has(q.id);
 
   let cardClass = 'card ';
-  if(st==='expired') cardClass+='closed-card';
-  else if(isMine) cardClass+='my-card';
-  else cardClass+='open-card';
+  if(st==='confirmed')      cardClass+='confirmed-card';
+  else if(st==='expired')   cardClass+='closed-card';
+  else if(isMine)           cardClass+='my-card';
+  else                      cardClass+='open-card';
 
-  let progressColor = st==='expired'?'gray':st==='full'?'red':'amber';
+  const hdrClass = st==='confirmed' ? 'card-header confirmed-hdr' : 'card-header';
+  const progressColor = st==='confirmed'?'green':st==='expired'?'gray':st==='full'?'red':'amber';
 
-  let topBadge = '';
-  if(isMine) topBadge = '<div class="owner-badge">発令者</div>';
-  else if(st!=='open') topBadge = '<div class="closed-badge">受注不可</div>';
+  // ヘッダー右タグ
+  let hdrTag = '';
+  if(st==='expired')   hdrTag = '<span class="expired-tag">⏰ 時間切れ</span>';
+  if(st==='confirmed') hdrTag = '<span class="confirmed-tag">✓ 確定</span>';
 
-  // アクションボタン
-  let actionBtn = '';
+  // ステータスバッジ
+  let sbadge = '';
+  if(isMine && st!=='confirmed' && st!=='expired') sbadge = '<span class="status-badge sb-owner">発令者</span>';
+  else if(st==='confirmed') sbadge = '<span class="status-badge sb-confirmed">確定済</span>';
+  else if(st!=='open') sbadge = '<span class="status-badge sb-closed">受注不可</span>';
+
+  // アクションボタン群
+  let actions = '';
   if(isMine){
-    actionBtn = `<button class="btn btn-delete" onclick="deleteQuest('${q.id}')">✕ クエスト取消</button>`;
-  } else if(st==='expired'){
-    actionBtn = `<button class="btn btn-disabled" disabled>受注不可</button>`;
+    if(st==='expired'){
+      actions = `<button class="btn btn-delete" onclick="deleteQuest('${q.id}')">✕ 取消</button>`;
+    } else if(st==='confirmed'){
+      actions = `<button class="btn btn-disabled" style="flex:1" disabled>確定済み</button>
+                 <button class="btn btn-delete" onclick="deleteQuest('${q.id}')">✕</button>`;
+    } else {
+      actions = `<button class="btn btn-confirm" onclick="confirmQuest('${q.id}')">✓ 確定</button>
+                 <button class="btn btn-delete" onclick="deleteQuest('${q.id}')">✕ 取消</button>`;
+    }
+  } else if(st==='expired'||st==='confirmed'){
+    actions = `<button class="btn btn-disabled" style="flex:1" disabled>受注不可</button>`;
   } else if(st==='full' && !isJoined){
-    actionBtn = `<button class="btn btn-disabled" disabled>受注不可</button>`;
+    actions = `<button class="btn btn-disabled" style="flex:1" disabled>受注不可</button>`;
   } else if(isJoined){
-    actionBtn = `<button class="btn btn-cancel" onclick="cancelQuest('${q.id}')">↩ 受注キャンセル</button>`;
-  } else if(alreadyJoined){
-    actionBtn = `<button class="btn btn-disabled" disabled>受注不可</button>`;
+    actions = `<button class="btn btn-cancel" onclick="cancelQuest('${q.id}')">↩ キャンセル</button>`;
+  } else if(alreadyJoinedElsewhere){
+    actions = `<button class="btn btn-disabled" style="flex:1" disabled>受注不可</button>`;
   } else {
-    actionBtn = `<button class="btn btn-join" onclick="joinQuest('${q.id}')">⚔ 受注する</button>`;
+    actions = `<button class="btn btn-join" onclick="joinQuest('${q.id}')">⚔ 受注する</button>`;
   }
 
   return `<div class="${cardClass}" id="card-${q.id}">
-    <div class="card-header">
+    <div class="${hdrClass}">
       <div class="card-header-left">🔥 Lunch Quest</div>
-      <div class="card-header-right">
-        ${st==='expired'?'<span class="expired-tag">⏰ 時間切れ</span>':''}
-        <span class="card-date">📅 ${fmtDate(q.date)}</span>
-        <span class="rank">${rank}</span>
-      </div>
+      <div class="card-header-right">${hdrTag}<span class="rank">${rank}</span></div>
     </div>
     <div class="card-body">
       <div class="card-top">
@@ -239,7 +306,7 @@ function renderCard(q){
           <div class="shop-name">${q.shopName}</div>
           <span class="category-badge ${badge}">${q.foodCategory}</span>
         </div>
-        ${topBadge}
+        ${sbadge}
       </div>
       <div class="stats">
         <div class="stat">🕐 <span class="stat-val">${q.meetingTime}</span></div>
@@ -247,7 +314,7 @@ function renderCard(q){
       </div>
       <div class="progress-track"><div class="progress-fill ${progressColor}" style="width:${pct}%"></div></div>
       <div class="card-actions">
-        ${actionBtn}
+        ${actions}
         <button class="btn-detail" onclick="openDetail('${q.id}')">🔍</button>
         <button class="btn-like${isLiked?' liked':''}" onclick="likeQuest('${q.id}')" ${isLiked?'disabled':''}>
           👍 <span id="like-${q.id}">${q.likeCount}</span>
@@ -258,194 +325,210 @@ function renderCard(q){
 }
 
 function render(){
-  // 期限チェックで joinedQuestId も無効化
   if(joinedQuestId){
-    const jq = quests.find(q=>q.id===joinedQuestId);
-    if(jq && isExpired(jq)) joinedQuestId = null;
+    const jq=quests.find(q=>q.id===joinedQuestId);
+    if(jq && isExpired(jq)) joinedQuestId=null;
   }
 
-  const active  = quests.filter(q => computeStatus(q)==='open' || computeStatus(q)==='full');
-  const expired = quests.filter(q => computeStatus(q)==='expired');
-  let html = '';
+  // 日付でソート
+  const sorted = [...quests].sort((a,b)=> a.date<b.date?-1:a.date>b.date?1:
+    (a.meetingTime<b.meetingTime?-1:a.meetingTime>b.meetingTime?1:0));
 
-  if(active.length){
-    html += `<div class="section-divider"><div class="divider-line" style="background:rgba(120,53,15,0.3)"></div><div class="divider-label" style="color:#d97706">受注可能なクエスト (${active.length})</div><div class="divider-line" style="background:rgba(120,53,15,0.3)"></div></div>`;
-    html += `<div class="grid">${active.map(renderCard).join('')}</div>`;
-  }
-  if(expired.length){
-    html += `<div class="section-divider"><div class="divider-line" style="background:#27272a"></div><div class="divider-label" style="color:#52525b">受注不可 (${expired.length})</div><div class="divider-line" style="background:#27272a"></div></div>`;
-    html += `<div class="grid">${expired.map(renderCard).join('')}</div>`;
-  }
+  // 日付ごとにグループ化
+  const byDate = {};
+  sorted.forEach(q=>{ if(!byDate[q.date]) byDate[q.date]=[]; byDate[q.date].push(q); });
+
+  let html = '<div class="date-sidebar" id="sidebar"></div><div class="quest-column" id="qcol"></div>';
   document.getElementById('main').innerHTML = html;
+
+  const sidebar = document.getElementById('sidebar');
+  const qcol    = document.getElementById('qcol');
+
+  const dates = Object.keys(byDate).sort();
+  dates.forEach((date, di) => {
+    const qs = byDate[date];
+    const openQs   = qs.filter(q=>!isClosed(q));
+    const closedQs = qs.filter(q=>isClosed(q));
+    const isToday  = date===TODAY;
+    const isPast   = date<TODAY;
+    const lblInfo  = dateLabel(date);
+    const badgeCls = isToday?'today':isPast?'past':'future';
+
+    // sidebar date badge
+    const sEl = document.createElement('div');
+    sEl.className = 'date-label-wrap';
+    sEl.style.cssText = `margin-bottom:0;`;
+    // estimate height: each section ~(cards*180+48)px, rough sync
+    sEl.innerHTML = `<div class="date-label">
+      <div class="date-badge ${badgeCls}">
+        <div class="date-day-name">${lblInfo.dow}曜日</div>
+        <div class="date-day-num">${lblInfo.day}</div>
+        <div class="date-month">${lblInfo.month} ${lblInfo.year}</div>
+        ${isToday?'<div class="today-pill">TODAY</div>':''}
+      </div>
+      ${di<dates.length-1?'<div class="date-connector"></div>':''}
+    </div>`;
+    sidebar.appendChild(sEl);
+
+    // quest section
+    const qEl = document.createElement('div');
+    qEl.className = 'date-section';
+    let inner = '<div class="date-section-inner">';
+    if(openQs.length){
+      inner += `<div class="sub-section-label sub-label-open">受注可能 (${openQs.length})</div>`;
+      inner += `<div class="grid">${openQs.map(renderCard).join('')}</div>`;
+    }
+    if(closedQs.length){
+      inner += `<div class="sub-section-label sub-label-closed">受注不可 (${closedQs.length})</div>`;
+      inner += `<div class="grid">${closedQs.map(renderCard).join('')}</div>`;
+    }
+    inner += '</div>';
+    qEl.innerHTML = inner;
+    qcol.appendChild(qEl);
+  });
 }
 
 function toast(msg,type='success'){
   const wrap=document.getElementById('toastWrap');
   const el=document.createElement('div');
   el.className='toast '+type;
-  const icons={success:'⚔',error:'🛡',info:'👍'};
-  el.innerHTML=`<span>${icons[type]}</span><span>${msg}</span>`;
+  const icons={success:'⚔',error:'🛡',info:'👍',green:'✓'};
+  el.innerHTML=`<span>${icons[type]||'⚔'}</span><span>${msg}</span>`;
   wrap.appendChild(el);
   setTimeout(()=>{el.style.transition='opacity 0.3s';el.style.opacity='0';setTimeout(()=>el.remove(),300);},3200);
 }
 
 function joinQuest(id){
-  if(joinedQuestId && joinedQuestId!==id){toast(rnd(MH.dup),'error');return;}
-  const idx=quests.findIndex(q=>q.id===id);
-  if(idx===-1) return;
+  if(joinedQuestId&&joinedQuestId!==id){toast(rnd(MH.dup),'error');return;}
+  const idx=quests.findIndex(q=>q.id===id); if(idx===-1)return;
   const q=quests[idx];
   if(isExpired(q)){toast(rnd(MH.expired),'error');return;}
   if(q.currentParticipants>=q.maxParticipants){toast(rnd(MH.full),'error');return;}
   quests[idx]={...q,currentParticipants:q.currentParticipants+1,hunters:[...q.hunters,ME]};
-  joinedQuestId=id;
-  render();
-  toast(rnd(MH.join),'success');
+  joinedQuestId=id; render(); toast(rnd(MH.join),'success');
 }
-
 function cancelQuest(id){
-  const idx=quests.findIndex(q=>q.id===id);
-  if(idx===-1) return;
+  const idx=quests.findIndex(q=>q.id===id); if(idx===-1)return;
   const q=quests[idx];
   quests[idx]={...q,currentParticipants:Math.max(0,q.currentParticipants-1),hunters:q.hunters.filter(h=>h!==ME)};
   if(joinedQuestId===id) joinedQuestId=null;
-  render();
-  toast(rnd(MH.cancel),'info');
+  render(); toast(rnd(MH.cancel),'info');
 }
-
+function confirmQuest(id){
+  const idx=quests.findIndex(q=>q.id===id); if(idx===-1)return;
+  quests[idx]={...quests[idx],status:'confirmed'};
+  render(); toast(rnd(MH.confirm),'green');
+}
 function deleteQuest(id){
   quests=quests.filter(q=>q.id!==id);
   if(joinedQuestId===id) joinedQuestId=null;
-  render();
-  toast(rnd(MH.delete),'error');
+  render(); toast(rnd(MH.delete),'error');
 }
-
 function likeQuest(id){
   if(likedSet.has(id)){toast(rnd(MH.liked),'error');return;}
-  const idx=quests.findIndex(q=>q.id===id);
-  if(idx===-1) return;
+  const idx=quests.findIndex(q=>q.id===id); if(idx===-1)return;
   quests[idx]={...quests[idx],likeCount:quests[idx].likeCount+1};
   likedSet.add(id);
   const el=document.getElementById('like-'+id);
-  if(el) el.textContent=quests[idx].likeCount;
-  const btn=el&&el.closest('.btn-like');
-  if(btn){btn.classList.add('liked');btn.disabled=true;}
+  if(el){ el.textContent=quests[idx].likeCount; const btn=el.closest('.btn-like'); if(btn){btn.classList.add('liked');btn.disabled=true;} }
   toast(rnd(MH.like),'info');
 }
 
-/* ---- Detail Panel ---- */
+/* ---- Detail ---- */
 function openDetail(id){
-  const q=quests.find(q=>q.id===id);
-  if(!q) return;
+  const q=quests.find(q=>q.id===id); if(!q)return;
   const st=computeStatus(q);
   const badge=BADGE[q.foodCategory]||'badge-gray';
   const pct=Math.min(q.currentParticipants/q.maxParticipants*100,100);
-  const huntersHtml = q.hunters.length===0
-    ? '<div class="empty-hunters">まだ誰も受注していない...</div>'
-    : q.hunters.map((h,i)=>{
-        const [bg,fg]=AVATAR_COLORS[i%AVATAR_COLORS.length];
-        const initial=h.charAt(0);
-        const isYou=h===ME;
-        return `<div class="hunter-row">
-          <div class="hunter-avatar" style="background:${bg};color:${fg};">${initial}</div>
-          <span class="hunter-name">${h}</span>
-          ${isYou?'<span class="hunter-you">← あなた</span>':''}
-          ${h===q.postedBy?'<span style="font-size:10px;color:#d97706;margin-left:auto;">発令者</span>':''}
-        </div>`;
-      }).join('');
-
-  const html=`<div class="detail-backdrop" id="detailBD" onclick="closeDetailBD(event)">
-    <div class="detail-panel">
-      <div class="detail-header">
-        <span class="detail-title">📜 クエスト詳細</span>
-        <button class="modal-close" onclick="closeDetail()">✕</button>
-      </div>
-      <div class="detail-body">
+  const stColor=st==='open'?'#4ade80':st==='confirmed'?'#86efac':'#f87171';
+  const stLabel=st==='open'?'受注可':st==='confirmed'?'確定済':'受注不可';
+  const huntersHtml=q.hunters.length===0
+    ?'<div class="empty-hunters">まだ誰も受注していない...</div>'
+    :q.hunters.map((h,i)=>{
+      const [bg,fg]=AV_COLORS[i%AV_COLORS.length];
+      const isYou=h===ME, isOwner=h===q.postedBy;
+      return `<div class="hunter-row">
+        <div class="hunter-av" style="background:${bg};color:${fg};">${h.charAt(0)}</div>
+        <span class="hunter-name">${h}</span>
+        ${isOwner?'<span class="hunter-tag tag-owner">発令者</span>':''}
+        ${isYou&&!isOwner?'<span class="hunter-tag tag-you">あなた</span>':''}
+      </div>`;
+    }).join('');
+  document.getElementById('detailMount').innerHTML=`<div class="overlay" id="dtBD" onclick="closeDTBD(event)">
+    <div class="panel">
+      <div class="panel-hdr"><span class="panel-title">📜 クエスト詳細</span><button class="panel-close" onclick="closeDetail()">✕</button></div>
+      <div class="panel-body">
         <div class="detail-shop">${q.shopName}</div>
-        <span class="category-badge ${badge}" style="margin-bottom:16px;display:inline-block;">${q.foodCategory}</span>
+        <span class="category-badge ${badge}" style="display:inline-block;margin-bottom:14px;">${q.foodCategory}</span>
         <div class="detail-grid">
-          <div class="detail-item">
-            <div class="detail-item-label">📅 日付</div>
-            <div class="detail-item-val">${fmtDate(q.date)}</div>
-          </div>
-          <div class="detail-item">
-            <div class="detail-item-label">🕐 集合時間</div>
-            <div class="detail-item-val">${q.meetingTime}</div>
-          </div>
-          <div class="detail-item">
-            <div class="detail-item-label">👤 発令者</div>
-            <div class="detail-item-val">${q.postedBy}</div>
-          </div>
-          <div class="detail-item">
-            <div class="detail-item-label">🏷 ステータス</div>
-            <div class="detail-item-val" style="color:${st==='open'?'#4ade80':st==='full'?'#f87171':'#71717a'}">${st==='open'?'受注可':'受注不可'}</div>
-          </div>
+          <div class="ditem"><div class="ditem-label">📅 日付</div><div class="ditem-val">${fmtDate(q.date)}</div></div>
+          <div class="ditem"><div class="ditem-label">🕐 集合時間</div><div class="ditem-val">${q.meetingTime}</div></div>
+          <div class="ditem"><div class="ditem-label">👤 発令者</div><div class="ditem-val">${q.postedBy}</div></div>
+          <div class="ditem"><div class="ditem-label">🏷 ステータス</div><div class="ditem-val" style="color:${stColor}">${stLabel}</div></div>
         </div>
-        <div class="progress-section">
-          <div class="progress-label"><span>参加人数</span><span>${q.currentParticipants} / ${q.maxParticipants}</span></div>
-          <div class="progress-track" style="margin-bottom:16px;"><div class="progress-fill ${st==='full'?'red':'amber'}" style="width:${pct}%"></div></div>
-        </div>
-        <div class="detail-section-title">⚔ 受注ハンター</div>
+        <div class="prog-row"><span>参加状況</span><span>${q.currentParticipants} / ${q.maxParticipants}</span></div>
+        <div class="progress-track" style="margin-bottom:14px;"><div class="progress-fill ${st==='confirmed'?'green':st==='full'?'red':'amber'}" style="width:${pct}%"></div></div>
+        <div class="hunters-title">⚔ 受注ハンター</div>
         <div class="hunters-list">${huntersHtml}</div>
-        <div style="display:flex;gap:8px;">
-          <button class="submit-btn" style="background:rgba(39,39,42,0.5);border-color:#52525b;color:#a1a1aa;" onclick="closeDetail()">閉じる</button>
-        </div>
+        <button class="submit-btn" style="background:rgba(39,39,42,0.45);border-color:#3f3f46;color:#a1a1aa;" onclick="closeDetail()">閉じる</button>
       </div>
     </div>
   </div>`;
-  document.getElementById('detailMount').innerHTML=html;
 }
 function closeDetail(){ document.getElementById('detailMount').innerHTML=''; }
-function closeDetailBD(e){ if(e.target.id==='detailBD') closeDetail(); }
+function closeDTBD(e){ if(e.target.id==='dtBD') closeDetail(); }
 
 /* ---- Post Modal ---- */
 function openModal(){
-  const html=`<div class="modal-backdrop" id="postBD" onclick="closeModalBD(event)">
+  // 現在時刻の次の分を minTime として算出
+  const now=new Date();
+  const hh=String(now.getHours()).padStart(2,'0');
+  const mm=String(now.getMinutes()+1).padStart(2,'0');
+  const minTime=`${hh}:${mm}`;
+
+  document.getElementById('modalMount').innerHTML=`<div class="overlay" id="postBD" onclick="closeModalBD(event)">
     <div class="modal">
-      <div class="modal-header">
-        <span class="modal-title-text">📜 新規クエスト依頼書</span>
-        <button class="modal-close" onclick="closeModal()">✕</button>
-      </div>
+      <div class="modal-hdr"><span class="modal-title">📜 新規クエスト依頼書</span><button class="panel-close" onclick="closeModal()">✕</button></div>
       <div class="modal-body">
-        <div class="field">
-          <label>🗺 お店の名前</label>
-          <input id="f-shop" type="text" placeholder="例：焼肉ホルモン 炎の番人" />
-        </div>
-        <div class="field">
-          <label>🍴 食べたいもの</label>
-          <select id="f-cat">
-            <option>焼肉</option><option>ラーメン</option><option>タイ料理</option>
-            <option>寿司</option><option>カレー</option><option>中華</option>
-            <option>イタリアン</option><option>その他</option>
-          </select>
+        <div class="field"><label>🗺 お店の名前</label><input id="f-shop" type="text" placeholder="例：焼肉ホルモン 炎の番人" /></div>
+        <div class="field"><label>🍴 食べたいもの</label>
+          <select id="f-cat"><option>焼肉</option><option>ラーメン</option><option>タイ料理</option><option>寿司</option><option>カレー</option><option>中華</option><option>イタリアン</option><option>その他</option></select>
         </div>
         <div class="field-row">
-          <div class="field">
-            <label>👥 最大人数</label>
-            <input id="f-max" type="number" min="2" max="10" value="4" />
-          </div>
-          <div class="field">
-            <label>🕐 集合時間</label>
-            <input id="f-time" type="time" value="12:00" />
-          </div>
+          <div class="field"><label>👥 最大人数</label><input id="f-max" type="number" min="2" max="10" value="4" /></div>
+          <div class="field"><label>🕐 集合時間</label><input id="f-time" type="time" value="12:00" min="${minTime}" /></div>
         </div>
-        <div class="field">
-          <label>📅 日付</label>
-          <input id="f-date" type="date" value="${TODAY}" min="${TODAY}" />
-        </div>
-        <div class="field">
-          <label>👤 あなたの名前</label>
-          <input id="f-name" type="text" placeholder="名前を入力（省略で「あなた」）" />
-        </div>
-        <p class="post-name-note">※ デモ用。実装時はログインユーザーを使用します</p>
+        <div class="field"><label>📅 日付</label><input id="f-date" type="date" value="${TODAY}" min="${TODAY}" onchange="validateDateTime()" /></div>
+        <div class="field"><label>👤 あなたの名前</label><input id="f-name" type="text" placeholder="名前（省略で「あなた」）" /></div>
+        <p class="field-note">※ デモ用。実装時はログインユーザーを使用します</p>
         <button class="submit-btn" onclick="postQuest()">── クエストを発令する ──</button>
       </div>
     </div>
   </div>`;
-  document.getElementById('modalMount').innerHTML=html;
-  setTimeout(()=>document.getElementById('f-shop')&&document.getElementById('f-shop').focus(),50);
+  setTimeout(()=>{ const el=document.getElementById('f-shop'); if(el)el.focus(); },50);
 }
 function closeModal(){ document.getElementById('modalMount').innerHTML=''; }
 function closeModalBD(e){ if(e.target.id==='postBD') closeModal(); }
+
+function validateDateTime(){
+  const dateEl=document.getElementById('f-date');
+  const timeEl=document.getElementById('f-time');
+  if(!dateEl||!timeEl) return;
+  const selDate=dateEl.value;
+  if(selDate===TODAY){
+    const now=new Date();
+    const hh=String(now.getHours()).padStart(2,'0');
+    const mm=String(now.getMinutes()+1).padStart(2,'0');
+    timeEl.min=`${hh}:${mm}`;
+    // 現在時刻より前なら補正
+    const [h,m]=timeEl.value.split(':').map(Number);
+    if(h*60+m < now.getHours()*60+now.getMinutes()+1){
+      timeEl.value=`${hh}:${mm}`;
+    }
+  } else {
+    timeEl.min='00:00';
+  }
+}
 
 function postQuest(){
   const shop=document.getElementById('f-shop').value.trim();
@@ -454,15 +537,19 @@ function postQuest(){
   const max  = parseInt(document.getElementById('f-max').value)||4;
   const time = document.getElementById('f-time').value||'12:00';
   const date = document.getElementById('f-date').value||TODAY;
-  const nameVal = document.getElementById('f-name').value.trim();
-  const poster = nameVal || ME;
+  const nameVal = (document.getElementById('f-name').value||'').trim();
+  const poster = nameVal||ME;
+
+  // 過去日時チェック
+  if(date<TODAY||(date===TODAY&&(()=>{ const [h,m]=time.split(':').map(Number); return h*60+m<nowMinutes(); })())){
+    toast(rnd(MH.pastdt),'error'); return;
+  }
+
   const newQ={id:'q'+Date.now(),shopName:shop,foodCategory:cat,maxParticipants:max,
     currentParticipants:1,meetingTime:time,date:date,status:'open',likeCount:0,
     postedBy:poster,hunters:[poster]};
-  quests.unshift(newQ);
-  closeModal();
-  render();
-  toast(rnd(MH.post),'success');
+  quests.push(newQ);
+  closeModal(); render(); toast(rnd(MH.post),'success');
 }
 
 render();
