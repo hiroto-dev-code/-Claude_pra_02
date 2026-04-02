@@ -7,148 +7,166 @@
   .logo-icon { width: 32px; height: 32px; border: 1px solid #92400e; background: rgba(120,53,15,0.3); border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
   .logo-title { font-size: 13px; font-weight: 700; letter-spacing: 0.15em; color: #fbbf24; text-transform: uppercase; }
   .logo-sub { font-size: 11px; color: #71717a; margin-top: 1px; }
-  .header-btn { display: flex; align-items: center; gap: 6px; padding: 7px 14px; font-size: 12px; font-weight: 700; border: 1px solid #d97706; color: #fde68a; background: rgba(120,53,15,0.3); border-radius: 3px; cursor: pointer; font-family: var(--font-mono, monospace); letter-spacing: 0.03em; transition: background 0.15s; }
+  .header-btn { display: flex; align-items: center; gap: 6px; padding: 7px 14px; font-size: 12px; font-weight: 700; border: 1px solid #d97706; color: #fde68a; background: rgba(120,53,15,0.3); border-radius: 3px; cursor: pointer; font-family: var(--font-mono, monospace); transition: background 0.15s; }
   .header-btn:hover { background: rgba(120,53,15,0.5); }
-  .main { max-width: 1080px; margin: 0 auto; padding: 28px 16px 0; display: flex; gap: 0; }
 
-  /* Date sidebar */
-  .date-sidebar { width: 120px; flex-shrink: 0; padding-right: 0; }
-  .date-label-wrap { position: relative; margin-bottom: 0; }
-  .date-label { position: sticky; top: 60px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 10px 8px 10px 0; }
-  .date-badge { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 10px 12px; border: 1px solid rgba(120,53,15,0.5); border-radius: 4px; background: rgba(120,53,15,0.1); min-width: 72px; text-align: center; }
-  .date-badge.today { border-color: #d97706; background: rgba(120,53,15,0.25); }
-  .date-badge.past  { border-color: #27272a; background: transparent; opacity: 0.5; }
-  .date-badge.future{ border-color: rgba(120,53,15,0.35); background: rgba(120,53,15,0.06); }
-  .date-day-name { font-size: 10px; color: #71717a; letter-spacing: 0.1em; text-transform: uppercase; }
-  .date-day-num { font-size: 22px; font-weight: 700; color: #fbbf24; line-height: 1; }
-  .date-badge.past .date-day-num { color: #52525b; }
-  .date-month { font-size: 10px; color: #a1a1aa; }
-  .date-badge.today .date-month { color: #d97706; }
-  .today-pill { font-size: 9px; color: #fbbf24; background: rgba(217,119,6,0.25); border: 1px solid rgba(217,119,6,0.4); border-radius: 99px; padding: 1px 7px; margin-top: 3px; letter-spacing: 0.08em; }
-  .date-connector { width: 1px; background: rgba(120,53,15,0.2); flex: 1; min-height: 20px; margin: 4px auto; }
+  .main { max-width: 1100px; margin: 0 auto; padding: 24px 16px 0; display: flex; gap: 0; }
 
-  /* Quest column */
-  .quest-column { flex: 1; min-width: 0; }
-  .date-section { margin-bottom: 32px; display: flex; gap: 16px; }
-  .date-section-inner { flex: 1; min-width: 0; }
+  /* ── Sidebar ── */
+  .sidebar { width: 110px; flex-shrink: 0; display: flex; flex-direction: column; gap: 0; padding-right: 4px; }
+  .sidebar-date-btn { display: flex; flex-direction: column; align-items: center; gap: 0; cursor: pointer; position: relative; }
+  .date-pill { display: flex; flex-direction: column; align-items: center; padding: 10px 10px 9px; border: 1px solid #27272a; border-radius: 4px; background: transparent; width: 88px; transition: border-color 0.15s, background 0.15s; }
+  .date-pill:hover { border-color: rgba(120,53,15,0.55); background: rgba(120,53,15,0.07); }
+  .date-pill.selected { border-color: #d97706; background: rgba(120,53,15,0.22); }
+  .date-pill.today-pill-wrap { border-color: rgba(120,53,15,0.45); }
+  .date-pill.today-pill-wrap.selected { border-color: #f59e0b; background: rgba(120,53,15,0.28); }
+  .dp-dow { font-size: 10px; color: #52525b; letter-spacing: 0.08em; margin-bottom: 2px; }
+  .date-pill.selected .dp-dow { color: #a16207; }
+  .dp-day { font-size: 22px; font-weight: 700; line-height: 1; color: #71717a; }
+  .date-pill.selected .dp-day { color: #fbbf24; }
+  .date-pill.today-pill-wrap .dp-day { color: #fbbf24; }
+  .dp-mon { font-size: 10px; color: #52525b; margin-top: 1px; }
+  .date-pill.selected .dp-mon { color: #a16207; }
+  .today-tag { font-size: 9px; color: #fbbf24; background: rgba(217,119,6,0.2); border: 1px solid rgba(217,119,6,0.35); border-radius: 99px; padding: 1px 7px; margin-top: 4px; }
+  .dp-count { font-size: 9px; color: #3f3f46; margin-top: 3px; }
+  .date-pill.selected .dp-count { color: #92400e; }
+  .connector-line { width: 1px; height: 14px; background: #1f1f22; margin: 0 auto; }
 
-  .sub-section-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; padding: 0 2px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
-  .sub-section-label::after { content: ''; flex: 1; height: 1px; }
-  .sub-label-open  { color: #d97706; }
-  .sub-label-open::after  { background: rgba(120,53,15,0.3); }
-  .sub-label-closed{ color: #3f3f46; }
-  .sub-label-closed::after{ background: #27272a; }
+  /* ── Quest column ── */
+  .quest-col { flex: 1; min-width: 0; padding-left: 16px; border-left: 1px solid #18181b; }
+  .col-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid rgba(120,53,15,0.2); }
+  .col-date-title { font-size: 14px; font-weight: 700; color: #fbbf24; font-family: sans-serif; }
+  .col-date-sub { font-size: 11px; color: #52525b; margin-top: 1px; }
+  .col-badge { font-size: 10px; color: #d97706; border: 1px solid rgba(120,53,15,0.4); padding: 3px 10px; border-radius: 99px; background: rgba(120,53,15,0.12); }
 
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(255px, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .sub-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .sub-label::after { content: ''; flex: 1; height: 1px; }
+  .sub-label.open   { color: #d97706; }
+  .sub-label.open::after   { background: rgba(120,53,15,0.3); }
+  .sub-label.closed { color: #3f3f46; }
+  .sub-label.closed::after { background: #1f1f22; }
+  .section-gap { margin-bottom: 20px; }
 
-  .card { border-radius: 3px; overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s; }
-  .card.open-card   { border: 1px solid rgba(120,53,15,0.45); background: linear-gradient(135deg,#18181b,#18181b,rgba(120,53,15,0.07)); }
-  .card.open-card:hover { border-color: rgba(217,119,6,0.65); box-shadow: 0 4px 20px rgba(120,53,15,0.18); }
-  .card.my-card     { border: 1px solid rgba(180,83,9,0.65); background: linear-gradient(135deg,#18181b,rgba(120,53,15,0.12)); }
-  .card.closed-card { border: 1px solid #27272a; background: rgba(24,24,27,0.45); opacity: 0.6; }
-  .card.confirmed-card { border: 1px solid rgba(20,83,45,0.6); background: linear-gradient(135deg,#18181b,rgba(20,83,45,0.07)); opacity: 0.7; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(252px, 1fr)); gap: 12px; margin-bottom: 6px; }
 
-  .card-header { display: flex; align-items: center; justify-content: space-between; padding: 6px 13px; border-bottom: 1px solid rgba(120,53,15,0.22); background: rgba(120,53,15,0.1); }
-  .card-header.confirmed-hdr { background: rgba(20,83,45,0.15); border-bottom-color: rgba(20,83,45,0.25); }
-  .card-header-left { display: flex; align-items: center; gap: 5px; font-size: 10px; color: rgba(251,191,36,0.7); letter-spacing: 0.14em; text-transform: uppercase; }
-  .card-header-right { display: flex; align-items: center; gap: 7px; }
+  /* ── Cards ── */
+  .card { border-radius: 3px; overflow: hidden; transition: border-color 0.18s, box-shadow 0.18s; }
+  .card.c-open      { border: 1px solid rgba(120,53,15,0.45); background: linear-gradient(135deg,#18181b,#18181b,rgba(120,53,15,0.07)); }
+  .card.c-open:hover{ border-color: rgba(217,119,6,0.6); box-shadow: 0 4px 18px rgba(120,53,15,0.16); }
+  .card.c-mine      { border: 1px solid rgba(180,83,9,0.6); background: linear-gradient(135deg,#18181b,rgba(120,53,15,0.1)); }
+  .card.c-confirmed { border: 1px solid rgba(20,83,45,0.55); background: linear-gradient(135deg,#18181b,rgba(20,83,45,0.07)); opacity: 0.72; }
+  .card.c-closed    { border: 1px solid #1f1f22; background: rgba(24,24,27,0.4); opacity: 0.6; }
+
+  .card-hdr { display: flex; align-items: center; justify-content: space-between; padding: 6px 13px; border-bottom: 1px solid rgba(120,53,15,0.2); background: rgba(120,53,15,0.09); }
+  .card-hdr.hdr-confirmed { background: rgba(20,83,45,0.14); border-bottom-color: rgba(20,83,45,0.22); }
+  .chdr-l { display: flex; align-items: center; gap: 5px; font-size: 10px; color: rgba(251,191,36,0.65); letter-spacing: 0.13em; text-transform: uppercase; }
+  .chdr-r { display: flex; align-items: center; gap: 6px; }
   .rank { font-size: 11px; color: #d97706; }
-  .expired-tag { font-size: 10px; color: #ef4444; }
-  .confirmed-tag { font-size: 10px; color: #4ade80; }
+  .tag-expired   { font-size: 10px; color: #ef4444; }
+  .tag-confirmed { font-size: 10px; color: #4ade80; }
 
   .card-body { padding: 12px 13px; }
-  .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 9px; }
-  .shop-name { font-size: 14px; font-weight: 700; color: #f4f4f5; line-height: 1.3; margin-bottom: 4px; font-family: sans-serif; }
-  .category-badge { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 2px; border: 1px solid; font-family: var(--font-mono, monospace); }
-  .badge-red    { color:#f87171;border-color:#b91c1c;background:rgba(127,29,29,0.3); }
-  .badge-orange { color:#fb923c;border-color:#c2410c;background:rgba(124,45,18,0.3); }
-  .badge-green  { color:#4ade80;border-color:#15803d;background:rgba(20,83,45,0.3); }
-  .badge-blue   { color:#60a5fa;border-color:#1d4ed8;background:rgba(29,78,216,0.2); }
-  .badge-yellow { color:#facc15;border-color:#a16207;background:rgba(113,63,18,0.3); }
-  .badge-gray   { color:#a1a1aa;border-color:#52525b;background:rgba(39,39,42,0.5); }
+  .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+  .shop-name { font-size: 14px; font-weight: 700; color: #f4f4f5; line-height: 1.3; margin-bottom: 3px; font-family: sans-serif; }
 
-  .status-badge { font-size:10px;font-weight:700;padding:3px 7px;border-radius:2px;border:1px solid;flex-shrink:0;font-family:var(--font-mono,monospace); }
-  .sb-closed    { color:#f87171;border-color:#991b1b;background:rgba(127,29,29,0.3);transform:rotate(1deg); }
-  .sb-confirmed { color:#4ade80;border-color:#15803d;background:rgba(20,83,45,0.25); }
-  .sb-owner     { color:#fbbf24;border-color:#92400e;background:rgba(120,53,15,0.35); }
+  .cat-badge { display: inline-block; font-size: 10px; padding: 2px 7px; border-radius: 2px; border: 1px solid; font-family: var(--font-mono, monospace); }
+  .b-red    { color:#f87171;border-color:#b91c1c;background:rgba(127,29,29,0.28); }
+  .b-orange { color:#fb923c;border-color:#c2410c;background:rgba(124,45,18,0.28); }
+  .b-green  { color:#4ade80;border-color:#15803d;background:rgba(20,83,45,0.28); }
+  .b-blue   { color:#60a5fa;border-color:#1d4ed8;background:rgba(29,78,216,0.18); }
+  .b-yellow { color:#facc15;border-color:#a16207;background:rgba(113,63,18,0.28); }
+  .b-gray   { color:#a1a1aa;border-color:#52525b;background:rgba(39,39,42,0.45); }
 
-  .stats { display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:9px; }
-  .stat { display:flex;align-items:center;gap:5px;font-size:11px;color:#a1a1aa; }
-  .stat-val { color:#e4e4e7; }
-  .stat-val.red { color:#f87171; }
-  .stat-muted { color:#52525b; }
+  .sb { font-size:10px;font-weight:700;padding:3px 7px;border-radius:2px;border:1px solid;flex-shrink:0;font-family:var(--font-mono,monospace); }
+  .sb-closed    { color:#f87171;border-color:#7f1d1d;background:rgba(127,29,29,0.28);transform:rotate(1deg); }
+  .sb-confirmed { color:#4ade80;border-color:#14532d;background:rgba(20,83,45,0.22); }
+  .sb-owner     { color:#fbbf24;border-color:#92400e;background:rgba(120,53,15,0.32); }
 
-  .progress-track { height:3px;background:#27272a;border-radius:99px;overflow:hidden;margin-bottom:10px; }
-  .progress-fill  { height:100%;border-radius:99px;transition:width 0.5s; }
-  .progress-fill.amber { background:#f59e0b; }
-  .progress-fill.red   { background:#dc2626; }
-  .progress-fill.green { background:#22c55e; }
-  .progress-fill.gray  { background:#52525b; }
+  .stats { display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:8px; }
+  .stat  { display:flex;align-items:center;gap:4px;font-size:11px;color:#71717a; }
+  .sv    { color:#d4d4d8; }
+  .sv.red{ color:#f87171; }
+  .sm    { color:#3f3f46; }
 
-  .card-actions { display:flex;gap:6px; }
-  .btn { display:flex;align-items:center;justify-content:center;gap:5px;padding:6px 9px;font-size:11px;font-weight:700;border-radius:2px;cursor:pointer;font-family:var(--font-mono,monospace);transition:background 0.15s,transform 0.1s;letter-spacing:0.02em;border:1px solid;white-space:nowrap; }
-  .btn:active { transform:scale(0.96); }
-  .btn-join     { flex:1;border-color:#d97706;color:#fde68a;background:rgba(120,53,15,0.35); }
-  .btn-join:hover { background:rgba(120,53,15,0.6); }
-  .btn-cancel   { flex:1;border-color:#52525b;color:#a1a1aa;background:rgba(39,39,42,0.35); }
+  /* 日付行 */
+  .card-date-row { display:flex;align-items:center;gap:4px;font-size:10px;color:#52525b;margin-bottom:7px; }
+  .card-date-row span { color:#71717a; }
+
+  .prog-track { height:3px;background:#1f1f22;border-radius:99px;overflow:hidden;margin-bottom:10px; }
+  .prog-fill  { height:100%;border-radius:99px;transition:width 0.45s; }
+  .pf-amber { background:#f59e0b; }
+  .pf-red   { background:#dc2626; }
+  .pf-green { background:#22c55e; }
+  .pf-gray  { background:#3f3f46; }
+
+  .actions { display:flex;gap:6px; }
+  .btn { display:flex;align-items:center;justify-content:center;gap:5px;padding:6px 9px;font-size:11px;font-weight:700;border-radius:2px;cursor:pointer;font-family:var(--font-mono,monospace);transition:background 0.13s,transform 0.1s;letter-spacing:0.02em;border:1px solid;white-space:nowrap; }
+  .btn:active:not(:disabled) { transform:scale(0.96); }
+  .btn-join    { flex:1;border-color:#d97706;color:#fde68a;background:rgba(120,53,15,0.32); }
+  .btn-join:hover { background:rgba(120,53,15,0.55); }
+  .btn-cancel  { flex:1;border-color:#52525b;color:#a1a1aa;background:rgba(39,39,42,0.3); }
   .btn-cancel:hover { border-color:#71717a;color:#d4d4d8; }
-  .btn-confirm  { border-color:#15803d;color:#86efac;background:rgba(20,83,45,0.25); }
-  .btn-confirm:hover { background:rgba(20,83,45,0.45); }
-  .btn-delete   { border-color:#7f1d1d;color:#fca5a5;background:rgba(127,29,29,0.25); }
-  .btn-delete:hover { background:rgba(127,29,29,0.45); }
-  .btn-disabled { flex:1;border-color:#27272a;color:#3f3f46;background:transparent;cursor:not-allowed; }
-  .btn-detail   { display:flex;align-items:center;gap:4px;padding:6px 9px;font-size:11px;border:1px solid #27272a;color:#52525b;background:transparent;border-radius:2px;cursor:pointer;transition:border-color 0.15s,color 0.15s; }
-  .btn-detail:hover { border-color:#52525b;color:#a1a1aa; }
-  .btn-like     { display:flex;align-items:center;gap:4px;padding:6px 9px;font-size:11px;border:1px solid #27272a;color:#52525b;background:transparent;border-radius:2px;cursor:pointer;transition:border-color 0.15s,color 0.15s; }
-  .btn-like:hover:not(.liked) { border-color:#52525b;color:#a1a1aa; }
-  .btn-like.liked { border-color:#1d4ed8;color:#93c5fd;background:rgba(29,78,216,0.12);cursor:not-allowed; }
+  .btn-confirm { border-color:#15803d;color:#86efac;background:rgba(20,83,45,0.22); }
+  .btn-confirm:hover { background:rgba(20,83,45,0.42); }
+  .btn-delete  { border-color:#7f1d1d;color:#fca5a5;background:rgba(127,29,29,0.22); }
+  .btn-delete:hover { background:rgba(127,29,29,0.42); }
+  .btn-off     { flex:1;border-color:#1f1f22;color:#3f3f46;background:transparent;cursor:not-allowed; }
+  .btn-sub     { display:flex;align-items:center;gap:4px;padding:6px 9px;font-size:11px;border:1px solid #1f1f22;color:#3f3f46;background:transparent;border-radius:2px;cursor:pointer;transition:border-color 0.13s,color 0.13s; }
+  .btn-sub:hover { border-color:#3f3f46;color:#71717a; }
+  .btn-like    { display:flex;align-items:center;gap:4px;padding:6px 9px;font-size:11px;border:1px solid #1f1f22;color:#3f3f46;background:transparent;border-radius:2px;cursor:pointer;transition:border-color 0.13s,color 0.13s; }
+  .btn-like:hover:not(.liked) { border-color:#3f3f46;color:#71717a; }
+  .btn-like.liked { border-color:#1d4ed8;color:#93c5fd;background:rgba(29,78,216,0.1);cursor:not-allowed; }
 
-  /* Detail */
-  .overlay { position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(4px);z-index:60;display:flex;align-items:center;justify-content:center;padding:16px; }
-  .panel { width:100%;max-width:460px;border:1px solid rgba(180,83,9,0.45);background:#0c0c0e;border-radius:4px; }
-  .panel-hdr { display:flex;align-items:center;justify-content:space-between;padding:10px 17px;border-bottom:1px solid rgba(120,53,15,0.28);background:rgba(120,53,15,0.14); }
-  .panel-title { font-size:11px;color:#fbbf24;letter-spacing:0.15em;text-transform:uppercase; }
-  .panel-close { background:none;border:none;color:#71717a;cursor:pointer;font-size:17px;line-height:1;padding:2px 4px; }
+  .empty-state { display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 0;gap:10px; }
+  .empty-icon { font-size:32px;opacity:0.25; }
+  .empty-text { font-size:13px;color:#3f3f46; }
+
+  /* overlays */
+  .overlay { position:fixed;inset:0;background:rgba(0,0,0,0.76);backdrop-filter:blur(4px);z-index:60;display:flex;align-items:center;justify-content:center;padding:16px; }
+  .panel { width:100%;max-width:455px;border:1px solid rgba(180,83,9,0.42);background:#0d0d0f;border-radius:4px; }
+  .panel-hdr { display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid rgba(120,53,15,0.25);background:rgba(120,53,15,0.12); }
+  .panel-ttl { font-size:11px;color:#fbbf24;letter-spacing:0.15em;text-transform:uppercase; }
+  .panel-close { background:none;border:none;color:#52525b;cursor:pointer;font-size:17px;line-height:1;padding:2px 4px; }
   .panel-close:hover { color:#d4d4d8; }
-  .panel-body { padding:17px; }
-  .detail-shop { font-size:17px;font-weight:700;color:#f4f4f5;font-family:sans-serif;margin-bottom:5px; }
-  .detail-grid { display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:14px 0; }
-  .ditem { background:#18181b;border:1px solid #27272a;border-radius:3px;padding:9px 11px; }
-  .ditem-label { font-size:9px;color:#52525b;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:2px; }
-  .ditem-val   { font-size:13px;color:#e4e4e7;font-weight:700; }
-  .hunters-title { font-size:9px;color:#71717a;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:7px; }
-  .hunters-list { display:flex;flex-direction:column;gap:5px;margin-bottom:14px; }
-  .hunter-row { display:flex;align-items:center;gap:7px;padding:6px 9px;background:#18181b;border:1px solid #27272a;border-radius:3px; }
-  .hunter-av { width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0; }
-  .hunter-name { font-size:12px;color:#d4d4d8; }
-  .hunter-tag  { font-size:9px;margin-left:auto;padding:1px 5px;border-radius:2px; }
-  .tag-you   { color:#d97706;background:rgba(120,53,15,0.3); }
-  .tag-owner { color:#fbbf24;background:rgba(120,53,15,0.2); }
-  .empty-hunters { font-size:12px;color:#3f3f46;text-align:center;padding:10px 0; }
-  .prog-row { display:flex;justify-content:space-between;font-size:10px;color:#71717a;margin-bottom:4px; }
+  .panel-body { padding:16px; }
+  .d-shop  { font-size:17px;font-weight:700;color:#f4f4f5;font-family:sans-serif;margin-bottom:4px; }
+  .d-grid  { display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0; }
+  .d-item  { background:#18181b;border:1px solid #27272a;border-radius:3px;padding:8px 10px; }
+  .d-lbl   { font-size:9px;color:#3f3f46;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:2px; }
+  .d-val   { font-size:13px;color:#e4e4e7;font-weight:700; }
+  .h-ttl   { font-size:9px;color:#52525b;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:6px; }
+  .h-list  { display:flex;flex-direction:column;gap:5px;margin-bottom:12px; }
+  .h-row   { display:flex;align-items:center;gap:7px;padding:6px 9px;background:#18181b;border:1px solid #27272a;border-radius:3px; }
+  .h-av    { width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0; }
+  .h-name  { font-size:12px;color:#d4d4d8; }
+  .h-tag   { font-size:9px;margin-left:auto;padding:1px 5px;border-radius:2px; }
+  .ht-you  { color:#d97706;background:rgba(120,53,15,0.28); }
+  .ht-own  { color:#fbbf24;background:rgba(120,53,15,0.18); }
+  .h-empty { font-size:12px;color:#3f3f46;text-align:center;padding:10px 0; }
+  .prog-row2 { display:flex;justify-content:space-between;font-size:10px;color:#52525b;margin-bottom:4px; }
+  .close-btn { width:100%;padding:8px;border:1px solid #27272a;color:#71717a;background:transparent;border-radius:2px;cursor:pointer;font-size:12px;font-family:var(--font-mono,monospace);transition:border-color 0.13s; }
+  .close-btn:hover { border-color:#52525b;color:#a1a1aa; }
 
-  /* Modal */
-  .modal { width:100%;max-width:420px;border:1px solid rgba(180,83,9,0.6);background:#09090b;border-radius:3px; }
-  .modal-hdr { display:flex;align-items:center;justify-content:space-between;padding:10px 17px;border-bottom:1px solid rgba(120,53,15,0.28);background:rgba(120,53,15,0.14); }
-  .modal-title { font-size:11px;color:#fbbf24;letter-spacing:0.15em;text-transform:uppercase; }
-  .modal-body { padding:17px;display:flex;flex-direction:column;gap:12px; }
-  .field label { display:flex;align-items:center;gap:5px;font-size:9px;color:#71717a;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:5px; }
-  .field input,.field select { width:100%;padding:7px 10px;background:#18181b;border:1px solid #3f3f46;border-radius:2px;color:#e4e4e7;font-size:12px;font-family:var(--font-mono,monospace);outline:none;transition:border-color 0.15s; }
-  .field input:focus,.field select:focus { border-color:#d97706; }
-  .field input::placeholder { color:#3f3f46; }
-  .field-row { display:grid;grid-template-columns:1fr 1fr;gap:10px; }
-  .field-note { font-size:9px;color:#3f3f46;margin-top:-6px;padding-left:2px; }
-  .submit-btn { width:100%;padding:9px;border:1px solid #d97706;color:#fde68a;background:rgba(120,53,15,0.4);border-radius:2px;cursor:pointer;font-size:12px;font-weight:700;font-family:var(--font-mono,monospace);letter-spacing:0.06em;transition:background 0.15s; }
-  .submit-btn:hover { background:rgba(120,53,15,0.62); }
+  .modal-form { width:100%;max-width:415px;border:1px solid rgba(180,83,9,0.55);background:#09090b;border-radius:3px; }
+  .mf-hdr  { display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid rgba(120,53,15,0.25);background:rgba(120,53,15,0.12); }
+  .mf-ttl  { font-size:11px;color:#fbbf24;letter-spacing:0.15em;text-transform:uppercase; }
+  .mf-body { padding:16px;display:flex;flex-direction:column;gap:11px; }
+  .f-lbl   { display:flex;align-items:center;gap:4px;font-size:9px;color:#71717a;letter-spacing:0.11em;text-transform:uppercase;margin-bottom:5px; }
+  .f-inp   { width:100%;padding:7px 10px;background:#18181b;border:1px solid #3f3f46;border-radius:2px;color:#e4e4e7;font-size:12px;font-family:var(--font-mono,monospace);outline:none;transition:border-color 0.13s; }
+  .f-inp:focus { border-color:#d97706; }
+  .f-inp::placeholder { color:#2a2a2e; }
+  .f-row   { display:grid;grid-template-columns:1fr 1fr;gap:10px; }
+  .f-note  { font-size:9px;color:#2a2a2e;margin-top:-5px; }
+  .f-submit { width:100%;padding:9px;border:1px solid #d97706;color:#fde68a;background:rgba(120,53,15,0.38);border-radius:2px;cursor:pointer;font-size:12px;font-weight:700;font-family:var(--font-mono,monospace);letter-spacing:0.06em;transition:background 0.13s; }
+  .f-submit:hover { background:rgba(120,53,15,0.6); }
 
-  /* Toast */
-  .toast-wrap { position:fixed;bottom:20px;right:20px;display:flex;flex-direction:column;gap:7px;z-index:99;pointer-events:none; }
-  .toast { display:flex;align-items:center;gap:9px;padding:9px 13px;border-radius:3px;font-size:11px;font-family:var(--font-mono,monospace);pointer-events:all;max-width:290px;animation:slideIn 0.18s ease;border:1px solid; }
-  .toast.success { background:rgba(120,53,15,0.93);border-color:#d97706;color:#fde68a; }
-  .toast.error   { background:rgba(127,29,29,0.93);border-color:#dc2626;color:#fca5a5; }
-  .toast.info    { background:rgba(24,24,27,0.96);border-color:#3f3f46;color:#d4d4d8; }
-  .toast.green   { background:rgba(20,83,45,0.93);border-color:#15803d;color:#86efac; }
-  @keyframes slideIn { from{opacity:0;transform:translateX(14px);}to{opacity:1;transform:translateX(0);} }
+  .toast-wrap { position:fixed;bottom:18px;right:18px;display:flex;flex-direction:column;gap:6px;z-index:99;pointer-events:none; }
+  .toast { display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:3px;font-size:11px;font-family:var(--font-mono,monospace);pointer-events:all;max-width:280px;animation:tIn 0.17s ease;border:1px solid; }
+  .toast.ts  { background:rgba(120,53,15,0.93);border-color:#d97706;color:#fde68a; }
+  .toast.te  { background:rgba(127,29,29,0.93);border-color:#dc2626;color:#fca5a5; }
+  .toast.ti  { background:rgba(24,24,27,0.96);border-color:#27272a;color:#d4d4d8; }
+  .toast.tg  { background:rgba(20,83,45,0.93);border-color:#15803d;color:#86efac; }
+  @keyframes tIn { from{opacity:0;transform:translateX(12px);}to{opacity:1;transform:translateX(0);} }
 </style>
 
 <div class="board">
@@ -162,25 +180,25 @@
     </div>
     <button class="header-btn" onclick="openModal()">＋ クエスト発令</button>
   </div>
-  <div class="main" id="main"></div>
+  <div class="main">
+    <div class="sidebar" id="sidebar"></div>
+    <div class="quest-col" id="questCol"></div>
+  </div>
 </div>
-
 <div class="toast-wrap" id="toastWrap"></div>
 <div id="detailMount"></div>
 <div id="modalMount"></div>
 
 <script>
-const BADGE = {'焼肉':'badge-red','ラーメン':'badge-orange','タイ料理':'badge-green','寿司':'badge-blue','カレー':'badge-yellow','中華':'badge-orange','イタリアン':'badge-green','その他':'badge-gray'};
-const RANK  = ['★','★★','★★★'];
-const AV_COLORS = [
-  ['rgba(120,53,15,0.55)','#fbbf24'],['rgba(29,78,216,0.4)','#93c5fd'],
-  ['rgba(20,83,45,0.45)','#86efac'],['rgba(127,29,29,0.4)','#fca5a5'],
-  ['rgba(88,28,135,0.4)','#d8b4fe'],['rgba(6,78,59,0.45)','#6ee7b7'],
-];
+const BADGE_MAP = {'焼肉':'b-red','ラーメン':'b-orange','タイ料理':'b-green','寿司':'b-blue','カレー':'b-yellow','中華':'b-orange','イタリアン':'b-green','その他':'b-gray'};
+const RANK = ['★','★★','★★★'];
+const AV_COLORS = [['rgba(120,53,15,.55)','#fbbf24'],['rgba(29,78,216,.4)','#93c5fd'],['rgba(20,83,45,.45)','#86efac'],['rgba(127,29,29,.4)','#fca5a5'],['rgba(88,28,135,.4)','#d8b4fe'],['rgba(6,78,59,.45)','#6ee7b7']];
+const DOW_JP = ['日','月','火','水','木','金','土'];
+const MON_EN = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const MH = {
   join:    ['受注完了！腹を空かして来い！','一飯の義！共に戦おうぞ！','ハンターが一名加わった！'],
   cancel:  ['受注をキャンセルした...また挑め！','撤退じゃ！次のクエストを探せ！'],
-  like:    ['グッジョブ！飯への情熱が伝わってきた！','激励を受け取った！','ナイスサポート！'],
+  like:    ['グッジョブ！飯への情熱が伝わってきた！','激励を受け取った！'],
   post:    ['依頼書をボードに貼り付けた！','新たなクエストが発令された！'],
   confirm: ['クエストを確定した！これより出発じゃ！','メンバー確定！一飯行こうぜ！'],
   delete:  ['クエストを取り消した。また発令せよ！'],
@@ -191,366 +209,335 @@ const MH = {
   pastdt:  ['過去の日時は選べぬ！'],
 };
 const rnd = a => a[Math.floor(Math.random()*a.length)];
-
 const ME = 'あなた';
-const DAY_JP = ['日','月','火','水','木','金','土'];
-const MONTH_JP = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
 function todayStr(){ const d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
-function nowMinutes(){ const n=new Date(); return n.getHours()*60+n.getMinutes(); }
-function isExpired(q){
-  const t=todayStr();
-  if(q.date<t) return true;
-  if(q.date>t) return false;
-  const [h,m]=q.meetingTime.split(':').map(Number);
-  return nowMinutes() >= h*60+m;
-}
-function computeStatus(q){
-  if(q.status==='confirmed') return 'confirmed';
-  if(isExpired(q)) return 'expired';
-  if(q.currentParticipants>=q.maxParticipants) return 'full';
-  return 'open';
-}
-function isClosed(q){ const s=computeStatus(q); return s==='confirmed'||s==='expired'||s==='full'; }
-function fmtDate(s){ const [y,m,d]=s.split('-'); return `${y}/${m}/${d}`; }
-function parseDateObj(s){ const [y,m,d]=s.split('-').map(Number); return new Date(y,m-1,d); }
-function dateLabel(s){
-  const d=parseDateObj(s);
-  return { day: d.getDate(), month: MONTH_JP[d.getMonth()], dow: DAY_JP[d.getDay()], year: d.getFullYear() };
-}
+function nowMin(){ const n=new Date(); return n.getHours()*60+n.getMinutes(); }
+function isExpired(q){ const t=todayStr(); if(q.date<t)return true; if(q.date>t)return false; const[h,m]=q.meetingTime.split(':').map(Number); return nowMin()>=h*60+m; }
+function computeStatus(q){ if(q.status==='confirmed')return 'confirmed'; if(isExpired(q))return 'expired'; if(q.currentParticipants>=q.maxParticipants)return 'full'; return 'open'; }
+function isClosed(q){ const s=computeStatus(q); return s!=='open'; }
+
+function fmtDate(s){ const[y,m,d]=s.split('-'); return `${y}/${m}/${d}`; }
+function fmtDateJp(s){ const d=new Date(s+'T00:00:00'); return `${d.getMonth()+1}月${d.getDate()}日（${DOW_JP[d.getDay()]}）`; }
+function dateInfo(s){ const d=new Date(s+'T00:00:00'); return { day:d.getDate(), mon:MON_EN[d.getMonth()], dow:DOW_JP[d.getDay()], year:d.getFullYear() }; }
 
 const TODAY = todayStr();
-
-// サンプルデータ（明日・明後日も追加して日付順を確認）
-function tomorrow(){ const d=new Date(); d.setDate(d.getDate()+1); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
-function dayAfter(){ const d=new Date(); d.setDate(d.getDate()+2); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function dPlus(n){ const d=new Date(); d.setDate(d.getDate()+n); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
 
 let quests = [
-  { id:'q1', shopName:'焼肉ホルモン 炎の番人',  foodCategory:'焼肉',    maxParticipants:4, currentParticipants:2, meetingTime:'12:00', date:TODAY,    status:'open', likeCount:5,  postedBy:'田中', hunters:['田中','鈴木'] },
-  { id:'q2', shopName:'ラーメン道場 鬼辛',       foodCategory:'ラーメン', maxParticipants:3, currentParticipants:3, meetingTime:'12:15', date:TODAY,    status:'open', likeCount:12, postedBy:'佐藤', hunters:['佐藤','山田','高橋'] },
-  { id:'q3', shopName:'タイ料理 バンコク食堂',   foodCategory:'タイ料理', maxParticipants:5, currentParticipants:1, meetingTime:'13:00', date:TODAY,    status:'open', likeCount:3,  postedBy:ME,     hunters:[ME] },
-  { id:'q4', shopName:'寿司割烹 海神',           foodCategory:'寿司',    maxParticipants:4, currentParticipants:2, meetingTime:'11:45', date:TODAY,    status:'open', likeCount:8,  postedBy:'伊藤', hunters:['伊藤','渡辺'] },
-  { id:'q5', shopName:'スパイス魔境',            foodCategory:'カレー',  maxParticipants:4, currentParticipants:2, meetingTime:'12:30', date:tomorrow(),status:'open', likeCount:7,  postedBy:ME,     hunters:[ME,'加藤'] },
-  { id:'q6', shopName:'麻婆豆腐 四川食堂',       foodCategory:'中華',    maxParticipants:5, currentParticipants:1, meetingTime:'12:00', date:tomorrow(),status:'open', likeCount:2,  postedBy:'松本', hunters:['松本'] },
-  { id:'q7', shopName:'トラットリア ボスコ',     foodCategory:'イタリアン',maxParticipants:6,currentParticipants:2, meetingTime:'12:15', date:dayAfter(),status:'open', likeCount:4,  postedBy:'中村', hunters:['中村','小林'] },
+  { id:'q1', shopName:'焼肉ホルモン 炎の番人',  foodCategory:'焼肉',     maxParticipants:4, currentParticipants:2, meetingTime:'12:00', date:TODAY,    status:'open', likeCount:5,  postedBy:'田中', hunters:['田中','鈴木'] },
+  { id:'q2', shopName:'ラーメン道場 鬼辛',       foodCategory:'ラーメン',  maxParticipants:3, currentParticipants:3, meetingTime:'12:15', date:TODAY,    status:'open', likeCount:12, postedBy:'佐藤', hunters:['佐藤','山田','高橋'] },
+  { id:'q3', shopName:'タイ料理 バンコク食堂',   foodCategory:'タイ料理',  maxParticipants:5, currentParticipants:1, meetingTime:'13:00', date:TODAY,    status:'open', likeCount:3,  postedBy:ME,     hunters:[ME] },
+  { id:'q4', shopName:'寿司割烹 海神',           foodCategory:'寿司',     maxParticipants:4, currentParticipants:2, meetingTime:'11:45', date:TODAY,    status:'open', likeCount:8,  postedBy:'伊藤', hunters:['伊藤','渡辺'] },
+  { id:'q5', shopName:'スパイス魔境',            foodCategory:'カレー',   maxParticipants:4, currentParticipants:2, meetingTime:'12:30', date:dPlus(1), status:'open', likeCount:7,  postedBy:ME,     hunters:[ME,'加藤'] },
+  { id:'q6', shopName:'麻婆豆腐 四川食堂',       foodCategory:'中華',     maxParticipants:5, currentParticipants:1, meetingTime:'12:00', date:dPlus(1), status:'open', likeCount:2,  postedBy:'松本', hunters:['松本'] },
+  { id:'q7', shopName:'トラットリア ボスコ',     foodCategory:'イタリアン',maxParticipants:6, currentParticipants:2, meetingTime:'12:15', date:dPlus(2), status:'open', likeCount:4,  postedBy:'中村', hunters:['中村','小林'] },
 ];
 
 let joinedQuestId = null;
 const likedSet = new Set();
-setInterval(render, 30000);
+let selectedDate = TODAY;
+
+setInterval(() => { render(); renderSidebar(); }, 30000);
 
 function getRank(c,m){ const r=c/m; return r<0.4?0:r<0.8?1:2; }
 
+/* ── Sidebar ── */
+function renderSidebar(){
+  const dates = [...new Set(quests.map(q=>q.date))].sort();
+  const sb = document.getElementById('sidebar');
+  sb.innerHTML = '';
+  dates.forEach((date, i) => {
+    const isToday = date===TODAY;
+    const cnt = quests.filter(q=>q.date===date).length;
+    const sel = date===selectedDate;
+    const info = dateInfo(date);
+    const el = document.createElement('div');
+    el.className = 'sidebar-date-btn';
+    el.innerHTML = `
+      <div class="date-pill${isToday?' today-pill-wrap':''}${sel?' selected':''}" onclick="selectDate('${date}')">
+        <div class="dp-dow">${info.dow}曜日</div>
+        <div class="dp-day">${info.day}</div>
+        <div class="dp-mon">${info.mon}</div>
+        ${isToday?'<div class="today-tag">TODAY</div>':''}
+        <div class="dp-count">${cnt}件</div>
+      </div>
+      ${i<dates.length-1?'<div class="connector-line"></div>':''}
+    `;
+    sb.appendChild(el);
+  });
+}
+
+/* ── Quest column ── */
+function renderQuestCol(){
+  const col = document.getElementById('questCol');
+  const filtered = quests.filter(q=>q.date===selectedDate)
+    .sort((a,b)=>a.meetingTime<b.meetingTime?-1:a.meetingTime>b.meetingTime?1:0);
+
+  const openQs   = filtered.filter(q=>!isClosed(q));
+  const closedQs = filtered.filter(q=>isClosed(q));
+
+  const isToday = selectedDate===TODAY;
+  const info = dateInfo(selectedDate);
+  const total = filtered.length;
+
+  let html = `<div class="col-header">
+    <div>
+      <div class="col-date-title">${fmtDateJp(selectedDate)}</div>
+      <div class="col-date-sub">${isToday?'本日のクエスト':'このクエストを確認中'}</div>
+    </div>
+    <div class="col-badge">${total}件のクエスト</div>
+  </div>`;
+
+  if(total===0){
+    html += `<div class="empty-state"><div class="empty-icon">🛡</div><div class="empty-text">この日はクエストがない...</div></div>`;
+  } else {
+    if(openQs.length){
+      html += `<div class="sub-label open">受注可能 (${openQs.length})</div>`;
+      html += `<div class="grid section-gap">${openQs.map(renderCard).join('')}</div>`;
+    }
+    if(closedQs.length){
+      html += `<div class="sub-label closed">受注不可 (${closedQs.length})</div>`;
+      html += `<div class="grid">${closedQs.map(renderCard).join('')}</div>`;
+    }
+  }
+  col.innerHTML = html;
+}
+
 function renderCard(q){
-  const st      = computeStatus(q);
-  const isMine  = q.postedBy===ME;
-  const isJoined= q.hunters.includes(ME) && !isMine;
-  const alreadyJoinedElsewhere = joinedQuestId!==null && joinedQuestId!==q.id;
-  const pct     = Math.min(q.currentParticipants/q.maxParticipants*100,100);
-  const badge   = BADGE[q.foodCategory]||'badge-gray';
-  const rank    = RANK[getRank(q.currentParticipants,q.maxParticipants)];
-  const isLiked = likedSet.has(q.id);
+  const st     = computeStatus(q);
+  const isMine = q.postedBy===ME;
+  const isJoin = q.hunters.includes(ME)&&!isMine;
+  const elsewhr= joinedQuestId!==null&&joinedQuestId!==q.id;
+  const pct    = Math.min(q.currentParticipants/q.maxParticipants*100,100);
+  const badge  = BADGE_MAP[q.foodCategory]||'b-gray';
+  const rank   = RANK[getRank(q.currentParticipants,q.maxParticipants)];
+  const liked  = likedSet.has(q.id);
 
-  let cardClass = 'card ';
-  if(st==='confirmed')      cardClass+='confirmed-card';
-  else if(st==='expired')   cardClass+='closed-card';
-  else if(isMine)           cardClass+='my-card';
-  else                      cardClass+='open-card';
+  let cc = 'card ';
+  if(st==='confirmed')   cc+='c-confirmed';
+  else if(st==='expired')cc+='c-closed';
+  else if(isMine)        cc+='c-mine';
+  else                   cc+='c-open';
 
-  const hdrClass = st==='confirmed' ? 'card-header confirmed-hdr' : 'card-header';
-  const progressColor = st==='confirmed'?'green':st==='expired'?'gray':st==='full'?'red':'amber';
+  const hdrCls = st==='confirmed'?'card-hdr hdr-confirmed':'card-hdr';
+  const pfCls  = st==='confirmed'?'pf-green':st==='expired'?'pf-gray':st==='full'?'pf-red':'pf-amber';
 
-  // ヘッダー右タグ
-  let hdrTag = '';
-  if(st==='expired')   hdrTag = '<span class="expired-tag">⏰ 時間切れ</span>';
-  if(st==='confirmed') hdrTag = '<span class="confirmed-tag">✓ 確定</span>';
+  let hdrTag='';
+  if(st==='expired')   hdrTag='<span class="tag-expired">⏰ 時間切れ</span>';
+  if(st==='confirmed') hdrTag='<span class="tag-confirmed">✓ 確定</span>';
 
-  // ステータスバッジ
-  let sbadge = '';
-  if(isMine && st!=='confirmed' && st!=='expired') sbadge = '<span class="status-badge sb-owner">発令者</span>';
-  else if(st==='confirmed') sbadge = '<span class="status-badge sb-confirmed">確定済</span>';
-  else if(st!=='open') sbadge = '<span class="status-badge sb-closed">受注不可</span>';
+  let sbadge='';
+  if(isMine&&st!=='confirmed'&&st!=='expired') sbadge='<span class="sb sb-owner">発令者</span>';
+  else if(st==='confirmed') sbadge='<span class="sb sb-confirmed">確定済</span>';
+  else if(st!=='open') sbadge='<span class="sb sb-closed">受注不可</span>';
 
-  // アクションボタン群
-  let actions = '';
+  let acts='';
   if(isMine){
     if(st==='expired'){
-      actions = `<button class="btn btn-delete" onclick="deleteQuest('${q.id}')">✕ 取消</button>`;
+      acts=`<button class="btn btn-delete" onclick="deleteQuest('${q.id}')">✕ 取消</button>`;
     } else if(st==='confirmed'){
-      actions = `<button class="btn btn-disabled" style="flex:1" disabled>確定済み</button>
-                 <button class="btn btn-delete" onclick="deleteQuest('${q.id}')">✕</button>`;
+      acts=`<button class="btn btn-off" style="flex:1" disabled>確定済み</button><button class="btn btn-delete" onclick="deleteQuest('${q.id}')">✕</button>`;
     } else {
-      actions = `<button class="btn btn-confirm" onclick="confirmQuest('${q.id}')">✓ 確定</button>
-                 <button class="btn btn-delete" onclick="deleteQuest('${q.id}')">✕ 取消</button>`;
+      acts=`<button class="btn btn-confirm" onclick="confirmQuest('${q.id}')">✓ 確定</button><button class="btn btn-delete" onclick="deleteQuest('${q.id}')">✕ 取消</button>`;
     }
-  } else if(st==='expired'||st==='confirmed'){
-    actions = `<button class="btn btn-disabled" style="flex:1" disabled>受注不可</button>`;
-  } else if(st==='full' && !isJoined){
-    actions = `<button class="btn btn-disabled" style="flex:1" disabled>受注不可</button>`;
-  } else if(isJoined){
-    actions = `<button class="btn btn-cancel" onclick="cancelQuest('${q.id}')">↩ キャンセル</button>`;
-  } else if(alreadyJoinedElsewhere){
-    actions = `<button class="btn btn-disabled" style="flex:1" disabled>受注不可</button>`;
+  } else if(st!=='open'&&!isJoin){
+    acts=`<button class="btn btn-off" style="flex:1" disabled>受注不可</button>`;
+  } else if(isJoin){
+    acts=`<button class="btn btn-cancel" onclick="cancelQuest('${q.id}')">↩ キャンセル</button>`;
+  } else if(elsewhr){
+    acts=`<button class="btn btn-off" style="flex:1" disabled>受注不可</button>`;
   } else {
-    actions = `<button class="btn btn-join" onclick="joinQuest('${q.id}')">⚔ 受注する</button>`;
+    acts=`<button class="btn btn-join" onclick="joinQuest('${q.id}')">⚔ 受注する</button>`;
   }
 
-  return `<div class="${cardClass}" id="card-${q.id}">
-    <div class="${hdrClass}">
-      <div class="card-header-left">🔥 Lunch Quest</div>
-      <div class="card-header-right">${hdrTag}<span class="rank">${rank}</span></div>
+  return `<div class="${cc}" id="card-${q.id}">
+    <div class="${hdrCls}">
+      <div class="chdr-l">🔥 Lunch Quest</div>
+      <div class="chdr-r">${hdrTag}<span class="rank">${rank}</span></div>
     </div>
     <div class="card-body">
       <div class="card-top">
         <div>
           <div class="shop-name">${q.shopName}</div>
-          <span class="category-badge ${badge}">${q.foodCategory}</span>
+          <span class="cat-badge ${badge}">${q.foodCategory}</span>
         </div>
         ${sbadge}
       </div>
-      <div class="stats">
-        <div class="stat">🕐 <span class="stat-val">${q.meetingTime}</span></div>
-        <div class="stat">👥 <span class="stat-val${st==='full'?' red':''}">${q.currentParticipants}</span><span class="stat-muted"> / ${q.maxParticipants}</span></div>
+      <div class="card-date-row">📅 <span>${fmtDate(q.date)}</span>&nbsp;🕐&nbsp;<span>${q.meetingTime}</span>&nbsp;👥&nbsp;<span>${q.currentParticipants}/${q.maxParticipants}名</span>
       </div>
-      <div class="progress-track"><div class="progress-fill ${progressColor}" style="width:${pct}%"></div></div>
-      <div class="card-actions">
-        ${actions}
-        <button class="btn-detail" onclick="openDetail('${q.id}')">🔍</button>
-        <button class="btn-like${isLiked?' liked':''}" onclick="likeQuest('${q.id}')" ${isLiked?'disabled':''}>
-          👍 <span id="like-${q.id}">${q.likeCount}</span>
-        </button>
+      <div class="prog-track"><div class="prog-fill ${pfCls}" style="width:${pct}%"></div></div>
+      <div class="actions">
+        ${acts}
+        <button class="btn-sub" onclick="openDetail('${q.id}')">🔍</button>
+        <button class="btn-like${liked?' liked':''}" onclick="likeQuest('${q.id}')" ${liked?'disabled':''}>👍 <span id="like-${q.id}">${q.likeCount}</span></button>
       </div>
     </div>
   </div>`;
 }
 
 function render(){
-  if(joinedQuestId){
-    const jq=quests.find(q=>q.id===joinedQuestId);
-    if(jq && isExpired(jq)) joinedQuestId=null;
-  }
-
-  // 日付でソート
-  const sorted = [...quests].sort((a,b)=> a.date<b.date?-1:a.date>b.date?1:
-    (a.meetingTime<b.meetingTime?-1:a.meetingTime>b.meetingTime?1:0));
-
-  // 日付ごとにグループ化
-  const byDate = {};
-  sorted.forEach(q=>{ if(!byDate[q.date]) byDate[q.date]=[]; byDate[q.date].push(q); });
-
-  let html = '<div class="date-sidebar" id="sidebar"></div><div class="quest-column" id="qcol"></div>';
-  document.getElementById('main').innerHTML = html;
-
-  const sidebar = document.getElementById('sidebar');
-  const qcol    = document.getElementById('qcol');
-
-  const dates = Object.keys(byDate).sort();
-  dates.forEach((date, di) => {
-    const qs = byDate[date];
-    const openQs   = qs.filter(q=>!isClosed(q));
-    const closedQs = qs.filter(q=>isClosed(q));
-    const isToday  = date===TODAY;
-    const isPast   = date<TODAY;
-    const lblInfo  = dateLabel(date);
-    const badgeCls = isToday?'today':isPast?'past':'future';
-
-    // sidebar date badge
-    const sEl = document.createElement('div');
-    sEl.className = 'date-label-wrap';
-    sEl.style.cssText = `margin-bottom:0;`;
-    // estimate height: each section ~(cards*180+48)px, rough sync
-    sEl.innerHTML = `<div class="date-label">
-      <div class="date-badge ${badgeCls}">
-        <div class="date-day-name">${lblInfo.dow}曜日</div>
-        <div class="date-day-num">${lblInfo.day}</div>
-        <div class="date-month">${lblInfo.month} ${lblInfo.year}</div>
-        ${isToday?'<div class="today-pill">TODAY</div>':''}
-      </div>
-      ${di<dates.length-1?'<div class="date-connector"></div>':''}
-    </div>`;
-    sidebar.appendChild(sEl);
-
-    // quest section
-    const qEl = document.createElement('div');
-    qEl.className = 'date-section';
-    let inner = '<div class="date-section-inner">';
-    if(openQs.length){
-      inner += `<div class="sub-section-label sub-label-open">受注可能 (${openQs.length})</div>`;
-      inner += `<div class="grid">${openQs.map(renderCard).join('')}</div>`;
-    }
-    if(closedQs.length){
-      inner += `<div class="sub-section-label sub-label-closed">受注不可 (${closedQs.length})</div>`;
-      inner += `<div class="grid">${closedQs.map(renderCard).join('')}</div>`;
-    }
-    inner += '</div>';
-    qEl.innerHTML = inner;
-    qcol.appendChild(qEl);
-  });
+  if(joinedQuestId){ const jq=quests.find(q=>q.id===joinedQuestId); if(jq&&isExpired(jq))joinedQuestId=null; }
+  renderQuestCol();
 }
 
-function toast(msg,type='success'){
-  const wrap=document.getElementById('toastWrap');
-  const el=document.createElement('div');
-  el.className='toast '+type;
-  const icons={success:'⚔',error:'🛡',info:'👍',green:'✓'};
-  el.innerHTML=`<span>${icons[type]||'⚔'}</span><span>${msg}</span>`;
-  wrap.appendChild(el);
-  setTimeout(()=>{el.style.transition='opacity 0.3s';el.style.opacity='0';setTimeout(()=>el.remove(),300);},3200);
+function selectDate(date){
+  selectedDate = date;
+  renderSidebar();
+  renderQuestCol();
 }
 
+/* ── Actions ── */
 function joinQuest(id){
-  if(joinedQuestId&&joinedQuestId!==id){toast(rnd(MH.dup),'error');return;}
-  const idx=quests.findIndex(q=>q.id===id); if(idx===-1)return;
+  if(joinedQuestId&&joinedQuestId!==id){toast(rnd(MH.dup),'te');return;}
+  const idx=quests.findIndex(q=>q.id===id); if(idx<0)return;
   const q=quests[idx];
-  if(isExpired(q)){toast(rnd(MH.expired),'error');return;}
-  if(q.currentParticipants>=q.maxParticipants){toast(rnd(MH.full),'error');return;}
+  if(isExpired(q)){toast(rnd(MH.expired),'te');return;}
+  if(q.currentParticipants>=q.maxParticipants){toast(rnd(MH.full),'te');return;}
   quests[idx]={...q,currentParticipants:q.currentParticipants+1,hunters:[...q.hunters,ME]};
-  joinedQuestId=id; render(); toast(rnd(MH.join),'success');
+  joinedQuestId=id; render(); toast(rnd(MH.join),'ts');
 }
 function cancelQuest(id){
-  const idx=quests.findIndex(q=>q.id===id); if(idx===-1)return;
+  const idx=quests.findIndex(q=>q.id===id); if(idx<0)return;
   const q=quests[idx];
   quests[idx]={...q,currentParticipants:Math.max(0,q.currentParticipants-1),hunters:q.hunters.filter(h=>h!==ME)};
-  if(joinedQuestId===id) joinedQuestId=null;
-  render(); toast(rnd(MH.cancel),'info');
+  if(joinedQuestId===id)joinedQuestId=null;
+  render(); toast(rnd(MH.cancel),'ti');
 }
 function confirmQuest(id){
-  const idx=quests.findIndex(q=>q.id===id); if(idx===-1)return;
+  const idx=quests.findIndex(q=>q.id===id); if(idx<0)return;
   quests[idx]={...quests[idx],status:'confirmed'};
-  render(); toast(rnd(MH.confirm),'green');
+  render(); toast(rnd(MH.confirm),'tg');
 }
 function deleteQuest(id){
   quests=quests.filter(q=>q.id!==id);
-  if(joinedQuestId===id) joinedQuestId=null;
-  render(); toast(rnd(MH.delete),'error');
+  if(joinedQuestId===id)joinedQuestId=null;
+  // もし選択日にクエストが0件になったら別の日に移動
+  const remaining=quests.filter(q=>q.date===selectedDate);
+  if(remaining.length===0){
+    const dates=[...new Set(quests.map(q=>q.date))].sort();
+    selectedDate=dates.length>0?dates[0]:TODAY;
+  }
+  renderSidebar(); render(); toast(rnd(MH.delete),'te');
 }
 function likeQuest(id){
-  if(likedSet.has(id)){toast(rnd(MH.liked),'error');return;}
-  const idx=quests.findIndex(q=>q.id===id); if(idx===-1)return;
+  if(likedSet.has(id)){toast(rnd(MH.liked),'te');return;}
+  const idx=quests.findIndex(q=>q.id===id); if(idx<0)return;
   quests[idx]={...quests[idx],likeCount:quests[idx].likeCount+1};
   likedSet.add(id);
   const el=document.getElementById('like-'+id);
-  if(el){ el.textContent=quests[idx].likeCount; const btn=el.closest('.btn-like'); if(btn){btn.classList.add('liked');btn.disabled=true;} }
-  toast(rnd(MH.like),'info');
+  if(el){el.textContent=quests[idx].likeCount; const b=el.closest('.btn-like'); if(b){b.classList.add('liked');b.disabled=true;}}
+  toast(rnd(MH.like),'ti');
 }
 
-/* ---- Detail ---- */
+/* ── Detail ── */
 function openDetail(id){
   const q=quests.find(q=>q.id===id); if(!q)return;
   const st=computeStatus(q);
-  const badge=BADGE[q.foodCategory]||'badge-gray';
   const pct=Math.min(q.currentParticipants/q.maxParticipants*100,100);
+  const pfCls=st==='confirmed'?'pf-green':st==='full'?'pf-red':'pf-amber';
   const stColor=st==='open'?'#4ade80':st==='confirmed'?'#86efac':'#f87171';
   const stLabel=st==='open'?'受注可':st==='confirmed'?'確定済':'受注不可';
-  const huntersHtml=q.hunters.length===0
-    ?'<div class="empty-hunters">まだ誰も受注していない...</div>'
+  const badge=BADGE_MAP[q.foodCategory]||'b-gray';
+  const hunters=q.hunters.length===0
+    ?'<div class="h-empty">まだ誰も受注していない...</div>'
     :q.hunters.map((h,i)=>{
-      const [bg,fg]=AV_COLORS[i%AV_COLORS.length];
-      const isYou=h===ME, isOwner=h===q.postedBy;
-      return `<div class="hunter-row">
-        <div class="hunter-av" style="background:${bg};color:${fg};">${h.charAt(0)}</div>
-        <span class="hunter-name">${h}</span>
-        ${isOwner?'<span class="hunter-tag tag-owner">発令者</span>':''}
-        ${isYou&&!isOwner?'<span class="hunter-tag tag-you">あなた</span>':''}
-      </div>`;
+      const[bg,fg]=AV_COLORS[i%AV_COLORS.length];
+      const isYou=h===ME,isOwn=h===q.postedBy;
+      return `<div class="h-row"><div class="h-av" style="background:${bg};color:${fg};">${h.charAt(0)}</div><span class="h-name">${h}</span>${isOwn?'<span class="h-tag ht-own">発令者</span>':''}${isYou&&!isOwn?'<span class="h-tag ht-you">あなた</span>':''}</div>`;
     }).join('');
-  document.getElementById('detailMount').innerHTML=`<div class="overlay" id="dtBD" onclick="closeDTBD(event)">
+  document.getElementById('detailMount').innerHTML=`<div class="overlay" id="dtBD" onclick="if(event.target.id==='dtBD')closeDetail()">
     <div class="panel">
-      <div class="panel-hdr"><span class="panel-title">📜 クエスト詳細</span><button class="panel-close" onclick="closeDetail()">✕</button></div>
+      <div class="panel-hdr"><span class="panel-ttl">📜 クエスト詳細</span><button class="panel-close" onclick="closeDetail()">✕</button></div>
       <div class="panel-body">
-        <div class="detail-shop">${q.shopName}</div>
-        <span class="category-badge ${badge}" style="display:inline-block;margin-bottom:14px;">${q.foodCategory}</span>
-        <div class="detail-grid">
-          <div class="ditem"><div class="ditem-label">📅 日付</div><div class="ditem-val">${fmtDate(q.date)}</div></div>
-          <div class="ditem"><div class="ditem-label">🕐 集合時間</div><div class="ditem-val">${q.meetingTime}</div></div>
-          <div class="ditem"><div class="ditem-label">👤 発令者</div><div class="ditem-val">${q.postedBy}</div></div>
-          <div class="ditem"><div class="ditem-label">🏷 ステータス</div><div class="ditem-val" style="color:${stColor}">${stLabel}</div></div>
+        <div class="d-shop">${q.shopName}</div>
+        <span class="cat-badge ${badge}" style="display:inline-block;margin-bottom:12px;">${q.foodCategory}</span>
+        <div class="d-grid">
+          <div class="d-item"><div class="d-lbl">📅 日付</div><div class="d-val">${fmtDate(q.date)}</div></div>
+          <div class="d-item"><div class="d-lbl">🕐 集合時間</div><div class="d-val">${q.meetingTime}</div></div>
+          <div class="d-item"><div class="d-lbl">👤 発令者</div><div class="d-val">${q.postedBy}</div></div>
+          <div class="d-item"><div class="d-lbl">🏷 ステータス</div><div class="d-val" style="color:${stColor}">${stLabel}</div></div>
         </div>
-        <div class="prog-row"><span>参加状況</span><span>${q.currentParticipants} / ${q.maxParticipants}</span></div>
-        <div class="progress-track" style="margin-bottom:14px;"><div class="progress-fill ${st==='confirmed'?'green':st==='full'?'red':'amber'}" style="width:${pct}%"></div></div>
-        <div class="hunters-title">⚔ 受注ハンター</div>
-        <div class="hunters-list">${huntersHtml}</div>
-        <button class="submit-btn" style="background:rgba(39,39,42,0.45);border-color:#3f3f46;color:#a1a1aa;" onclick="closeDetail()">閉じる</button>
+        <div class="prog-row2"><span>参加状況</span><span>${q.currentParticipants} / ${q.maxParticipants}</span></div>
+        <div class="prog-track" style="margin-bottom:12px;"><div class="prog-fill ${pfCls}" style="width:${pct}%"></div></div>
+        <div class="h-ttl">⚔ 受注ハンター</div>
+        <div class="h-list">${hunters}</div>
+        <button class="close-btn" onclick="closeDetail()">閉じる</button>
       </div>
     </div>
   </div>`;
 }
 function closeDetail(){ document.getElementById('detailMount').innerHTML=''; }
-function closeDTBD(e){ if(e.target.id==='dtBD') closeDetail(); }
 
-/* ---- Post Modal ---- */
+/* ── Post Modal ── */
 function openModal(){
-  // 現在時刻の次の分を minTime として算出
   const now=new Date();
   const hh=String(now.getHours()).padStart(2,'0');
   const mm=String(now.getMinutes()+1).padStart(2,'0');
-  const minTime=`${hh}:${mm}`;
-
-  document.getElementById('modalMount').innerHTML=`<div class="overlay" id="postBD" onclick="closeModalBD(event)">
-    <div class="modal">
-      <div class="modal-hdr"><span class="modal-title">📜 新規クエスト依頼書</span><button class="panel-close" onclick="closeModal()">✕</button></div>
-      <div class="modal-body">
-        <div class="field"><label>🗺 お店の名前</label><input id="f-shop" type="text" placeholder="例：焼肉ホルモン 炎の番人" /></div>
-        <div class="field"><label>🍴 食べたいもの</label>
-          <select id="f-cat"><option>焼肉</option><option>ラーメン</option><option>タイ料理</option><option>寿司</option><option>カレー</option><option>中華</option><option>イタリアン</option><option>その他</option></select>
+  document.getElementById('modalMount').innerHTML=`<div class="overlay" id="postBD" onclick="if(event.target.id==='postBD')closeModal()">
+    <div class="modal-form">
+      <div class="mf-hdr"><span class="mf-ttl">📜 新規クエスト依頼書</span><button class="panel-close" onclick="closeModal()">✕</button></div>
+      <div class="mf-body">
+        <div><div class="f-lbl">🗺 お店の名前</div><input class="f-inp" id="f-shop" type="text" placeholder="例：焼肉ホルモン 炎の番人" /></div>
+        <div><div class="f-lbl">🍴 食べたいもの</div>
+          <select class="f-inp" id="f-cat"><option>焼肉</option><option>ラーメン</option><option>タイ料理</option><option>寿司</option><option>カレー</option><option>中華</option><option>イタリアン</option><option>その他</option></select>
         </div>
-        <div class="field-row">
-          <div class="field"><label>👥 最大人数</label><input id="f-max" type="number" min="2" max="10" value="4" /></div>
-          <div class="field"><label>🕐 集合時間</label><input id="f-time" type="time" value="12:00" min="${minTime}" /></div>
+        <div class="f-row">
+          <div><div class="f-lbl">👥 最大人数</div><input class="f-inp" id="f-max" type="number" min="2" max="10" value="4" /></div>
+          <div><div class="f-lbl">🕐 集合時間</div><input class="f-inp" id="f-time" type="time" value="12:00" /></div>
         </div>
-        <div class="field"><label>📅 日付</label><input id="f-date" type="date" value="${TODAY}" min="${TODAY}" onchange="validateDateTime()" /></div>
-        <div class="field"><label>👤 あなたの名前</label><input id="f-name" type="text" placeholder="名前（省略で「あなた」）" /></div>
-        <p class="field-note">※ デモ用。実装時はログインユーザーを使用します</p>
-        <button class="submit-btn" onclick="postQuest()">── クエストを発令する ──</button>
+        <div><div class="f-lbl">📅 日付</div><input class="f-inp" id="f-date" type="date" value="${TODAY}" min="${TODAY}" onchange="onDateChange()" /></div>
+        <div><div class="f-lbl">👤 あなたの名前</div><input class="f-inp" id="f-name" type="text" placeholder="名前（省略で「あなた」）" /></div>
+        <p class="f-note">※ デモ用。実装時はログインユーザーを使用</p>
+        <button class="f-submit" onclick="postQuest()">── クエストを発令する ──</button>
       </div>
     </div>
   </div>`;
-  setTimeout(()=>{ const el=document.getElementById('f-shop'); if(el)el.focus(); },50);
+  setTimeout(()=>{ const e=document.getElementById('f-shop'); if(e)e.focus(); },40);
 }
 function closeModal(){ document.getElementById('modalMount').innerHTML=''; }
-function closeModalBD(e){ if(e.target.id==='postBD') closeModal(); }
 
-function validateDateTime(){
-  const dateEl=document.getElementById('f-date');
-  const timeEl=document.getElementById('f-time');
-  if(!dateEl||!timeEl) return;
-  const selDate=dateEl.value;
-  if(selDate===TODAY){
-    const now=new Date();
-    const hh=String(now.getHours()).padStart(2,'0');
-    const mm=String(now.getMinutes()+1).padStart(2,'0');
-    timeEl.min=`${hh}:${mm}`;
-    // 現在時刻より前なら補正
-    const [h,m]=timeEl.value.split(':').map(Number);
-    if(h*60+m < now.getHours()*60+now.getMinutes()+1){
-      timeEl.value=`${hh}:${mm}`;
-    }
-  } else {
-    timeEl.min='00:00';
-  }
+function onDateChange(){
+  const de=document.getElementById('f-date');
+  const te=document.getElementById('f-time');
+  if(!de||!te)return;
+  if(de.value===TODAY){
+    const n=new Date();
+    const h=String(n.getHours()).padStart(2,'0'), m=String(n.getMinutes()+1).padStart(2,'0');
+    te.min=`${h}:${m}`;
+    const[ch,cm]=te.value.split(':').map(Number);
+    if(ch*60+cm<n.getHours()*60+n.getMinutes()+1) te.value=`${h}:${m}`;
+  } else { te.min='00:00'; }
 }
 
 function postQuest(){
-  const shop=document.getElementById('f-shop').value.trim();
+  const shop=(document.getElementById('f-shop').value||'').trim();
   if(!shop){document.getElementById('f-shop').focus();return;}
-  const cat  = document.getElementById('f-cat').value;
-  const max  = parseInt(document.getElementById('f-max').value)||4;
-  const time = document.getElementById('f-time').value||'12:00';
-  const date = document.getElementById('f-date').value||TODAY;
-  const nameVal = (document.getElementById('f-name').value||'').trim();
-  const poster = nameVal||ME;
-
-  // 過去日時チェック
-  if(date<TODAY||(date===TODAY&&(()=>{ const [h,m]=time.split(':').map(Number); return h*60+m<nowMinutes(); })())){
-    toast(rnd(MH.pastdt),'error'); return;
+  const cat =document.getElementById('f-cat').value;
+  const max =parseInt(document.getElementById('f-max').value)||4;
+  const time=document.getElementById('f-time').value||'12:00';
+  const date=document.getElementById('f-date').value||TODAY;
+  const name=(document.getElementById('f-name').value||'').trim();
+  const poster=name||ME;
+  if(date<TODAY||(date===TODAY&&(()=>{ const[h,m]=time.split(':').map(Number); return h*60+m<nowMin(); })())){
+    toast(rnd(MH.pastdt),'te'); return;
   }
-
-  const newQ={id:'q'+Date.now(),shopName:shop,foodCategory:cat,maxParticipants:max,
-    currentParticipants:1,meetingTime:time,date:date,status:'open',likeCount:0,
-    postedBy:poster,hunters:[poster]};
-  quests.push(newQ);
-  closeModal(); render(); toast(rnd(MH.post),'success');
+  quests.push({id:'q'+Date.now(),shopName:shop,foodCategory:cat,maxParticipants:max,currentParticipants:1,meetingTime:time,date,status:'open',likeCount:0,postedBy:poster,hunters:[poster]});
+  selectedDate=date;
+  closeModal(); renderSidebar(); render(); toast(rnd(MH.post),'ts');
 }
 
+/* ── Toast ── */
+function toast(msg,cls='ts'){
+  const w=document.getElementById('toastWrap');
+  const e=document.createElement('div');
+  e.className='toast '+cls;
+  const icons={ts:'⚔',te:'🛡',ti:'👍',tg:'✓'};
+  e.innerHTML=`<span>${icons[cls]||'⚔'}</span><span>${msg}</span>`;
+  w.appendChild(e);
+  setTimeout(()=>{e.style.transition='opacity .3s';e.style.opacity='0';setTimeout(()=>e.remove(),300);},3200);
+}
+
+renderSidebar();
 render();
 </script>
