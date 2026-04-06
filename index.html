@@ -9,119 +9,97 @@
   .logo-sub { font-size: 11px; color: #71717a; margin-top: 1px; }
   .header-btn { display: flex; align-items: center; gap: 6px; padding: 7px 14px; font-size: 12px; font-weight: 700; border: 1px solid #d97706; color: #fde68a; background: rgba(120,53,15,0.3); border-radius: 3px; cursor: pointer; font-family: var(--font-mono, monospace); transition: background 0.15s; }
   .header-btn:hover { background: rgba(120,53,15,0.5); }
-
   .main { max-width: 1100px; margin: 0 auto; padding: 24px 16px 0; display: flex; gap: 0; }
-
-  /* ── Sidebar ── */
   .sidebar { width: 110px; flex-shrink: 0; display: flex; flex-direction: column; gap: 0; padding-right: 4px; }
   .sidebar-date-btn { display: flex; flex-direction: column; align-items: center; gap: 0; cursor: pointer; position: relative; }
-  .date-pill { display: flex; flex-direction: column; align-items: center; padding: 10px 10px 9px; border: 1px solid #27272a; border-radius: 4px; background: transparent; width: 88px; transition: border-color 0.15s, background 0.15s; }
+  .date-pill { display: flex; flex-direction: column; align-items: center; padding: 10px 10px 9px; border: 1px solid #27272a; border-radius: 4px; background: transparent; width: 88px; transition: border-color 0.15s, background 0.15s; cursor: pointer; }
   .date-pill:hover { border-color: rgba(120,53,15,0.55); background: rgba(120,53,15,0.07); }
   .date-pill.selected { border-color: #d97706; background: rgba(120,53,15,0.22); }
-  .date-pill.today-pill-wrap { border-color: rgba(120,53,15,0.45); }
-  .date-pill.today-pill-wrap.selected { border-color: #f59e0b; background: rgba(120,53,15,0.28); }
+  .date-pill.today-p { border-color: rgba(120,53,15,0.45); }
+  .date-pill.today-p.selected { border-color: #f59e0b; background: rgba(120,53,15,0.28); }
   .dp-dow { font-size: 10px; color: #52525b; letter-spacing: 0.08em; margin-bottom: 2px; }
   .date-pill.selected .dp-dow { color: #a16207; }
   .dp-day { font-size: 22px; font-weight: 700; line-height: 1; color: #71717a; }
-  .date-pill.selected .dp-day { color: #fbbf24; }
-  .date-pill.today-pill-wrap .dp-day { color: #fbbf24; }
+  .date-pill.selected .dp-day, .date-pill.today-p .dp-day { color: #fbbf24; }
   .dp-mon { font-size: 10px; color: #52525b; margin-top: 1px; }
   .date-pill.selected .dp-mon { color: #a16207; }
   .today-tag { font-size: 9px; color: #fbbf24; background: rgba(217,119,6,0.2); border: 1px solid rgba(217,119,6,0.35); border-radius: 99px; padding: 1px 7px; margin-top: 4px; }
   .dp-count { font-size: 9px; color: #3f3f46; margin-top: 3px; }
   .date-pill.selected .dp-count { color: #92400e; }
   .connector-line { width: 1px; height: 14px; background: #1f1f22; margin: 0 auto; }
-
-  /* ── Quest column ── */
   .quest-col { flex: 1; min-width: 0; padding-left: 16px; border-left: 1px solid #18181b; }
   .col-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid rgba(120,53,15,0.2); }
   .col-date-title { font-size: 14px; font-weight: 700; color: #fbbf24; font-family: sans-serif; }
   .col-date-sub { font-size: 11px; color: #52525b; margin-top: 1px; }
   .col-badge { font-size: 10px; color: #d97706; border: 1px solid rgba(120,53,15,0.4); padding: 3px 10px; border-radius: 99px; background: rgba(120,53,15,0.12); }
-
   .sub-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
   .sub-label::after { content: ''; flex: 1; height: 1px; }
-  .sub-label.open   { color: #d97706; }
-  .sub-label.open::after   { background: rgba(120,53,15,0.3); }
+  .sub-label.open { color: #d97706; }
+  .sub-label.open::after { background: rgba(120,53,15,0.3); }
   .sub-label.closed { color: #3f3f46; }
   .sub-label.closed::after { background: #1f1f22; }
   .section-gap { margin-bottom: 20px; }
-
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(252px, 1fr)); gap: 12px; margin-bottom: 6px; }
-
-  /* ── Cards ── */
   .card { border-radius: 3px; overflow: hidden; transition: border-color 0.18s, box-shadow 0.18s; }
-  .card.c-open      { border: 1px solid rgba(120,53,15,0.45); background: linear-gradient(135deg,#18181b,#18181b,rgba(120,53,15,0.07)); }
-  .card.c-open:hover{ border-color: rgba(217,119,6,0.6); box-shadow: 0 4px 18px rgba(120,53,15,0.16); }
-  .card.c-mine      { border: 1px solid rgba(180,83,9,0.6); background: linear-gradient(135deg,#18181b,rgba(120,53,15,0.1)); }
+  .card.c-open { border: 1px solid rgba(120,53,15,0.45); background: linear-gradient(135deg,#18181b,#18181b,rgba(120,53,15,0.07)); }
+  .card.c-open:hover { border-color: rgba(217,119,6,0.6); box-shadow: 0 4px 18px rgba(120,53,15,0.16); }
+  .card.c-mine { border: 1px solid rgba(180,83,9,0.6); background: linear-gradient(135deg,#18181b,rgba(120,53,15,0.1)); }
   .card.c-confirmed { border: 1px solid rgba(20,83,45,0.55); background: linear-gradient(135deg,#18181b,rgba(20,83,45,0.07)); opacity: 0.72; }
-  .card.c-closed    { border: 1px solid #1f1f22; background: rgba(24,24,27,0.4); opacity: 0.6; }
-
+  .card.c-closed { border: 1px solid #1f1f22; background: rgba(24,24,27,0.4); opacity: 0.6; }
   .card-hdr { display: flex; align-items: center; justify-content: space-between; padding: 6px 13px; border-bottom: 1px solid rgba(120,53,15,0.2); background: rgba(120,53,15,0.09); }
   .card-hdr.hdr-confirmed { background: rgba(20,83,45,0.14); border-bottom-color: rgba(20,83,45,0.22); }
   .chdr-l { display: flex; align-items: center; gap: 5px; font-size: 10px; color: rgba(251,191,36,0.65); letter-spacing: 0.13em; text-transform: uppercase; }
   .chdr-r { display: flex; align-items: center; gap: 6px; }
   .rank { font-size: 11px; color: #d97706; }
-  .tag-expired   { font-size: 10px; color: #ef4444; }
+  .tag-expired { font-size: 10px; color: #ef4444; }
   .tag-confirmed { font-size: 10px; color: #4ade80; }
-
   .card-body { padding: 12px 13px; }
   .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
   .shop-name { font-size: 14px; font-weight: 700; color: #f4f4f5; line-height: 1.3; margin-bottom: 3px; font-family: sans-serif; }
-
   .cat-badge { display: inline-block; font-size: 10px; padding: 2px 7px; border-radius: 2px; border: 1px solid; font-family: var(--font-mono, monospace); }
-  .b-red    { color:#f87171;border-color:#b91c1c;background:rgba(127,29,29,0.28); }
+  .b-red { color:#f87171;border-color:#b91c1c;background:rgba(127,29,29,0.28); }
   .b-orange { color:#fb923c;border-color:#c2410c;background:rgba(124,45,18,0.28); }
-  .b-green  { color:#4ade80;border-color:#15803d;background:rgba(20,83,45,0.28); }
-  .b-blue   { color:#60a5fa;border-color:#1d4ed8;background:rgba(29,78,216,0.18); }
+  .b-green { color:#4ade80;border-color:#15803d;background:rgba(20,83,45,0.28); }
+  .b-blue { color:#60a5fa;border-color:#1d4ed8;background:rgba(29,78,216,0.18); }
   .b-yellow { color:#facc15;border-color:#a16207;background:rgba(113,63,18,0.28); }
-  .b-gray   { color:#a1a1aa;border-color:#52525b;background:rgba(39,39,42,0.45); }
-
+  .b-gray { color:#a1a1aa;border-color:#52525b;background:rgba(39,39,42,0.45); }
   .sb { font-size:10px;font-weight:700;padding:3px 7px;border-radius:2px;border:1px solid;flex-shrink:0;font-family:var(--font-mono,monospace); }
-  .sb-closed    { color:#f87171;border-color:#7f1d1d;background:rgba(127,29,29,0.28);transform:rotate(1deg); }
+  .sb-closed { color:#f87171;border-color:#7f1d1d;background:rgba(127,29,29,0.28);transform:rotate(1deg); }
   .sb-confirmed { color:#4ade80;border-color:#14532d;background:rgba(20,83,45,0.22); }
-  .sb-owner     { color:#fbbf24;border-color:#92400e;background:rgba(120,53,15,0.32); }
-
+  .sb-owner { color:#fbbf24;border-color:#92400e;background:rgba(120,53,15,0.32); }
   .stats { display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:8px; }
-  .stat  { display:flex;align-items:center;gap:4px;font-size:11px;color:#71717a; }
-  .sv    { color:#d4d4d8; }
-  .sv.red{ color:#f87171; }
-  .sm    { color:#3f3f46; }
-
-  /* 日付行 */
+  .stat { display:flex;align-items:center;gap:4px;font-size:11px;color:#71717a; }
+  .sv { color:#d4d4d8; }
+  .sv.red { color:#f87171; }
+  .sm { color:#3f3f46; }
   .card-date-row { display:flex;align-items:center;gap:4px;font-size:10px;color:#52525b;margin-bottom:7px; }
   .card-date-row span { color:#71717a; }
-
   .prog-track { height:3px;background:#1f1f22;border-radius:99px;overflow:hidden;margin-bottom:10px; }
-  .prog-fill  { height:100%;border-radius:99px;transition:width 0.45s; }
+  .prog-fill { height:100%;border-radius:99px;transition:width 0.45s; }
   .pf-amber { background:#f59e0b; }
-  .pf-red   { background:#dc2626; }
+  .pf-red { background:#dc2626; }
   .pf-green { background:#22c55e; }
-  .pf-gray  { background:#3f3f46; }
-
+  .pf-gray { background:#3f3f46; }
   .actions { display:flex;gap:6px; }
   .btn { display:flex;align-items:center;justify-content:center;gap:5px;padding:6px 9px;font-size:11px;font-weight:700;border-radius:2px;cursor:pointer;font-family:var(--font-mono,monospace);transition:background 0.13s,transform 0.1s;letter-spacing:0.02em;border:1px solid;white-space:nowrap; }
   .btn:active:not(:disabled) { transform:scale(0.96); }
-  .btn-join    { flex:1;border-color:#d97706;color:#fde68a;background:rgba(120,53,15,0.32); }
+  .btn-join { flex:1;border-color:#d97706;color:#fde68a;background:rgba(120,53,15,0.32); }
   .btn-join:hover { background:rgba(120,53,15,0.55); }
-  .btn-cancel  { flex:1;border-color:#52525b;color:#a1a1aa;background:rgba(39,39,42,0.3); }
+  .btn-cancel { flex:1;border-color:#52525b;color:#a1a1aa;background:rgba(39,39,42,0.3); }
   .btn-cancel:hover { border-color:#71717a;color:#d4d4d8; }
   .btn-confirm { border-color:#15803d;color:#86efac;background:rgba(20,83,45,0.22); }
   .btn-confirm:hover { background:rgba(20,83,45,0.42); }
-  .btn-delete  { border-color:#7f1d1d;color:#fca5a5;background:rgba(127,29,29,0.22); }
+  .btn-delete { border-color:#7f1d1d;color:#fca5a5;background:rgba(127,29,29,0.22); }
   .btn-delete:hover { background:rgba(127,29,29,0.42); }
-  .btn-off     { flex:1;border-color:#1f1f22;color:#3f3f46;background:transparent;cursor:not-allowed; }
-  .btn-sub     { display:flex;align-items:center;gap:4px;padding:6px 9px;font-size:11px;border:1px solid #1f1f22;color:#3f3f46;background:transparent;border-radius:2px;cursor:pointer;transition:border-color 0.13s,color 0.13s; }
+  .btn-off { flex:1;border-color:#1f1f22;color:#3f3f46;background:transparent;cursor:not-allowed; }
+  .btn-sub { display:flex;align-items:center;gap:4px;padding:6px 9px;font-size:11px;border:1px solid #1f1f22;color:#3f3f46;background:transparent;border-radius:2px;cursor:pointer;transition:border-color 0.13s,color 0.13s; }
   .btn-sub:hover { border-color:#3f3f46;color:#71717a; }
-  .btn-like    { display:flex;align-items:center;gap:4px;padding:6px 9px;font-size:11px;border:1px solid #1f1f22;color:#3f3f46;background:transparent;border-radius:2px;cursor:pointer;transition:border-color 0.13s,color 0.13s; }
+  .btn-like { display:flex;align-items:center;gap:4px;padding:6px 9px;font-size:11px;border:1px solid #1f1f22;color:#3f3f46;background:transparent;border-radius:2px;cursor:pointer;transition:border-color 0.13s,color 0.13s; }
   .btn-like:hover:not(.liked) { border-color:#3f3f46;color:#71717a; }
   .btn-like.liked { border-color:#1d4ed8;color:#93c5fd;background:rgba(29,78,216,0.1);cursor:not-allowed; }
-
   .empty-state { display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 0;gap:10px; }
   .empty-icon { font-size:32px;opacity:0.25; }
   .empty-text { font-size:13px;color:#3f3f46; }
-
-  /* overlays */
   .overlay { position:fixed;inset:0;background:rgba(0,0,0,0.76);backdrop-filter:blur(4px);z-index:60;display:flex;align-items:center;justify-content:center;padding:16px; }
   .panel { width:100%;max-width:455px;border:1px solid rgba(180,83,9,0.42);background:#0d0d0f;border-radius:4px; }
   .panel-hdr { display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid rgba(120,53,15,0.25);background:rgba(120,53,15,0.12); }
@@ -129,43 +107,41 @@
   .panel-close { background:none;border:none;color:#52525b;cursor:pointer;font-size:17px;line-height:1;padding:2px 4px; }
   .panel-close:hover { color:#d4d4d8; }
   .panel-body { padding:16px; }
-  .d-shop  { font-size:17px;font-weight:700;color:#f4f4f5;font-family:sans-serif;margin-bottom:4px; }
-  .d-grid  { display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0; }
-  .d-item  { background:#18181b;border:1px solid #27272a;border-radius:3px;padding:8px 10px; }
-  .d-lbl   { font-size:9px;color:#3f3f46;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:2px; }
-  .d-val   { font-size:13px;color:#e4e4e7;font-weight:700; }
-  .h-ttl   { font-size:9px;color:#52525b;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:6px; }
-  .h-list  { display:flex;flex-direction:column;gap:5px;margin-bottom:12px; }
-  .h-row   { display:flex;align-items:center;gap:7px;padding:6px 9px;background:#18181b;border:1px solid #27272a;border-radius:3px; }
-  .h-av    { width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0; }
-  .h-name  { font-size:12px;color:#d4d4d8; }
-  .h-tag   { font-size:9px;margin-left:auto;padding:1px 5px;border-radius:2px; }
-  .ht-you  { color:#d97706;background:rgba(120,53,15,0.28); }
-  .ht-own  { color:#fbbf24;background:rgba(120,53,15,0.18); }
+  .d-shop { font-size:17px;font-weight:700;color:#f4f4f5;font-family:sans-serif;margin-bottom:4px; }
+  .d-grid { display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0; }
+  .d-item { background:#18181b;border:1px solid #27272a;border-radius:3px;padding:8px 10px; }
+  .d-lbl { font-size:9px;color:#3f3f46;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:2px; }
+  .d-val { font-size:13px;color:#e4e4e7;font-weight:700; }
+  .h-ttl { font-size:9px;color:#52525b;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:6px; }
+  .h-list { display:flex;flex-direction:column;gap:5px;margin-bottom:12px; }
+  .h-row { display:flex;align-items:center;gap:7px;padding:6px 9px;background:#18181b;border:1px solid #27272a;border-radius:3px; }
+  .h-av { width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0; }
+  .h-name { font-size:12px;color:#d4d4d8; }
+  .h-tag { font-size:9px;margin-left:auto;padding:1px 5px;border-radius:2px; }
+  .ht-you { color:#d97706;background:rgba(120,53,15,0.28); }
+  .ht-own { color:#fbbf24;background:rgba(120,53,15,0.18); }
   .h-empty { font-size:12px;color:#3f3f46;text-align:center;padding:10px 0; }
   .prog-row2 { display:flex;justify-content:space-between;font-size:10px;color:#52525b;margin-bottom:4px; }
   .close-btn { width:100%;padding:8px;border:1px solid #27272a;color:#71717a;background:transparent;border-radius:2px;cursor:pointer;font-size:12px;font-family:var(--font-mono,monospace);transition:border-color 0.13s; }
   .close-btn:hover { border-color:#52525b;color:#a1a1aa; }
-
   .modal-form { width:100%;max-width:415px;border:1px solid rgba(180,83,9,0.55);background:#09090b;border-radius:3px; }
-  .mf-hdr  { display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid rgba(120,53,15,0.25);background:rgba(120,53,15,0.12); }
-  .mf-ttl  { font-size:11px;color:#fbbf24;letter-spacing:0.15em;text-transform:uppercase; }
+  .mf-hdr { display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid rgba(120,53,15,0.25);background:rgba(120,53,15,0.12); }
+  .mf-ttl { font-size:11px;color:#fbbf24;letter-spacing:0.15em;text-transform:uppercase; }
   .mf-body { padding:16px;display:flex;flex-direction:column;gap:11px; }
-  .f-lbl   { display:flex;align-items:center;gap:4px;font-size:9px;color:#71717a;letter-spacing:0.11em;text-transform:uppercase;margin-bottom:5px; }
-  .f-inp   { width:100%;padding:7px 10px;background:#18181b;border:1px solid #3f3f46;border-radius:2px;color:#e4e4e7;font-size:12px;font-family:var(--font-mono,monospace);outline:none;transition:border-color 0.13s; }
+  .f-lbl { display:flex;align-items:center;gap:4px;font-size:9px;color:#71717a;letter-spacing:0.11em;text-transform:uppercase;margin-bottom:5px; }
+  .f-inp { width:100%;padding:7px 10px;background:#18181b;border:1px solid #3f3f46;border-radius:2px;color:#e4e4e7;font-size:12px;font-family:var(--font-mono,monospace);outline:none;transition:border-color 0.13s; }
   .f-inp:focus { border-color:#d97706; }
   .f-inp::placeholder { color:#2a2a2e; }
-  .f-row   { display:grid;grid-template-columns:1fr 1fr;gap:10px; }
-  .f-note  { font-size:9px;color:#2a2a2e;margin-top:-5px; }
+  .f-row { display:grid;grid-template-columns:1fr 1fr;gap:10px; }
+  .f-note { font-size:9px;color:#2a2a2e;margin-top:-5px; }
   .f-submit { width:100%;padding:9px;border:1px solid #d97706;color:#fde68a;background:rgba(120,53,15,0.38);border-radius:2px;cursor:pointer;font-size:12px;font-weight:700;font-family:var(--font-mono,monospace);letter-spacing:0.06em;transition:background 0.13s; }
   .f-submit:hover { background:rgba(120,53,15,0.6); }
-
   .toast-wrap { position:fixed;bottom:18px;right:18px;display:flex;flex-direction:column;gap:6px;z-index:99;pointer-events:none; }
-  .toast { display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:3px;font-size:11px;font-family:var(--font-mono,monospace);pointer-events:all;max-width:280px;animation:tIn 0.17s ease;border:1px solid; }
-  .toast.ts  { background:rgba(120,53,15,0.93);border-color:#d97706;color:#fde68a; }
-  .toast.te  { background:rgba(127,29,29,0.93);border-color:#dc2626;color:#fca5a5; }
-  .toast.ti  { background:rgba(24,24,27,0.96);border-color:#27272a;color:#d4d4d8; }
-  .toast.tg  { background:rgba(20,83,45,0.93);border-color:#15803d;color:#86efac; }
+  .toast { display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:3px;font-size:11px;font-family:var(--font-mono,monospace);pointer-events:all;max-width:290px;animation:tIn 0.17s ease;border:1px solid; }
+  .toast.ts { background:rgba(120,53,15,0.93);border-color:#d97706;color:#fde68a; }
+  .toast.te { background:rgba(127,29,29,0.93);border-color:#dc2626;color:#fca5a5; }
+  .toast.ti { background:rgba(24,24,27,0.96);border-color:#27272a;color:#d4d4d8; }
+  .toast.tg { background:rgba(20,83,45,0.93);border-color:#15803d;color:#86efac; }
   @keyframes tIn { from{opacity:0;transform:translateX(12px);}to{opacity:1;transform:translateX(0);} }
 </style>
 
@@ -203,7 +179,7 @@ const MH = {
   confirm: ['クエストを確定した！これより出発じゃ！','メンバー確定！一飯行こうぜ！'],
   delete:  ['クエストを取り消した。また発令せよ！'],
   full:    ['このクエストは定員に達している...'],
-  dup:     ['本日すでに別クエストを受注済みだ！一日一飯の掟じゃ！'],
+  dup:     ['その日はすでに別クエストを受注済みだ！一日一飯の掟じゃ！'],
   liked:   ['すでにグッジョブ済みじゃ！'],
   expired: ['このクエストはすでに時刻を過ぎておる...'],
   pastdt:  ['過去の日時は選べぬ！'],
@@ -215,26 +191,37 @@ function todayStr(){ const d=new Date(); return d.getFullYear()+'-'+String(d.get
 function nowMin(){ const n=new Date(); return n.getHours()*60+n.getMinutes(); }
 function isExpired(q){ const t=todayStr(); if(q.date<t)return true; if(q.date>t)return false; const[h,m]=q.meetingTime.split(':').map(Number); return nowMin()>=h*60+m; }
 function computeStatus(q){ if(q.status==='confirmed')return 'confirmed'; if(isExpired(q))return 'expired'; if(q.currentParticipants>=q.maxParticipants)return 'full'; return 'open'; }
-function isClosed(q){ const s=computeStatus(q); return s!=='open'; }
-
+function isClosed(q){ return computeStatus(q)!=='open'; }
 function fmtDate(s){ const[y,m,d]=s.split('-'); return `${y}/${m}/${d}`; }
 function fmtDateJp(s){ const d=new Date(s+'T00:00:00'); return `${d.getMonth()+1}月${d.getDate()}日（${DOW_JP[d.getDay()]}）`; }
-function dateInfo(s){ const d=new Date(s+'T00:00:00'); return { day:d.getDate(), mon:MON_EN[d.getMonth()], dow:DOW_JP[d.getDay()], year:d.getFullYear() }; }
+function dateInfo(s){ const d=new Date(s+'T00:00:00'); return { day:d.getDate(), mon:MON_EN[d.getMonth()], dow:DOW_JP[d.getDay()] }; }
 
 const TODAY = todayStr();
 function dPlus(n){ const d=new Date(); d.setDate(d.getDate()+n); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
 
 let quests = [
-  { id:'q1', shopName:'焼肉ホルモン 炎の番人',  foodCategory:'焼肉',     maxParticipants:4, currentParticipants:2, meetingTime:'12:00', date:TODAY,    status:'open', likeCount:5,  postedBy:'田中', hunters:['田中','鈴木'] },
-  { id:'q2', shopName:'ラーメン道場 鬼辛',       foodCategory:'ラーメン',  maxParticipants:3, currentParticipants:3, meetingTime:'12:15', date:TODAY,    status:'open', likeCount:12, postedBy:'佐藤', hunters:['佐藤','山田','高橋'] },
-  { id:'q3', shopName:'タイ料理 バンコク食堂',   foodCategory:'タイ料理',  maxParticipants:5, currentParticipants:1, meetingTime:'13:00', date:TODAY,    status:'open', likeCount:3,  postedBy:ME,     hunters:[ME] },
-  { id:'q4', shopName:'寿司割烹 海神',           foodCategory:'寿司',     maxParticipants:4, currentParticipants:2, meetingTime:'11:45', date:TODAY,    status:'open', likeCount:8,  postedBy:'伊藤', hunters:['伊藤','渡辺'] },
-  { id:'q5', shopName:'スパイス魔境',            foodCategory:'カレー',   maxParticipants:4, currentParticipants:2, meetingTime:'12:30', date:dPlus(1), status:'open', likeCount:7,  postedBy:ME,     hunters:[ME,'加藤'] },
-  { id:'q6', shopName:'麻婆豆腐 四川食堂',       foodCategory:'中華',     maxParticipants:5, currentParticipants:1, meetingTime:'12:00', date:dPlus(1), status:'open', likeCount:2,  postedBy:'松本', hunters:['松本'] },
-  { id:'q7', shopName:'トラットリア ボスコ',     foodCategory:'イタリアン',maxParticipants:6, currentParticipants:2, meetingTime:'12:15', date:dPlus(2), status:'open', likeCount:4,  postedBy:'中村', hunters:['中村','小林'] },
+  { id:'q1', shopName:'焼肉ホルモン 炎の番人',  foodCategory:'焼肉',      maxParticipants:4, currentParticipants:2, meetingTime:'12:00', date:TODAY,    status:'open', likeCount:5,  postedBy:'田中', hunters:['田中','鈴木'] },
+  { id:'q2', shopName:'ラーメン道場 鬼辛',       foodCategory:'ラーメン',   maxParticipants:3, currentParticipants:3, meetingTime:'12:15', date:TODAY,    status:'open', likeCount:12, postedBy:'佐藤', hunters:['佐藤','山田','高橋'] },
+  { id:'q3', shopName:'タイ料理 バンコク食堂',   foodCategory:'タイ料理',   maxParticipants:5, currentParticipants:1, meetingTime:'13:00', date:TODAY,    status:'open', likeCount:3,  postedBy:ME,     hunters:[ME] },
+  { id:'q4', shopName:'寿司割烹 海神',           foodCategory:'寿司',      maxParticipants:4, currentParticipants:2, meetingTime:'11:45', date:TODAY,    status:'open', likeCount:8,  postedBy:'伊藤', hunters:['伊藤','渡辺'] },
+  { id:'q5', shopName:'スパイス魔境',            foodCategory:'カレー',    maxParticipants:4, currentParticipants:2, meetingTime:'12:30', date:dPlus(1), status:'open', likeCount:7,  postedBy:ME,     hunters:[ME,'加藤'] },
+  { id:'q6', shopName:'麻婆豆腐 四川食堂',       foodCategory:'中華',      maxParticipants:5, currentParticipants:1, meetingTime:'12:00', date:dPlus(1), status:'open', likeCount:2,  postedBy:'松本', hunters:['松本'] },
+  { id:'q7', shopName:'トラットリア ボスコ',     foodCategory:'イタリアン', maxParticipants:6, currentParticipants:2, meetingTime:'12:15', date:dPlus(2), status:'open', likeCount:4,  postedBy:'中村', hunters:['中村','小林'] },
 ];
 
-let joinedQuestId = null;
+// ────────────────────────────────────────────
+// 受注制御: date → questId のマップで管理
+// joinedByDate['2026-04-06'] = 'q3'  のように「日付ごとに1件のみ」
+// ────────────────────────────────────────────
+const joinedByDate = {};
+
+// 初期状態でq3(今日)・q5(明日)はMEがhuntersにいるのでセット
+quests.forEach(q => {
+  if(q.hunters.includes(ME) && q.postedBy !== ME) {
+    joinedByDate[q.date] = q.id;
+  }
+});
+
 const likedSet = new Set();
 let selectedDate = TODAY;
 
@@ -242,7 +229,9 @@ setInterval(() => { render(); renderSidebar(); }, 30000);
 
 function getRank(c,m){ const r=c/m; return r<0.4?0:r<0.8?1:2; }
 
-/* ── Sidebar ── */
+// その日付にMEが受注済みか（発令者は除く）
+function joinedOnDate(date){ return joinedByDate[date] || null; }
+
 function renderSidebar(){
   const dates = [...new Set(quests.map(q=>q.date))].sort();
   const sb = document.getElementById('sidebar');
@@ -255,7 +244,7 @@ function renderSidebar(){
     const el = document.createElement('div');
     el.className = 'sidebar-date-btn';
     el.innerHTML = `
-      <div class="date-pill${isToday?' today-pill-wrap':''}${sel?' selected':''}" onclick="selectDate('${date}')">
+      <div class="date-pill${isToday?' today-p':''}${sel?' selected':''}" onclick="selectDate('${date}')">
         <div class="dp-dow">${info.dow}曜日</div>
         <div class="dp-day">${info.day}</div>
         <div class="dp-mon">${info.mon}</div>
@@ -268,17 +257,13 @@ function renderSidebar(){
   });
 }
 
-/* ── Quest column ── */
 function renderQuestCol(){
   const col = document.getElementById('questCol');
   const filtered = quests.filter(q=>q.date===selectedDate)
     .sort((a,b)=>a.meetingTime<b.meetingTime?-1:a.meetingTime>b.meetingTime?1:0);
-
   const openQs   = filtered.filter(q=>!isClosed(q));
   const closedQs = filtered.filter(q=>isClosed(q));
-
   const isToday = selectedDate===TODAY;
-  const info = dateInfo(selectedDate);
   const total = filtered.length;
 
   let html = `<div class="col-header">
@@ -305,33 +290,37 @@ function renderQuestCol(){
 }
 
 function renderCard(q){
-  const st     = computeStatus(q);
-  const isMine = q.postedBy===ME;
-  const isJoin = q.hunters.includes(ME)&&!isMine;
-  const elsewhr= joinedQuestId!==null&&joinedQuestId!==q.id;
+  const st      = computeStatus(q);
+  const isMine  = q.postedBy===ME;
+  const isJoin  = q.hunters.includes(ME) && !isMine;
+  // その日付にすでに別のクエストを受注しているか
+  const joinedId = joinedOnDate(q.date);
+  const alreadyJoinedOther = joinedId !== null && joinedId !== q.id;
+
   const pct    = Math.min(q.currentParticipants/q.maxParticipants*100,100);
   const badge  = BADGE_MAP[q.foodCategory]||'b-gray';
   const rank   = RANK[getRank(q.currentParticipants,q.maxParticipants)];
   const liked  = likedSet.has(q.id);
 
   let cc = 'card ';
-  if(st==='confirmed')   cc+='c-confirmed';
-  else if(st==='expired')cc+='c-closed';
-  else if(isMine)        cc+='c-mine';
-  else                   cc+='c-open';
+  if(st==='confirmed')    cc+='c-confirmed';
+  else if(st==='expired') cc+='c-closed';
+  else if(isMine)         cc+='c-mine';
+  else                    cc+='c-open';
 
   const hdrCls = st==='confirmed'?'card-hdr hdr-confirmed':'card-hdr';
   const pfCls  = st==='confirmed'?'pf-green':st==='expired'?'pf-gray':st==='full'?'pf-red':'pf-amber';
 
   let hdrTag='';
-  if(st==='expired')   hdrTag='<span class="tag-expired">⏰ 時間切れ</span>';
-  if(st==='confirmed') hdrTag='<span class="tag-confirmed">✓ 確定</span>';
+  if(st==='expired')    hdrTag='<span class="tag-expired">⏰ 時間切れ</span>';
+  if(st==='confirmed')  hdrTag='<span class="tag-confirmed">✓ 確定</span>';
 
   let sbadge='';
   if(isMine&&st!=='confirmed'&&st!=='expired') sbadge='<span class="sb sb-owner">発令者</span>';
   else if(st==='confirmed') sbadge='<span class="sb sb-confirmed">確定済</span>';
-  else if(st!=='open') sbadge='<span class="sb sb-closed">受注不可</span>';
+  else if(st!=='open')      sbadge='<span class="sb sb-closed">受注不可</span>';
 
+  // ── アクションボタン ──
   let acts='';
   if(isMine){
     if(st==='expired'){
@@ -341,12 +330,14 @@ function renderCard(q){
     } else {
       acts=`<button class="btn btn-confirm" onclick="confirmQuest('${q.id}')">✓ 確定</button><button class="btn btn-delete" onclick="deleteQuest('${q.id}')">✕ 取消</button>`;
     }
-  } else if(st!=='open'&&!isJoin){
-    acts=`<button class="btn btn-off" style="flex:1" disabled>受注不可</button>`;
   } else if(isJoin){
+    // 受注済み → キャンセル可能（st がclosed系でも自分が参加中ならキャンセルは見せる）
     acts=`<button class="btn btn-cancel" onclick="cancelQuest('${q.id}')">↩ キャンセル</button>`;
-  } else if(elsewhr){
+  } else if(st!=='open'){
     acts=`<button class="btn btn-off" style="flex:1" disabled>受注不可</button>`;
+  } else if(alreadyJoinedOther){
+    // その日別クエスト受注済み
+    acts=`<button class="btn btn-off" style="flex:1" title="この日はすでに別クエストを受注済み" disabled>この日は受注済</button>`;
   } else {
     acts=`<button class="btn btn-join" onclick="joinQuest('${q.id}')">⚔ 受注する</button>`;
   }
@@ -364,8 +355,7 @@ function renderCard(q){
         </div>
         ${sbadge}
       </div>
-      <div class="card-date-row">📅 <span>${fmtDate(q.date)}</span>&nbsp;🕐&nbsp;<span>${q.meetingTime}</span>&nbsp;👥&nbsp;<span>${q.currentParticipants}/${q.maxParticipants}名</span>
-      </div>
+      <div class="card-date-row">📅 <span>${fmtDate(q.date)}</span>&nbsp;🕐&nbsp;<span>${q.meetingTime}</span>&nbsp;👥&nbsp;<span>${q.currentParticipants}/${q.maxParticipants}名</span></div>
       <div class="prog-track"><div class="prog-fill ${pfCls}" style="width:${pct}%"></div></div>
       <div class="actions">
         ${acts}
@@ -377,49 +367,62 @@ function renderCard(q){
 }
 
 function render(){
-  if(joinedQuestId){ const jq=quests.find(q=>q.id===joinedQuestId); if(jq&&isExpired(jq))joinedQuestId=null; }
+  // 期限切れになった受注を joinedByDate から削除
+  Object.keys(joinedByDate).forEach(date => {
+    const qid = joinedByDate[date];
+    const q = quests.find(x=>x.id===qid);
+    if(!q || isExpired(q)) delete joinedByDate[date];
+  });
   renderQuestCol();
 }
 
-function selectDate(date){
-  selectedDate = date;
-  renderSidebar();
-  renderQuestCol();
-}
+function selectDate(date){ selectedDate=date; renderSidebar(); renderQuestCol(); }
 
 /* ── Actions ── */
 function joinQuest(id){
-  if(joinedQuestId&&joinedQuestId!==id){toast(rnd(MH.dup),'te');return;}
   const idx=quests.findIndex(q=>q.id===id); if(idx<0)return;
   const q=quests[idx];
-  if(isExpired(q)){toast(rnd(MH.expired),'te');return;}
-  if(q.currentParticipants>=q.maxParticipants){toast(rnd(MH.full),'te');return;}
-  quests[idx]={...q,currentParticipants:q.currentParticipants+1,hunters:[...q.hunters,ME]};
-  joinedQuestId=id; render(); toast(rnd(MH.join),'ts');
+
+  // その日付の受注チェック（発令者は除く）
+  const existingId = joinedOnDate(q.date);
+  if(existingId && existingId!==id){
+    toast(rnd(MH.dup),'te'); return;
+  }
+  if(isExpired(q)){ toast(rnd(MH.expired),'te'); return; }
+  if(q.currentParticipants>=q.maxParticipants){ toast(rnd(MH.full),'te'); return; }
+
+  quests[idx]={...q, currentParticipants:q.currentParticipants+1, hunters:[...q.hunters,ME]};
+  joinedByDate[q.date] = id;  // その日の受注として記録
+  render(); toast(rnd(MH.join),'ts');
 }
+
 function cancelQuest(id){
   const idx=quests.findIndex(q=>q.id===id); if(idx<0)return;
   const q=quests[idx];
-  quests[idx]={...q,currentParticipants:Math.max(0,q.currentParticipants-1),hunters:q.hunters.filter(h=>h!==ME)};
-  if(joinedQuestId===id)joinedQuestId=null;
+  quests[idx]={...q, currentParticipants:Math.max(0,q.currentParticipants-1), hunters:q.hunters.filter(h=>h!==ME)};
+  // その日付の受注を解除
+  if(joinedByDate[q.date]===id) delete joinedByDate[q.date];
   render(); toast(rnd(MH.cancel),'ti');
 }
+
 function confirmQuest(id){
   const idx=quests.findIndex(q=>q.id===id); if(idx<0)return;
   quests[idx]={...quests[idx],status:'confirmed'};
   render(); toast(rnd(MH.confirm),'tg');
 }
+
 function deleteQuest(id){
-  quests=quests.filter(q=>q.id!==id);
-  if(joinedQuestId===id)joinedQuestId=null;
-  // もし選択日にクエストが0件になったら別の日に移動
-  const remaining=quests.filter(q=>q.date===selectedDate);
+  const q=quests.find(x=>x.id===id);
+  if(q && joinedByDate[q.date]===id) delete joinedByDate[q.date];
+  quests=quests.filter(x=>x.id!==id);
+  const remaining=quests.filter(x=>x.date===selectedDate);
   if(remaining.length===0){
-    const dates=[...new Set(quests.map(q=>q.date))].sort();
+    const dates=[...new Set(quests.map(x=>x.date))].sort();
     selectedDate=dates.length>0?dates[0]:TODAY;
   }
   renderSidebar(); render(); toast(rnd(MH.delete),'te');
 }
+
 function likeQuest(id){
   if(likedSet.has(id)){toast(rnd(MH.liked),'te');return;}
   const idx=quests.findIndex(q=>q.id===id); if(idx<0)return;
@@ -432,7 +435,7 @@ function likeQuest(id){
 
 /* ── Detail ── */
 function openDetail(id){
-  const q=quests.find(q=>q.id===id); if(!q)return;
+  const q=quests.find(x=>x.id===id); if(!q)return;
   const st=computeStatus(q);
   const pct=Math.min(q.currentParticipants/q.maxParticipants*100,100);
   const pfCls=st==='confirmed'?'pf-green':st==='full'?'pf-red':'pf-amber';
@@ -496,10 +499,8 @@ function openModal(){
   setTimeout(()=>{ const e=document.getElementById('f-shop'); if(e)e.focus(); },40);
 }
 function closeModal(){ document.getElementById('modalMount').innerHTML=''; }
-
 function onDateChange(){
-  const de=document.getElementById('f-date');
-  const te=document.getElementById('f-time');
+  const de=document.getElementById('f-date'), te=document.getElementById('f-time');
   if(!de||!te)return;
   if(de.value===TODAY){
     const n=new Date();
@@ -509,12 +510,11 @@ function onDateChange(){
     if(ch*60+cm<n.getHours()*60+n.getMinutes()+1) te.value=`${h}:${m}`;
   } else { te.min='00:00'; }
 }
-
 function postQuest(){
   const shop=(document.getElementById('f-shop').value||'').trim();
   if(!shop){document.getElementById('f-shop').focus();return;}
-  const cat =document.getElementById('f-cat').value;
-  const max =parseInt(document.getElementById('f-max').value)||4;
+  const cat=document.getElementById('f-cat').value;
+  const max=parseInt(document.getElementById('f-max').value)||4;
   const time=document.getElementById('f-time').value||'12:00';
   const date=document.getElementById('f-date').value||TODAY;
   const name=(document.getElementById('f-name').value||'').trim();
@@ -527,7 +527,6 @@ function postQuest(){
   closeModal(); renderSidebar(); render(); toast(rnd(MH.post),'ts');
 }
 
-/* ── Toast ── */
 function toast(msg,cls='ts'){
   const w=document.getElementById('toastWrap');
   const e=document.createElement('div');
